@@ -89,7 +89,7 @@
                             
                             <div class="col-md-12" style="margin-bottom: 30px;">
                                 
-                                <img src="assets/img/banner.jpg" style="width: 100%;"></img>
+                                <img src="assets/img/banner2.jpg" style="width: 100%;"></img>
                                 
                             </div>
                             
