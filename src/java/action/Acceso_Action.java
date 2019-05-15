@@ -31,6 +31,7 @@ public class Acceso_Action extends ActionSupport implements SessionAware{
     private String nomModulo;
     private String modulo;
     private String nombreUsuario;
+    private String Imagen;
     
     //LISTAS PERSISTENTES DEL MENU
     public List <moduloBean> modulosAUX = new ArrayList<moduloBean>();
@@ -111,6 +112,7 @@ public class Acceso_Action extends ActionSupport implements SessionAware{
 
                 //obteniendo el nombre del usuario
                 nombreUsuario=  usuariocons.getNAMEUSUARIO();
+                Imagen=usuariocons.getFILTRO();
 
                 modulosAUX = (ArrayList<moduloBean>) acceso.consultaModulosPerfilMenu(usuariocons.getPERFIL(), modulo);
                 modulosAUXP = (ArrayList<moduloAuxBean>) acceso.consultaModulosHijosPerfilMenu(usuariocons.getPERFIL(), modulo);
@@ -273,4 +275,14 @@ public class Acceso_Action extends ActionSupport implements SessionAware{
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
+
+    public String getImagen() {
+        return Imagen;
+    }
+
+    public void setImagen(String Imagen) {
+        this.Imagen = Imagen;
+    }
+        
+        
 }

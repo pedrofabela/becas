@@ -32,7 +32,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/pages/dashboard.jsp</welcome-file>
+		<welcome-file>/pages/login.jsp</welcome-file>
 	</welcome-file-list>
 
 
