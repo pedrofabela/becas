@@ -81,13 +81,26 @@
     <div class="main-panel">
           
           <div class="container-fluid">                          
-                        <h2>Becas Ofertadas</h2>
+              <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                  <div class="container-fluid">
+                      <div class="navbar-wrapper">
+                          <div class="navbar-minimize"></div>     
+                      </div>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="navbar-toggler-icon icon-bar"></span>
+                          <span class="navbar-toggler-icon icon-bar"></span>
+                          <span class="navbar-toggler-icon icon-bar"></span>
+                      </button>    
+                  </div>
+              </nav>
+
                        
                          
                                       
                         <div class="row">
                             
-                            <div class="col-md-12" style="margin-bottom: 30px;">
+                            <div class="col-md-12" style="margin-bottom: 30px; margin-top: 35px;">
                                 
                                 <img src="assets/img/banner2.jpg" style="width: 100%;"></img>
                                 
