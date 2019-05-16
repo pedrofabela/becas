@@ -95,16 +95,18 @@
      
       <div class="content">
         <div class="container-fluid">
-          <div class="header text-center">
-            <h3 class="title">Bases y requisitos</h3>
-          </div>
+          
           <div class="row">
               
               
   
               
               
-              
+                 <div class="col-md-12" style="margin-bottom: 30px;">
+                                
+                                <img src="assets/img/banner3.jpg" style="width: 100%;"></img>
+                                
+                            </div>
               
               
               
