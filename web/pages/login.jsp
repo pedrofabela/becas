@@ -48,7 +48,7 @@
               <div class="card-body ">
                   <div class="form-group">
                       <label for="exampleEmails" class="bmd-label-floating"> Usuario *</label>
-                      <input class="form-control" name="cveusuario"  required="true"/>
+                      <s:textfield cssClass="form-control" name="cveusuario" theme="simple" required="true"/>
                   </div>
                   <div class="form-group">
                       <label for="examplePasswords" class="bmd-label-floating"> Password *</label>
