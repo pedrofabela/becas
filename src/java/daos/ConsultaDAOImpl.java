@@ -16,7 +16,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     OracleDAOFactory oraDaoFac = new OracleDAOFactory();
 
     public List ConsultaBecas() throws Exception {
-        String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN FROM " + Constantes.CatBecas + "";
+        String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN, CASE WHEN (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO  THEN '1' ELSE '0' END AS ESTATUS_FECHA FROM  CAT_BECAS";
         //System.out.println("QueryConsultaCatalogos ---> " + query);
         List list = null;
         list = queryForList(query, new BecasMapper());

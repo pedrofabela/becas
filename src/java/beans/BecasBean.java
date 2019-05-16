@@ -19,6 +19,18 @@ public class BecasBean implements Serializable {
         private String ID_BASE;
         private String ID_REQUISITO;
         private String REQUISITO;
+         private String ESTATUS_FECHA;
+
+    public String getESTATUS_FECHA() {
+        return ESTATUS_FECHA;
+    }
+
+    public void setESTATUS_FECHA(String ESTATUS_FECHA) {
+        this.ESTATUS_FECHA = ESTATUS_FECHA;
+    }
+         
+         
+         
 
     public String getID_REQUISITO() {
         return ID_REQUISITO;

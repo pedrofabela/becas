@@ -49,6 +49,11 @@ public class BecasMapper implements Mapper {
         } else {
             dat.setIMAGEN(rs.getString("IMAGEN"));
         } 
+         if (rs.getString("ESTATUS_FECHA") != null) {
+            dat.setESTATUS_FECHA(rs.getString("ESTATUS_FECHA").trim());
+        } else {
+            dat.setESTATUS_FECHA(rs.getString("ESTATUS_FECHA"));
+        } 
          
         return dat;
     }

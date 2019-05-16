@@ -135,7 +135,7 @@
                                              </div>
                                          </div>
                                              
-                                                 <s:if test="ESTATUS_BECA==1">
+                                                 <s:if test="ESTATUS_BECA==1 && ESTATUS_FECHA==1">
                                              <a href="Javascript:Accion('ConsultaReq','<s:property value="ID_BECA"/>')">
                                                  <div class="btn btn-success " style="margin-left: 10px;" >
                                                       Solicitar Beca
