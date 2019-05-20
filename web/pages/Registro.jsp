@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Requisitos de la beca  
+    Registro a Beca 
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -68,28 +68,8 @@
               <p> Dashboard </p>
             </a>
           </li>        
-          <li class="nav-item ">
-            <a class="nav-link" href="examples/calendar.html">
-              <i class="material-icons">date_range</i>
-              <p> Calendar </p>
-            </a>
-          </li>
         </ul>
-      </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      </div>  
     </div>
     <div class="main-panel">
      
@@ -104,111 +84,49 @@
 
               </div>
            
-              <div class="col-md-4">
-                  <div class="card">
-                      <div class="card-header card-header-image" data-header-animation="true">
-                          <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
-
-                              <s:if test="objdatos.ID_BECA_AUX==ID_BECA"> <img class="img" src="assets/img/<s:property value="IMAGEN"/>"></s:if>
-
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="IMAGEN"></s:hidden>
-
-                              </s:iterator>   
-                                  
-                      </div>  
-                      <div class="card-body">
-                      
-                          <div class="progress" style="margin-top: -45px; height: 10px;">
-                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                  <div class="card ">
+                      <div class="card-header card-header-rose card-header-icon">
+                          <div class="card-icon">
+                              <i class="material-icons">account_box</i>
                           </div>
+                          <h4 class="card-title">Datos de Aspirante</h4>
+                      </div>
+                      <div class="card-body">  
+                          <div class="dropdown-divider"></div>
+                              <div class="col-sm-12">
+                                  <div class="row">
+                                      <div class="form-group col-md-4">
+                                          <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
+
+                                          <s:textfield  cssClass="form-control " name="datos.NOMBRE" id="datos.NOMBRE"/>
+
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
+                                          <s:textfield cssClass="form-control" name="datos.APELLIDOP" id="datos.APELLIDOP"/>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
+                                           <s:textfield cssClass="form-control" name="datos.APELLIDOM" id="datos.APELLIDOM"/>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Genero</label>
+                                           <s:textfield cssClass="form-control" name="datos.APELLIDOM" id="datos.APELLIDOM"/>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                          <s:select  data-style="select-with-transition" title="Estado Civil"  name="datos.ID_ESTADO_CIVIL" id="datos.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
+                                      </div>
+                                      
+                                  </div>
+                              </div>                         
+                      </div>
                       
-                          
+                      <div class="card-footer ">
+                          <button type="submit" class="btn btn-fill btn-rose">Submit</button>
                       </div>
-                      <div class="card-footer">
-                          <div>
-                              <a href="Javascript:Regreso('Registro')" class="btn btn-success">Registrate</a>
-                              
-                          </div>
-
-                      </div>
-                     
-                  </div>
-              </div>         
-              <div class="col-md-8">
-                  <div class="card">
-
-                      <div class="card-body">
-                          <div id="accordion" role="tablist">
-                              <div class="card-collapse">
-                                  <div class="card-header" role="tab" id="headingOne">
-                                      <h5 class="mb-0">
-                                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapsed">
-                                              Población Objetivo
-                                              <i class="material-icons">keyboard_arrow_down</i>
-                                          </a>
-                                      </h5>
-                                  </div>
-                                  <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
-                                      <div class="card-body">
-                                          <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
-
-                                              <s:property value="POB_OBJ"/>  
-
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="IMAGEN"></s:hidden>
-
-                                          </s:iterator>   
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="card-collapse">
-                                  <div class="card-header" role="tab" id="headingTwo">
-                                      <h5 class="mb-0">
-                                          <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                              Bases
-                                              <i class="material-icons">keyboard_arrow_down</i>
-                                          </a>
-                                      </h5>
-                                  </div>
-                                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-                                      <div class="card-body">
-                                          <div class="list-group">
-
-                                              <s:iterator value="ListaBases" id="ListaBses" status="stat">
-                                                  <a href="#" class="list-group-item list-group-item-action"><i class="material-icons" >verified_user</i> &nbsp; &nbsp; <s:property value="BASE"></s:property></a>
-                                              </s:iterator>
-                                          </div>
-
-
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="card-collapse">
-                                  <div class="card-header" role="tab" id="headingThree">
-                                      <h5 class="mb-0">
-                                          <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                              Requisitos
-                                              <i class="material-icons">keyboard_arrow_down</i>
-                                          </a>
-                                      </h5>
-                                  </div>
-                                  <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                      <div class="card-body">
-                                          <div class="list-group">
-                                              <s:iterator value="ListaRequisitos" id="ListaBsesRequisitos" status="stat">
-                                                  <a href="#" class="list-group-item list-group-item-action"><i class="material-icons" >check_circle_outline</i> &nbsp; &nbsp; <s:property value="REQUISITO"></s:property></a>
-                                              </s:iterator>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>                       
-                      </div>
-                  </div>
-              </div> 
+                  </div>                 
+           
+             
           </div>
         </div>
       </div>
@@ -246,7 +164,7 @@
             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
         </div>
-          
+         
       </footer>
     </div>
   </div>

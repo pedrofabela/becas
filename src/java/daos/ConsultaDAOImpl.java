@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import mappers.BasesMapper;
 import mappers.BecasMapper;
+import mappers.EstadosMapper;
 import mappers.RequisitoBuenoMapper;
 import mappers.RequisitosMapper;
 import utilidades.Constantes;
@@ -44,6 +45,14 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         List list = null;
         list = queryForList(query, new RequisitoBuenoMapper());
+        return list;
+    }
+       
+    public List ConsultaEstadosCivil() throws Exception {
+        String query = "SELECT ID_ESTADO_CIVIL, ESTADO_CIVIL FROM "+Constantes.TablaEstados+"";
+        //System.out.println("QueryConsultaCatalogos ---> " + query);
+        List list = null;
+        list = queryForList(query, new EstadosMapper());
         return list;
     }
   

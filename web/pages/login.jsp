@@ -48,12 +48,13 @@
               <div class="card-body ">
                   <div class="form-group">
                       <label for="exampleEmails" class="bmd-label-floating"> Usuario *</label>
-                      <s:textfield cssClass="form-control" name="cveusuario" theme="simple" required="true"/>
+                      <input class="form-control" id="exampleEmails"  required="true"  name="cveusuario"/>
                   </div>
                   <div class="form-group">
                       <label for="examplePasswords" class="bmd-label-floating"> Password *</label>
                       <input type="password" class="form-control" id="examplePasswords"  required="true" name="pasusuario">
-                  </div>
+                  </div                
+                      <s:actionerror cssClass="alert alert-danger"/>                               
               </div>
               <div class="card-footer ml-auto mr-auto">
                   <button type="submit" class="btn btn-rose">Acceso</button>

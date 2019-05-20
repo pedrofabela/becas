@@ -135,7 +135,7 @@ public class Acceso_Action extends ActionSupport implements SessionAware{
                 Constantes.enviaMensajeConsola("voy a successs-----------------------");
                 return "SUCCESS";
             }else{
-                addActionError("***** Usuario no valido, favor de verificar ***** ");
+                addActionError("Usuario no valido, Favor de Verificar ");
                 return "ERROR";
             }
          

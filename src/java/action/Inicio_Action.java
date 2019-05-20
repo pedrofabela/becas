@@ -1,6 +1,7 @@
 package action;
 
 import beans.BecasBean;
+import beans.EstadoCivilBean;
 import beans.RequisitosBean;
 
 import beans.moduloAuxBean;
@@ -30,6 +31,8 @@ public class Inicio_Action extends ActionSupport {
     private List<RequisitosBean> ListaReq = new ArrayList<RequisitosBean>();
     private List<BecasBean> ListaBases = new ArrayList<BecasBean>();
     private List<BecasBean> ListaRequisitos = new ArrayList<BecasBean>();
+    private List<EstadoCivilBean>ListaEstadosCivil=new ArrayList<EstadoCivilBean>();
+            
    
     
     //****************************//
@@ -66,7 +69,7 @@ public class Inicio_Action extends ActionSupport {
         return "SUCCESS";
     }
     
-     public String ConsultaReq() {
+    public String ConsultaReq() {
         try {
             //validando session***********************************************************************
            
@@ -74,19 +77,11 @@ public class Inicio_Action extends ActionSupport {
             ConsultasBusiness con=new ConsultasBusiness();
             
             Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
-            
-            ListaReq=(ArrayList<RequisitosBean>) con.ConsultaReq(objdatos);
-           
-              MuestraBecas();
-              
-              
-              ListaBases=(ArrayList<BecasBean>) con.ConsultaBases(objdatos);
+
+            MuestraBecas();         
+            ListaBases=(ArrayList<BecasBean>) con.ConsultaBases(objdatos);
             ListaRequisitos=(ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
-            
-            
-            
-            System.out.println("ID DE LA BECA"+objdatos.getID_BECA_AUX());
-            Constantes.enviaMensajeConsola("lista Req: "+ListaReq.size());
+            Constantes.enviaMensajeConsola("lista Req: "+ListaRequisitos.size());
           
 
         } catch (Exception e) {
@@ -97,7 +92,30 @@ public class Inicio_Action extends ActionSupport {
         return "SUCCESS";
     }
      
-     
+    public String Registro() {
+        try {
+            //validando session***********************************************************************
+           
+
+            ConsultasBusiness con=new ConsultasBusiness();
+            
+            ListaEstadosCivil=con.ConsultaEstadosCivil();
+                    
+                    
+            
+            
+            Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
+            Constantes.enviaMensajeConsola("lista Req: "+ListaReq.size());
+            Constantes.enviaMensajeConsola("lista ESTADOS: "+ListaEstadosCivil.size());
+          
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
       //******************************** FIN VARIABLE ARCHIVOS*********************************
 
     public List<BecasBean> getListaBases() {
@@ -114,6 +132,14 @@ public class Inicio_Action extends ActionSupport {
 
     public void setListaRequisitos(List<BecasBean> ListaRequisitos) {
         this.ListaRequisitos = ListaRequisitos;
+    }
+
+    public List<EstadoCivilBean> getListaEstadosCivil() {
+        return ListaEstadosCivil;
+    }
+
+    public void setListaEstadosCivil(List<EstadoCivilBean> ListaEstadosCivil) {
+        this.ListaEstadosCivil = ListaEstadosCivil;
     }
      
   

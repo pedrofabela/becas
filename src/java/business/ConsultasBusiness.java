@@ -17,19 +17,26 @@ public class ConsultasBusiness {
         List lista = this.con.ConsultaBecas();
         return lista;
     }
-    
+
     public List ConsultaReq(BecasBean obj) throws Exception {
         List lista = this.con.ConsultaReq(obj);
         return lista;
     }
-    
-      public List ConsultaBases(BecasBean obj) throws Exception {
+
+    public List ConsultaBases(BecasBean obj) throws Exception {
         List lista = this.con.ConsultaBases(obj);
         return lista;
     }
-       public List ConsultaRequisitos(BecasBean obj) throws Exception {
+
+    public List ConsultaRequisitos(BecasBean obj) throws Exception {
         List lista = this.con.ConsultaRequisitos(obj);
         return lista;
     }
-           
+    
+    public List ConsultaEstadosCivil() throws Exception {
+        List lista = this.con.ConsultaEstadosCivil();
+        return lista;
+    }
+
+
 }
