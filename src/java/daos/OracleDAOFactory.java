@@ -36,9 +36,9 @@ public class OracleDAOFactory implements DAOFactory {
     
    
      // DESARROLLO
-    private String username = "ProyectoBecas";	
+    private String username = "U_BECASPROD";	
 	private String url = "jdbc:oracle:thin:@172.20.2.47:1521:xe";	
-    private String password = "ProyectoBecas"; 
+    private String password = "B3C4S#2019"; 
    	//*/
     
     /*//PRODUCCION
