@@ -6,11 +6,11 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Registro a Beca 
+    Registro de Beca
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -23,7 +23,6 @@
 </head>
 
 <body class="">
-     <s:form name="altaPetiForm" id="altaPetiForm" enctype="multipart/form-data" >
 
   <div class="wrapper ">
     <div class="sidebar" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
@@ -32,16 +31,23 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-     
+      <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+          CT
+        </a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+          Creative Tim
+        </a>
+      </div>
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            <img src="assets/img/faces/m.png" />
+            <img src="assets/img/faces/m.jpg" />
           </div>
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Becas
+                Tania Andrew
                 <b class="caret"></b>
               </span>
             </a>
@@ -69,10 +75,10 @@
             </a>
           </li>        
         </ul>
-      </div>  
+      </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->
+         <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
@@ -87,156 +93,172 @@
         </div>
       </nav>
       <!-- End Navbar -->
-
-     
       <div class="content">
         <div class="container-fluid">
-          
-          <div class="row">
-                 
-              <div class="col-md-12" style="margin-bottom: 30px;">
-
-                  <img src="assets/img/banner3.jpg" style="width: 100%;"></img>
-
-              </div>
-           
-                  <div class="card ">
-                      <div class="card-header card-header-rose card-header-icon">
-                          <div class="card-icon">
-                              <i class="material-icons">account_box</i>
-                          </div>
-                          <h4 class="card-title">Datos de Aspirante</h4>
-                      </div>
-                      <div class="card-body">  
-                          <div class="dropdown-divider"></div>
-                              <div class="col-sm-12">
+          <div class="col-md-8 col-12 mr-auto ml-auto">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+              <div class="card card-wizard" data-color="rose" id="wizardProfile">
+      
+                  <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                  <div class="card-header text-center">
+                    <h3 class="card-title">
+                      Registro de Aspirante 
+                    </h3>
+                    <h5 class="card-description"></h5>
+                  </div>
+                  <div class="wizard-navigation">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#DatosPersonales" data-toggle="tab" role="tab">
+                          Datos Personales
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#DatosAcademicos" data-toggle="tab" role="tab">
+                          Datos Academicos
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#DatosTutor" data-toggle="tab" role="tab">
+                          Datos de Tutor
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                       <s:form name="altaPetiForm" id="altaPetiForm" enctype="multipart/form-data" > 
+                    <div class="tab-content">
+                      
+                      <div class="tab-pane active" id="DatosPersonales">
+                        <h5 class="info-text"></h5>
+                        <div class="col-sm-12">
                                   <div class="row">
-                                       <div class="form-group col-md-4">
-                                          <label for="exampleEmail" class="bmd-label-floating">CURP</label>
-
-                                          <s:textfield  cssClass="form-control " name="objRenapo.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP"/>
-                                           <s:fielderror name="NOMA" cssClass="alert alert-danger"></s:fielderror>
-
-                                      </div>
-
                                       <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
 
-                                          <s:textfield  cssClass="form-control " name="objRenapo.NOMBRE_RENAPO" id="objRenapo.NOMBRE_RENAPO"/>
-                                           <s:fielderror name="NOMA" cssClass="alert alert-danger"></s:fielderror>
+                                          <s:textfield  cssClass="form-control " name="NOMBRE" id="datos.NOMBRE"/>
 
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.APATERNO_RENAPO" id="objRenapo.APATERNO_RENAPO"/>
-                                           <s:fielderror name="APA" cssClass="alert alert-danger"></s:fielderror>
+                                          <s:textfield cssClass="form-control" name="APELLIDOP" id="datos.APELLIDOP"/>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.AMATERNO_RENAPO" id="objRenapo.AMATERNO_RENAPO"/>
-                                            <s:fielderror name="AMA" cssClass="alert alert-danger"></s:fielderror>
+                                           <s:textfield cssClass="form-control" name="APELLIDOM" id="datos.APELLIDOM"/>
                                       </div>
-                                      
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Fecha de Nacimiento</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.FEC_NAC_RENAPO" id="objRenapo.FEC_NAC_RENAPO"/>
-                                            <s:fielderror name="FECNAN" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Nacionalidad</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.NACIONALIDAD_RENAPO" id="objRenapo.NACIONALIDAD_RENAPO"/>
-                                            <s:fielderror name="NAC" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Entidad de Nacimiento</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.ENTIDAD_NACIMINETO_RENAPO" id="objRenapo.ENTIDAD_NACIMINETO_RENAPO"/>
-                                            <s:fielderror name="ENTIDADNAC" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      
-                                      
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Genero</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.GENERO_RENAPO" id="objRenapo.GENERO_RENAPO"/>
-                                            <s:fielderror name="GENERO" cssClass="alert alert-danger"></s:fielderror>
+                                           <s:textfield cssClass="form-control" name="GENERO" id="GENERO"/>
                                       </div>
                                       <div class="form-group col-md-4">
-                                          <s:select  data-style="select-with-transition" title="Estado Civil"  name="objRenapo.ID_ESTADO_CIVIL" id="objRenapo.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
-                                          <s:iterator value="ListaEstadosCivil" id="ListaEstadosCivil" status="stat">                        
-                                              <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL"></s:hidden>
-                                              <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ESTADO_CIVIL" id="ESTADO_CIVIL"></s:hidden>
-                                          </s:iterator>
-                                           <s:fielderror name="IDESTADO" cssClass="alert alert-danger"></s:fielderror>
+                                          <s:select  data-style="select-with-transition" title="Estado Civil"  name="ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
                                       </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.DOMICILIO" id="objRenapo.DOMICILIO"/>
-                                            <s:fielderror name="DOMICILIO" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Entre Calle </label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE1" id="objRenapo.CALLE1"/>
-                                            <s:fielderror name="CALLE1" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating"> Y Calle</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE2" id="objRenapo.CALLE2"/>
-                                            <s:fielderror name="CALLE2" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating"> Otra referencia de domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.REFERENCIA" id="objRenapo.REFERENCIA"/>
-                                            <s:fielderror name="REFERENCIA" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-
-                                      <div class="form-group col-md-4">
-                                       
-                                          <label for="examplePass" class="bmd-label-floating">Codigo Postal</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.CP" id="CP" onchange="Javascript:ConsultaCP('ConsultaCP')" maxLength="5"/>
-                                          <s:fielderror name="NoCP" cssClass="alert alert-danger"></s:fielderror>
-                                          
-                                      </div>
-                                          <s:if test="banColonia">   
-                                              <div class="form-group col-md-4">
-                                                   <label for="examplePass" class="bmd-label-floating">Colonia: </label>
-                                                  <s:select  data-style="select-with-transition"   name="objRenapo.COLONIA" id="objRenapo.COLONIA" list="ListaColonia"  listKey="COLONIA"  listValue="COLONIA" headerValue="COLONIA"  cssClass="selectpicker "  />
-                                                  <s:iterator value="ListaColonia" id="ListaColonia" status="stat">                        
-                                                      <s:hidden  name = "ListaColonia[%{#stat.index}].COLONIA" id="COLONIA"></s:hidden>
-                                                  </s:iterator>
-                                                   <s:fielderror name="COLONIA" cssClass="alert alert-danger"></s:fielderror>
-                                              </div>  
-                                              <div class="form-group col-md-4">
-                                                  <label for="examplePass" class="bmd-label-floating">Municipio</label>
-                                                  <s:textfield cssClass="form-control" name="objRenapo.MUNICIPIO" id="objRenapo.MUNICIPIO"/>
-                                                   <s:fielderror name="MUNICIPIO" cssClass="alert alert-danger"></s:fielderror>
-                                              </div>    
-                                          </s:if>  
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.TELEFONO" id="objRenapo.TELEFONO"/>
-                                            <s:fielderror name="TEL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CELULAR" id="objRenapo.CELULAR"/>
-                                            <s:fielderror name="CEL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Email</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.EMAIL" id="objRenapo.EMAIL" required="true"/>
-                                           <s:fielderror name="EMAIL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-
-
+                                      
                                   </div>
-                              </div>                         
+                              </div>        
                       </div>
-                      
-                      <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaAspirante')" class="btn btn-block btn-rose">Guardar y Continuar</a>
+                     
+                      <div class="tab-pane" id="DatosAcademicos">
+                        <h5 class="info-text"> What are you doing? (checkboxes) </h5>
+                        <div class="row justify-content-center">
+                          <div class="col-lg-10">
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <div class="choice" data-toggle="wizard-checkbox">
+                                  <input type="checkbox" name="jobb" value="Design">
+                                  <div class="icon">
+                                    <i class="fa fa-pencil"></i>
+                                  </div>
+                                  <h6>Design</h6>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="choice" data-toggle="wizard-checkbox">
+                                  <input type="checkbox" name="jobb" value="Code">
+                                  <div class="icon">
+                                    <i class="fa fa-terminal"></i>
+                                  </div>
+                                  <h6>Code</h6>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="choice" data-toggle="wizard-checkbox">
+                                  <input type="checkbox" name="jobb" value="Develop">
+                                  <div class="icon">
+                                    <i class="fa fa-laptop"></i>
+                                  </div>
+                                  <h6>Develop</h6>
+                                </div>
+                                <select class="selectpicker" data-style="btn btn-primary btn-round" title="Single Select" data-size="7">
+                                  <option disabled selected>Choose city</option>
+                                  <option value="2">Foobar</option>
+                                  <option value="3">Is great</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                  </div>                 
-           
-             
+                      <div class="tab-pane" id="DatosTutor">
+                        <div class="row justify-content-center">
+                          <div class="col-sm-12">
+                            <h5 class="info-text"> Are you living in a nice area? </h5>
+                          </div>
+                          <div class="col-sm-7">
+                            <div class="form-group">
+                              <label>Street Name</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label>Street No.</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-group">
+                              <label>City</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-group select-wizard">
+                              <label>Country</label>
+                              <select class="selectpicker" data-size="7" data-style="select-with-transition" title="Single Select">
+                                <option value="Afghanistan"> Afghanistan </option>
+                                <option value="Albania"> Albania </option>
+                                <option value="Algeria"> Algeria </option>
+                                <option value="American Samoa"> American Samoa </option>
+                                <option value="Andorra"> Andorra </option>
+                                <option value="Angola"> Angola </option>
+                                <option value="Anguilla"> Anguilla </option>
+                                <option value="Antarctica"> Antarctica </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+ 
+                    </div>
+                     </s:form>  
+                  </div>
+                  <div class="card-footer">
+                    <div class="mr-auto">
+                      <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+                    </div>
+                    <div class="ml-auto">
+                      <input type="button" class="btn btn-next btn-fill btn-rose btn-wd" name="next" value="Next">
+                      <input type="button" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Finish" style="display: none;">
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+               
+              </div>
+            </div>
+            <!-- wizard container -->
           </div>
         </div>
       </div>
@@ -274,10 +296,10 @@
             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
         </div>
-         
       </footer>
     </div>
   </div>
+    
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
       <a href="#" data-toggle="dropdown">
@@ -596,61 +618,14 @@
   </script>
   <script>
     $(document).ready(function() {
-      md.checkFullPageBackgroundImage();
+      // Initialise the wizard
+      demo.initMaterialWizard();
+      setTimeout(function() {
+        $('.card.card-wizard').addClass('active');
+      }, 600);
     });
   </script>
-  
-   <script type="text/javascript">
-       
-        function Regreso(accion) {
-               
-                    document.altaPetiForm.action = accion;
-                    document.altaPetiForm.target = "_self";
-                    document.altaPetiForm.submit();
-                
 
-            }
-        
-         function Consulta(accion) {
-               
-                    document.altaPetiForm.action = accion;
-                    document.altaPetiForm.target = "_self";
-                    document.altaPetiForm.submit();
-                
-
-            }
-         function ConsultaCP(accion) {
-             
-                        valor = document.getElementById("CP").value;
-                        
-                        variable=valor.length;           
-                    if(variable==5){
-                    document.altaPetiForm.action = accion;
-                    document.altaPetiForm.target = "_self";
-                    document.altaPetiForm.submit();  
-                    }else{
-                        alert("El codigo postal debe tener 5 números");
-                        document.getElementById("cadena").value="El codigo postal debe tener 5 números";
-                        
-                    }
-                    
-                
-
-            }    
-      
-       function Accion(accion, valor) {
-               
-                    document.altaPetiForm.ID_BECA.value = valor;
-                    document.altaPetiForm.action = accion;
-                    document.altaPetiForm.target = "_self";
-                    document.altaPetiForm.submit();
-                
-
-            }
-  </script>    
-   <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-     
-     </s:form>
 </body>
 
 </html>

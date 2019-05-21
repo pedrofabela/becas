@@ -1,0 +1,27 @@
+package mappers;
+
+import beans.ColoniasBean;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ColoniaMapper implements Mapper {
+
+    public Object mapRow(ResultSet rs) throws SQLException {
+        ColoniasBean dat = new ColoniasBean();
+        
+        if (rs.getString("asenta") != null) {
+            dat.setCOLONIA(rs.getString("asenta").trim());
+        } else {
+            dat.setCOLONIA(rs.getString("asenta"));
+        }
+        if (rs.getString("desc_mpio") != null) {
+            dat.setMUNICIPIO(rs.getString("desc_mpio").trim());
+        } else {
+            dat.setMUNICIPIO(rs.getString("desc_mpio"));
+        }
+        
+         
+        return dat;
+    }
+
+}

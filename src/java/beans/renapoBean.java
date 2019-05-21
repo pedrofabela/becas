@@ -12,20 +12,33 @@ import java.io.Serializable;
  * @author pedro
  */
 public class renapoBean implements Serializable {
-	private static final long serialVersionUID = -3358884679090829992L;
-    
-        public String NOMBRE_RENAPO;
-	public String APATERNO_RENAPO;
-        public String AMATERNO_RENAPO;
-        public String GENERO_RENAPO;
-         public String ENTIDAD_NACIMINETO_RENAPO;
-         public String FEC_NAC_RENAPO;
-          public String NACIONALIDAD_RENAPO;
-           
 
-           
-           
-           
+    private static final long serialVersionUID = -3358884679090829992L;
+    
+    public String NOMBRE_RENAPO;
+    public String APATERNO_RENAPO;
+    public String AMATERNO_RENAPO;
+    public String GENERO_RENAPO;
+    public String ENTIDAD_NACIMINETO_RENAPO;
+    public String FEC_NAC_RENAPO;
+    public String NACIONALIDAD_RENAPO;
+    public String CP;
+    public String MUNICIPIO;
+    public String ID_ESTADO_CIVIL;
+    public String DOMICILIO;
+    public String CALLE1;
+    public String CALLE2;
+    public String REFERENCIA;
+    public String COLONIA;
+    public String TELEFONO;
+    public String CELULAR;
+    public String EMAIL;
+
+   
+    
+    
+    
+
     public String getENTIDAD_NACIMINETO_RENAPO() {
         return ENTIDAD_NACIMINETO_RENAPO;
     }
@@ -50,8 +63,6 @@ public class renapoBean implements Serializable {
         this.NACIONALIDAD_RENAPO = NACIONALIDAD_RENAPO;
     }
 
-  
-           
     public String getNOMBRE_RENAPO() {
         return NOMBRE_RENAPO;
     }
@@ -83,18 +94,98 @@ public class renapoBean implements Serializable {
     public void setGENERO_RENAPO(String GENERO_RENAPO) {
         this.GENERO_RENAPO = GENERO_RENAPO;
     }
-        
-        
-        
-        
-        
-        
-	
 
-   
-     
-        
-        
-        
-        
+    public String getCP() {
+        return CP;
+    }
+
+    public void setCP(String CP) {
+        this.CP = CP;
+    }
+
+    public String getMUNICIPIO() {
+        return MUNICIPIO;
+    }
+
+    public void setMUNICIPIO(String MUNICIPIO) {
+        this.MUNICIPIO = MUNICIPIO;
+    }
+
+    public String getID_ESTADO_CIVIL() {
+        return ID_ESTADO_CIVIL;
+    }
+
+    public void setID_ESTADO_CIVIL(String ID_ESTADO_CIVIL) {
+        this.ID_ESTADO_CIVIL = ID_ESTADO_CIVIL;
+    }
+
+    public String getDOMICILIO() {
+        return DOMICILIO;
+    }
+
+    public void setDOMICILIO(String DOMICILIO) {
+        this.DOMICILIO = DOMICILIO;
+    }
+
+    public String getCALLE1() {
+        return CALLE1;
+    }
+
+    public void setCALLE1(String CALLE1) {
+        this.CALLE1 = CALLE1;
+    }
+
+    public String getCALLE2() {
+        return CALLE2;
+    }
+
+    public void setCALLE2(String CALLE2) {
+        this.CALLE2 = CALLE2;
+    }
+
+    public String getREFERENCIA() {
+        return REFERENCIA;
+    }
+
+    public void setREFERENCIA(String REFERENCIA) {
+        this.REFERENCIA = REFERENCIA;
+    }
+
+    public String getCOLONIA() {
+        return COLONIA;
+    }
+
+    public void setCOLONIA(String COLONIA) {
+        this.COLONIA = COLONIA;
+    }
+
+    public String getTELEFONO() {
+        return TELEFONO;
+    }
+
+    public void setTELEFONO(String TELEFONO) {
+        this.TELEFONO = TELEFONO;
+    }
+
+    public String getCELULAR() {
+        return CELULAR;
+    }
+
+    public void setCELULAR(String CELULAR) {
+        this.CELULAR = CELULAR;
+    }
+
+    public String getEMAIL() {
+        return EMAIL;
+    }
+
+    public void setEMAIL(String EMAIL) {
+        this.EMAIL = EMAIL;
+    }
+    
+    
+    
+    
+    
+
 }

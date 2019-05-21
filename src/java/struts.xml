@@ -56,7 +56,19 @@
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>             	
         
-		
+	 <action name="ConsultaCP" class="action.Inicio_Action" method="ConsultaCP">
+            <result name="SUCCESS">/pages/Registro.jsp</result>			              
+            <result name="ERROR">/pages/Registro.jsp</result>
+            <result name="input">/pages/Registro.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>       
+        
+        <action name="GuardaAspirante" class="action.Inicio_Action" method="GuardaAspirante">
+            <result name="SUCCESS">/pages/Registro.jsp</result>			              
+            <result name="ERROR">/pages/Registro.jsp</result>
+            <result name="input">/pages/Registro.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>              	
     </package>
 	
 </struts>

@@ -35,13 +35,13 @@ public class OracleDAOFactory implements DAOFactory {
     private PreparedStatement pstmt;
     
    
-     // DESARROLLO
+     /*// DESARROLLO
     private String username = "U_BECASPROD";	
 	private String url = "jdbc:oracle:thin:@172.20.2.47:1521:xe";	
     private String password = "B3C4S#2019"; 
    	//*/
     
-    /*//PRODUCCION
+    //PRODUCCION
     private String username = "U_BECASPROD";	
 	private String url = "jdbc:oracle:thin:@10.33.220.169:1521:oraudai";	
     private String password = "B3C4S#2019"; 

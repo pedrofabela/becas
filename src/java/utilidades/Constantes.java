@@ -19,7 +19,8 @@ public class Constantes implements Serializable {
 	 public static final String TablaModulosPerfiles="TBL_MODULOSPERFILES";
 	 public static final String TablaModulos="TBL_MODULOS";
 	 public static final String CatBecas= "CAT_BECAS";
-          public static final String TablaEstados= "CAT_ESTADO_CIVIL";
+         public static final String TablaEstados= "CAT_ESTADO_CIVIL";
+         public static final String TablaAspirantes="TBL_ASPIRANTES";
 	 
 		 /**************DESARROLLO**********************************************************
 	

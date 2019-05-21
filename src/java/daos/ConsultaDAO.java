@@ -5,6 +5,8 @@
 package daos;
 
 import beans.BecasBean;
+import beans.ColoniasBean;
+import beans.renapoBean;
 import java.util.List;
 
 public interface ConsultaDAO {
@@ -18,5 +20,9 @@ public interface ConsultaDAO {
     public List ConsultaRequisitos(BecasBean obj) throws Exception;
 
     public List ConsultaEstadosCivil() throws Exception;
+    
+    public List ConsultaColonia(renapoBean obj) throws Exception;
+    
+    public boolean GuardaDatosPersonales(renapoBean objg) throws Exception;
 
 }

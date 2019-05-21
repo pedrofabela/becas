@@ -1,6 +1,8 @@
 package business;
 
 import beans.BecasBean;
+import beans.ColoniasBean;
+import beans.renapoBean;
 import java.util.List;
 import daos.ConsultaDAO;
 import daos.ConsultaDAOImpl;
@@ -36,6 +38,15 @@ public class ConsultasBusiness {
     public List ConsultaEstadosCivil() throws Exception {
         List lista = this.con.ConsultaEstadosCivil();
         return lista;
+    }
+    
+    public List ConsultaColonia(renapoBean obj) throws Exception {
+        List lista = this.con.ConsultaColonia(obj);
+        return lista;
+    }
+    
+    public boolean GuardaDatosPersonales(renapoBean objg) throws Exception{
+        return this.con.GuardaDatosPersonales(objg);
     }
 
 

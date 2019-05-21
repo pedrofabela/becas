@@ -1,6 +1,7 @@
 package action;
 
 import beans.BecasBean;
+import beans.ColoniasBean;
 import beans.EstadoCivilBean;
 import beans.RequisitosBean;
 
@@ -12,6 +13,7 @@ import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +23,7 @@ public class Inicio_Action extends ActionSupport {
 
     //INSTANCIA A LOS BEANS//
     BecasBean objdatos = new BecasBean();
-     renapoBean objRenapo = new renapoBean();
+    renapoBean objRenapo = new renapoBean();
    
     //************************************
 
@@ -34,6 +36,9 @@ public class Inicio_Action extends ActionSupport {
     private List<BecasBean> ListaBases = new ArrayList<BecasBean>();
     private List<BecasBean> ListaRequisitos = new ArrayList<BecasBean>();
     private List<EstadoCivilBean>ListaEstadosCivil=new ArrayList<EstadoCivilBean>();
+    private List<ColoniasBean>ListaColonia=new ArrayList<ColoniasBean>();
+    
+    private boolean banColonia=false;
             
    
     
@@ -110,10 +115,7 @@ public class Inicio_Action extends ActionSupport {
         
         
             System.out.println("nombre de renapo en metodo"+ objRenapo.getNOMBRE_RENAPO());
-                    
-                    
-            
-            
+                            
             Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
             Constantes.enviaMensajeConsola("lista Req: "+ListaReq.size());
             Constantes.enviaMensajeConsola("lista ESTADOS: "+ListaEstadosCivil.size());
@@ -126,6 +128,234 @@ public class Inicio_Action extends ActionSupport {
         }
         return "SUCCESS";
     }
+    
+    public String ConsultaCP() {
+        try {
+            //validando session***********************************************************************
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            
+            ListaColonia=con.ConsultaColonia(objRenapo);
+            
+            if (ListaColonia.size()>0) {
+                
+                banColonia=true;
+                
+                Iterator LC=ListaColonia.iterator();
+                ColoniasBean objg;
+                
+                while (LC.hasNext()) {
+                    objg = (ColoniasBean) LC.next();
+                    
+                    objRenapo.setMUNICIPIO(objg.getMUNICIPIO());
+                    
+                }
+                
+            } else {
+                   banColonia=false;
+                   addFieldError("NoCP", "Codigo Postal No encontrado favor de verificar");
+            }
+          
+            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+    
+    public String GuardaAspirante() {
+        
+        try {
+            //validando session***********************************************************************
+
+            ConsultasBusiness con = new ConsultasBusiness();
+            
+    boolean NOMBRE_RENAPO=false;
+    boolean APATERNO_RENAPO=false;
+    boolean AMATERNO_RENAPO=false;
+    boolean GENERO_RENAPO=false;
+    boolean ENTIDAD_NACIMINETO_RENAPO=false;
+    boolean FEC_NAC_RENAPO=false;
+    boolean NACIONALIDAD_RENAPO=false;
+    boolean CP=false;
+    boolean MUNICIPIO=false;
+    boolean ID_ESTADO_CIVIL=false;
+    boolean DOMICILIO=false;
+    boolean CALLE1=false;
+    boolean CALLE2=false;
+    boolean REFERENCIA=false;
+    boolean COLONIA=false;
+    boolean TELEFONO=false;
+    boolean CELULAR=false;
+    boolean EMAIL=false;
+    
+            if (objRenapo.getNOMBRE_RENAPO().length()>0) {
+                NOMBRE_RENAPO=true;
+                
+            } else {
+                NOMBRE_RENAPO=false;
+                addFieldError("NOMA", "Debe registrar el nombre del alumno");
+            }
+        
+             if (objRenapo.getAPATERNO_RENAPO().length()>0) {
+                APATERNO_RENAPO=true;
+                
+            } else {
+                APATERNO_RENAPO=false;
+                addFieldError("APA", "Debe registrar el apellido paterno del alumno");
+            }
+             
+             if (objRenapo.getAMATERNO_RENAPO().length()>0) {
+                AMATERNO_RENAPO=true;
+                
+            } else {
+                AMATERNO_RENAPO=false;
+                addFieldError("AMA", "Debe registrar el apellido materno del alumno");
+            } 
+             if (objRenapo.getFEC_NAC_RENAPO().length()>0) {
+                FEC_NAC_RENAPO=true;
+                
+            } else {
+                FEC_NAC_RENAPO=false;
+                addFieldError("FECNAN", "Debe registrar la fecha de nacimiento del alumno");
+            } 
+            
+             if (objRenapo.getNACIONALIDAD_RENAPO().length()>0) {
+                NACIONALIDAD_RENAPO=true;
+                
+            } else {
+                NACIONALIDAD_RENAPO=false;
+                addFieldError("NAC", "Debe registrar la nacionalidad del alumno");
+            }  
+             if (objRenapo.getENTIDAD_NACIMINETO_RENAPO().length()>0) {
+                ENTIDAD_NACIMINETO_RENAPO=true;
+                
+            } else {
+                ENTIDAD_NACIMINETO_RENAPO=false;
+                addFieldError("ENTIDADNAC", "Debe registrar la entidad de nacimiento");
+            }  
+            
+             if (objRenapo.getGENERO_RENAPO().length()>0) {
+                GENERO_RENAPO=true;
+                
+            } else {
+                GENERO_RENAPO=false;
+                addFieldError("GENERO", "Debe registrar el genero del alumno");
+            }  
+             
+            if (objRenapo.getID_ESTADO_CIVIL().length() > 0) {
+                ID_ESTADO_CIVIL = true;
+
+            } else {
+                ID_ESTADO_CIVIL = false;
+                addFieldError("IDESTADO", "Debe Seleccionar un estado civil del alumno");
+            }
+             if (objRenapo.getDOMICILIO().length() > 0) {
+                DOMICILIO = true;
+
+            } else {
+                DOMICILIO = false;
+                addFieldError("DOMICILIO", "Debe registrar el domicilio del alumno");
+            }
+             
+             if (objRenapo.getCALLE1().length() > 0) {
+                CALLE1 = true;
+
+            } else {
+                CALLE1 = false;
+                addFieldError("CALLE1", "Debe registrar entre calle del domicilio del alumno");
+            }
+              if (objRenapo.getCALLE2().length() > 0) {
+                CALLE2 = true;
+
+            } else {
+                CALLE2 = false;
+                addFieldError("CALLE2", "Debe registrar Y calle del domicilio del alumno");
+            }
+
+             if (objRenapo.getREFERENCIA().length() > 0) {
+                REFERENCIA = true;
+
+            } else {
+                REFERENCIA = false;
+                addFieldError("REFERENCIA", "Debe registrar otra referencia del domicilio del alumno");
+            }
+            
+             if (objRenapo.getCP().length() > 0) {
+                CP = true;
+
+            } else {
+                CP = false;
+                addFieldError("CP", "Debe registrar un codigo postal del alumno");
+            } 
+              if (objRenapo.getCOLONIA().length() > 0) {
+                COLONIA = true;
+
+            } else {
+                COLONIA = false;
+                addFieldError("COLONIA", "Debe registrar una colonia del alumno");
+            }
+              if (objRenapo.getMUNICIPIO().length() > 0) {
+                MUNICIPIO = true;
+
+            } else {
+                MUNICIPIO = false;
+                addFieldError("MUNICIPIO", "Debe registrar el municipio del alumno");
+            } 
+             if (objRenapo.getTELEFONO().length() > 0) {
+                TELEFONO = true;
+
+            } else {
+                TELEFONO = false;
+                addFieldError("TEL", "Debe registrar un número telefonico del alumno");
+            } 
+            
+             if (objRenapo.getCELULAR().length() > 0) {
+                CELULAR = true;
+
+            } else {
+                CELULAR = false;
+                addFieldError("CEL", "Debe registrar un número celular del alumno");
+            } 
+             
+             if (objRenapo.getEMAIL().length() > 0) {
+                EMAIL = true;
+
+            } else {
+                EMAIL = false;
+                addFieldError("EMAIL", "Debe registrar un correo electronico del alumno");
+            } 
+             
+             if ( NOMBRE_RENAPO && APATERNO_RENAPO && AMATERNO_RENAPO && GENERO_RENAPO && ENTIDAD_NACIMINETO_RENAPO && FEC_NAC_RENAPO && NACIONALIDAD_RENAPO && CP && MUNICIPIO &&
+    ID_ESTADO_CIVIL && DOMICILIO && CALLE1 && CALLE2 && REFERENCIA && COLONIA && TELEFONO && CELULAR && EMAIL) {
+                 
+                 con.GuardaDatosPersonales(objRenapo);
+                
+            }
+  
+ 
+             
+             
+
+        
+ 
+
+            
+                
+            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+
       //******************************** FIN VARIABLE ARCHIVOS*********************************
 
     public List<BecasBean> getListaBases() {
@@ -151,12 +381,18 @@ public class Inicio_Action extends ActionSupport {
     public void setListaEstadosCivil(List<EstadoCivilBean> ListaEstadosCivil) {
         this.ListaEstadosCivil = ListaEstadosCivil;
     }
-     
-  
-     
-     
-     
 
+    public List<ColoniasBean> getListaColonia() {
+        return ListaColonia;
+    }
+
+    public void setListaColonia(List<ColoniasBean> ListaColonia) {
+        this.ListaColonia = ListaColonia;
+    }
+     
+    
+     
+     
     public BecasBean getObjdatos() {
         return objdatos;
     }
@@ -227,6 +463,14 @@ public class Inicio_Action extends ActionSupport {
 
     public void setNivelUsuario(String nivelUsuario) {
         this.nivelUsuario = nivelUsuario;
+    }
+
+    public boolean isBanColonia() {
+        return banColonia;
+    }
+
+    public void setBanColonia(boolean banColonia) {
+        this.banColonia = banColonia;
     }
     
     
