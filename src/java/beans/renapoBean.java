@@ -33,11 +33,15 @@ public class renapoBean implements Serializable {
     public String TELEFONO;
     public String CELULAR;
     public String EMAIL;
+    public String CONSULTA_CURP;
 
-   
-    
-    
-    
+    public String getCONSULTA_CURP() {
+        return CONSULTA_CURP;
+    }
+
+    public void setCONSULTA_CURP(String CONSULTA_CURP) {
+        this.CONSULTA_CURP = CONSULTA_CURP;
+    }
 
     public String getENTIDAD_NACIMINETO_RENAPO() {
         return ENTIDAD_NACIMINETO_RENAPO;

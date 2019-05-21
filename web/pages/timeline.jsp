@@ -2,6 +2,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
+
+
+
+
+
+ <script type="text/javascript"> 
+          
+   
+          
+          
+          
+          function validarInput(input) {
+	var curp = input.value.toUpperCase(),
+    	resultado = document.getElementById("resultado"),
+        valido = "No válido";
+ div = document.getElementById('btnvalidar');
+            div.style.display = 'none';
+        
+    if (curpValida(curp)) {
+    	valido = "Válido";
+        resultado.classList.add("ok");
+        
+        div = document.getElementById('btnvalidar');
+            div.style.display = '';
+        
+        
+        
+        
+    } else {
+    	resultado.classList.remove("ok");
+    }
+        
+    resultado.innerText = "\nFormato de CURP: " + valido;
+}
+
+function curpValida(curp) {
+	var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0\d|1[0-2])(?:[0-2]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+    	validado = curp.match(re);
+	
+    if (!validado)  //Coincide con el formato general?
+    	return false;
+    
+    //Validar que coincida el dígito verificador
+    function digitoVerificador(curp17) {
+        //Fuente https://consultas.curp.gob.mx/CurpSP/
+        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+            lngSuma      = 0.0,
+            lngDigito    = 0.0;
+        for(var i=0; i<17; i++)
+            lngSuma= lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigito = 10 - lngSuma % 10;
+        if(lngDigito == 10)
+            return 0;
+        return lngDigito;
+    }
+    if (validado[2] != digitoVerificador(validado[1])) 
+    	return false;
+        
+	return true; //Validado
+}
+
+          
+          
+          
+          
+          
+          
+          </script>
+
+
+
+
+
+
+
+
 <html lang="en">
 
 <head>
@@ -127,10 +203,76 @@
                           
                       </div>
                       <div class="card-footer">
-                          <div>
-                              <a href="Javascript:Regreso('Registro')" class="btn btn-success">Registrate</a>
+                          
+                          
+                          <div class="row">
                               
+                              
+                              <div class="col-md-12 text-center">
+                                  <div style="margin: auto;"><h4 style="color:purple">Favor de capturar la CURP del Aspirante a la Beca</h4></div>
+                                  
+                              </div>
+
+                              <div class="col-md-12" style="margin-top: 15px;">
+                                  <label for="examplePass" class="bmd-label-floating">CURP</label>
+                                    <s:textfield name="objRenapo.CONSULTA_CURP" id="CONSULTA_CURP"  cssClass="form-control " oninput="validarInput(this)"></s:textfield>
+                              </div>
+                              
+                              <div class="col-md-12" style="margin-top: 15px;" >
+                                   <pre id="resultado" > </pre>
+                              </div>
+                              
+                               
+                              
+                                    <div id="btnvalidar">
+
+                                        <div class="col-md-12" style="margin-top: 15px;">
+                                       
+                                        
+                                        
+                                        
+    
+
+                                        <div class="togglebutton">
+                                            <label>
+                                                <input type="checkbox" name="ACUERDO" id="ACUERDO" value="1" checked ></input>
+                                                    <span class="toggle"></span>
+                                                   Estoy de acuerdo y cumplo con las bases y requisitos de la beca a la que aspiro.
+                                            </label>
+                                        </div>
+                                       
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        </div>
+
+                                        <div class="col-md-12"  >
+                                            <a href="Javascript:Regreso('Registro')" class="btn btn-success" >Registrar Beca</a>
+                                        </div>
+                                        
+                                    </div>
                           </div>
+                          
+                          
+                          
+                          
+                          
+                          
 
                       </div>
                      
@@ -210,6 +352,24 @@
                   </div>
               </div> 
           </div>
+            
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         </div>
       </div>
       <footer class="footer">
@@ -248,6 +408,15 @@
         </div>
           
       </footer>
+                              
+                              
+       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
+     
+     </s:form>                       
+                              
+                              
+                              
+                              
     </div>
   </div>
   <div class="fixed-plugin">
@@ -576,26 +745,118 @@
        
         function Regreso(accion) {
                
+                 var curp=document.getElementById("CONSULTA_CURP").value;
+                 var acuerdo=document.getElementById("ACUERDO").checked;
+               
+             
+      
+           
+           if(curp.length==18 && acuerdo==true){
+               
+           
+               
+                    document.altaPetiForm.action = accion;
+                    document.altaPetiForm.target = "_self";
+                     document.altaPetiForm.submit();
+                   
+        }
+         else{
+                         
+            if(acuerdo==false && curp.length==18){
+                 alert("Debe Aceptar las bases y requisitos de la beca");
+            }
+                     
+               if(acuerdo==true && curp.length!=18){
+                 alert("Formato de curp no valido, favor de intentar de nuevo");
+            }
+                     
+                     
+                 }
+                 
+                 
+                 if(curp.length!=18 && acuerdo==false){
+               
+           
+               
+                  alert("Debe capturar una CURP y Aceptar las Bases y Requisitos de la Beca");
+                   
+        }  
+                 
+                 
+                 
+                 
+                 
+
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            function Regreso2(accion) {
+               
+                
+               
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";
                     document.altaPetiForm.submit();
-                
+   
 
             }
       
        function Accion(accion, valor) {
+           
+           
+          
+           
+           
+        
+               
+          
+           
+           
                
                     document.altaPetiForm.ID_BECA.value = valor;
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";
                     document.altaPetiForm.submit();
+              
                 
 
             }
   </script>    
-   <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-     
-     </s:form>
+  
+  
+  <script>
+      
+      
+      $('.bootstrap-switch').each(function(){
+    $this = $(this);
+    data_on_label = $this.data('on-label') || '';
+    data_off_label = $this.data('off-label') || '';
+
+    $this.bootstrapSwitch({
+        onText: data_on_label,
+        offText: data_off_label
+    });
+});
+      
+      
+      
+      
+      
+      
+      
+  </script>
+  
+  
+  
+  
+  
+  
 </body>
 
 </html>

@@ -109,7 +109,7 @@ public class Inicio_Action extends ActionSupport {
             
             ListaEstadosCivil=con.ConsultaEstadosCivil();
             
-        objRenapo= renapo.consultaRenapo("FAMP871204HMCBRD07");
+        objRenapo= renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
         
         
         

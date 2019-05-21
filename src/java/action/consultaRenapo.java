@@ -165,6 +165,7 @@ public class consultaRenapo {
             System.out.println("PERSONA JSON : " + jsonPersona.get("apellidoMaterno"));
             System.out.println("PERSONA JSON : " + jsonPersona.get("apellidoPaterno"));
             
+            objRenapo.setCONSULTA_CURP(String.valueOf(jsonPersona.get("curp")).replace("\"", ""));
             objRenapo.setNOMBRE_RENAPO(String.valueOf(jsonPersona.get("nombre")).replace("\"", ""));
             objRenapo.setAPATERNO_RENAPO(String.valueOf(jsonPersona.get("apellidoPaterno")).replace("\"", ""));
             objRenapo.setAMATERNO_RENAPO(String.valueOf(jsonPersona.get("apellidoMaterno")).replace("\"", ""));
