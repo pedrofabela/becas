@@ -21,6 +21,7 @@ public class renapoBean implements Serializable {
          public String ENTIDAD_NACIMINETO_RENAPO;
          public String FEC_NAC_RENAPO;
           public String NACIONALIDAD_RENAPO;
+           public String CONSULTA_CURP;
            
 
            
@@ -82,6 +83,14 @@ public class renapoBean implements Serializable {
 
     public void setGENERO_RENAPO(String GENERO_RENAPO) {
         this.GENERO_RENAPO = GENERO_RENAPO;
+    }
+
+    public String getCONSULTA_CURP() {
+        return CONSULTA_CURP;
+    }
+
+    public void setCONSULTA_CURP(String CONSULTA_CURP) {
+        this.CONSULTA_CURP = CONSULTA_CURP;
     }
         
         
