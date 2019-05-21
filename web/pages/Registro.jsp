@@ -114,20 +114,35 @@
                                       <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
 
-                                          <s:textfield  cssClass="form-control " name="datos.NOMBRE" id="datos.NOMBRE"/>
+                                          <s:textfield  cssClass="form-control " name="objRenapo.NOMBRE_RENAPO" id="objRenapo.NOMBRE_RENAPO"/>
 
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
-                                          <s:textfield cssClass="form-control" name="datos.APELLIDOP" id="datos.APELLIDOP"/>
+                                          <s:textfield cssClass="form-control" name="objRenapo.APATERNO_RENAPO" id="objRenapo.APATERNO_RENAPO"/>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
-                                           <s:textfield cssClass="form-control" name="datos.APELLIDOM" id="datos.APELLIDOM"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.AMATERNO_RENAPO" id="objRenapo.AMATERNO_RENAPO"/>
                                       </div>
+                                      
+                                       <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Fecha de Nacimiento</label>
+                                           <s:textfield cssClass="form-control" name="objRenapo.FEC_NAC_RENAPO" id="objRenapo.FEC_NAC_RENAPO"/>
+                                      </div>
+                                        <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Nacionalidad</label>
+                                           <s:textfield cssClass="form-control" name="objRenapo.NACIONALIDAD_RENAPO" id="objRenapo.NACIONALIDAD_RENAPO"/>
+                                      </div>
+                                       <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Entidad de Nacimiento</label>
+                                           <s:textfield cssClass="form-control" name="objRenapo.ENTIDAD_NACIMINETO_RENAPO" id="objRenapo.ENTIDAD_NACIMINETO_RENAPO"/>
+                                      </div>
+                                      
+                                      
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Genero</label>
-                                           <s:textfield cssClass="form-control" name="datos.APELLIDOM" id="datos.APELLIDOM"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.GENERO_RENAPO" id="objRenapo.GENERO_RENAPO"/>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <s:select  data-style="select-with-transition" title="Estado Civil"  name="datos.ID_ESTADO_CIVIL" id="datos.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />

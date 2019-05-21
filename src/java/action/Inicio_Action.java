@@ -6,6 +6,7 @@ import beans.RequisitosBean;
 
 import beans.moduloAuxBean;
 import beans.moduloBean;
+import beans.renapoBean;
 import beans.usuarioBean;
 import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionContext;
@@ -20,6 +21,7 @@ public class Inicio_Action extends ActionSupport {
 
     //INSTANCIA A LOS BEANS//
     BecasBean objdatos = new BecasBean();
+     renapoBean objRenapo = new renapoBean();
    
     //************************************
 
@@ -98,8 +100,16 @@ public class Inicio_Action extends ActionSupport {
            
 
             ConsultasBusiness con=new ConsultasBusiness();
+            consultaRenapo renapo=new consultaRenapo();
             
             ListaEstadosCivil=con.ConsultaEstadosCivil();
+            
+        objRenapo= renapo.consultaRenapo("FAMP871204HMCBRD07");
+        
+        
+        
+        
+            System.out.println("nombre de renapo en metodo"+ objRenapo.getNOMBRE_RENAPO());
                     
                     
             
@@ -200,6 +210,27 @@ public class Inicio_Action extends ActionSupport {
     public void setUsuariocons(usuarioBean usuariocons) {
         this.usuariocons = usuariocons;
     }
+
+    public renapoBean getObjRenapo() {
+        return objRenapo;
+    }
+
+    public void setObjRenapo(renapoBean objRenapo) {
+        this.objRenapo = objRenapo;
+    }
+
+   
+
+    public String getNivelUsuario() {
+        return nivelUsuario;
+    }
+
+    public void setNivelUsuario(String nivelUsuario) {
+        this.nivelUsuario = nivelUsuario;
+    }
+    
+    
+    
     
     
 }
