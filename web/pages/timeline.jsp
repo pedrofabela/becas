@@ -235,7 +235,7 @@ function curpValida(curp) {
 
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox" name="ACUERDO" id="ACUERDO" value="1" checked ></input>
+                                                <input type="checkbox" name="ACUERDO" id="ACUERDO" value="1"  ></input>
                                                     <span class="toggle"></span>
                                                    Estoy de acuerdo y cumplo con las bases y requisitos de la beca a la que aspiro.
                                             </label>
