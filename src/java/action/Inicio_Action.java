@@ -1,8 +1,11 @@
 package action;
 
+import beans.AcademicoBean;
 import beans.BecasBean;
 import beans.ColoniasBean;
 import beans.EstadoCivilBean;
+import beans.GradoBean;
+import beans.PromedioBean;
 import beans.RequisitosBean;
 
 import beans.moduloAuxBean;
@@ -24,6 +27,8 @@ public class Inicio_Action extends ActionSupport {
     //INSTANCIA A LOS BEANS//
     BecasBean objdatos = new BecasBean();
     renapoBean objRenapo = new renapoBean();
+    AcademicoBean objDatosA=new AcademicoBean();
+    
    
     //************************************
 
@@ -37,8 +42,11 @@ public class Inicio_Action extends ActionSupport {
     private List<BecasBean> ListaRequisitos = new ArrayList<BecasBean>();
     private List<EstadoCivilBean>ListaEstadosCivil=new ArrayList<EstadoCivilBean>();
     private List<ColoniasBean>ListaColonia=new ArrayList<ColoniasBean>();
+    private List<GradoBean> ListaGrados=new ArrayList<GradoBean>();
+    private List<PromedioBean>ListaPromedios=new ArrayList<PromedioBean>();
     
     private boolean banColonia=false;
+    private boolean banFormAca=false;
             
    
     
@@ -109,7 +117,24 @@ public class Inicio_Action extends ActionSupport {
             
             ListaEstadosCivil=con.ConsultaEstadosCivil();
             
-        objRenapo= renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
+            objRenapo= renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
+            
+            //consulta cct*********************
+            
+              objDatosA.setCCTAUX("15EPR0806K");
+            
+              objDatosA=con.ConsultaCCT(objDatosA);
+            
+            if (objDatosA==null) {
+                
+                banFormAca=false;
+                addFieldError("ERRORCCT", "LA CCT QUE INGRESO NO SE ENCUENTRA FAVOR DE VERIFICAR");
+                
+            } else {
+                banFormAca=true;
+                 ListaGrados=con.ConsultaGrados();        
+            ListaPromedios=con.ConsultaPromedios();
+            }
         
         
         
@@ -149,6 +174,7 @@ public class Inicio_Action extends ActionSupport {
                     objg = (ColoniasBean) LC.next();
                     
                     objRenapo.setMUNICIPIO(objg.getMUNICIPIO());
+                    objRenapo.setID_MUNICIPIO(objg.getID_MUNICIPIO());
                     
                 }
                 
@@ -191,7 +217,10 @@ public class Inicio_Action extends ActionSupport {
     boolean COLONIA=false;
     boolean TELEFONO=false;
     boolean CELULAR=false;
-    boolean EMAIL=false;
+    boolean EMAIL=false; 
+    boolean GRADO=false;
+    boolean PROMEDIO=false;
+
     
             if (objRenapo.getNOMBRE_RENAPO().length()>0) {
                 NOMBRE_RENAPO=true;
@@ -329,24 +358,135 @@ public class Inicio_Action extends ActionSupport {
                 EMAIL = false;
                 addFieldError("EMAIL", "Debe registrar un correo electronico del alumno");
             } 
+            
+             if (objDatosA.getGRADO().length()>0) {
+                GRADO=true;
+                
+            } else {
+                GRADO=false;
+                addFieldError("GRADO", "Debe registrar el grado que cursa el alumno");
+            }
+        
+             if (objDatosA.getPROMEDIO().length()>0) {
+                PROMEDIO=true;
+                
+            } else {
+                PROMEDIO=false;
+                addFieldError("PROMEDIO", "Debe registrar el promedio del alumno");
+            }
+ 
              
              if ( NOMBRE_RENAPO && APATERNO_RENAPO && AMATERNO_RENAPO && GENERO_RENAPO && ENTIDAD_NACIMINETO_RENAPO && FEC_NAC_RENAPO && NACIONALIDAD_RENAPO && CP && MUNICIPIO &&
-    ID_ESTADO_CIVIL && DOMICILIO && CALLE1 && CALLE2 && REFERENCIA && COLONIA && TELEFONO && CELULAR && EMAIL) {
+    ID_ESTADO_CIVIL && DOMICILIO && CALLE1 && CALLE2 && REFERENCIA && COLONIA && TELEFONO && CELULAR && EMAIL && GRADO && PROMEDIO) {
                  
                  con.GuardaDatosPersonales(objRenapo);
+                 
+                 objRenapo.setID_ASPIRANTE(con.ConsultaAspirante(objRenapo));
+                 
+                 objDatosA.setID_ASPIRANTE(objRenapo.getID_ASPIRANTE());
+                 objDatosA.setID_CICLO("1");
+                 
+                 con.GuardaDatosAcademicos(objDatosA);
+                
+             }         
+            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+    
+    public String ConsultaCCT() {
+        try {
+            //validando session***********************************************************************
+
+            ConsultasBusiness con = new ConsultasBusiness();
+            
+            Constantes.enviaMensajeConsola("cctaux: "+objDatosA.getCCTAUX());
+            
+            if (objDatosA.getCCTAUX().length()>0 && objDatosA.getCCTAUX().length()==10) {
+                
+                 objDatosA=con.ConsultaCCT(objDatosA);
+            
+            if (objDatosA==null) {
+                
+                banFormAca=false;
+                addFieldError("ERRORCCT", "LA CCT QUE INGRESO NO SE ENCUENTRA FAVOR DE VERIFICAR");
+                
+            } else {
+                banFormAca=true;
+                 ListaGrados=con.ConsultaGrados();        
+            ListaPromedios=con.ConsultaPromedios();
+            }
+
+                
+            } else {
+                         
+                 addFieldError("ERRORCCT", "POR FAVOR INGRESE UNA CCT VALIDA");
                 
             }
-  
- 
-             
-             
-
-        
- 
 
             
+                       
+           
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+    
+    public String GuardaDatosAcademicos() {
+        
+        try {
+            //validando session***********************************************************************
+            
+           
+            
+            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+            
+               boolean GRADO=false;
+               boolean PROMEDIO=false;
+    
+    
+            if (objDatosA.getGRADO().length()>0) {
+                GRADO=true;
                 
-            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
+            } else {
+                GRADO=false;
+                addFieldError("GRADO", "Debe registrar el grado que cursa el alumno");
+            }
+        
+             if (objDatosA.getPROMEDIO().length()>0) {
+                PROMEDIO=true;
+                
+            } else {
+                PROMEDIO=false;
+                addFieldError("PROMEDIO", "Debe registrar el promedio del alumno");
+            }
+             
+                         
+             if ( GRADO && PROMEDIO) {
+                 
+                  Constantes.enviaMensajeConsola("entro a metodo paso validaciones");
+                 
+                 objDatosA.setID_ASPIRANTE(objRenapo.getID_ASPIRANTE());
+                 objDatosA.setID_CICLO("1");
+                 
+                 con.GuardaDatosAcademicos(objDatosA);
+                             
+             }else{
+                             return "ERROR";
+
+             }        
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -389,6 +529,24 @@ public class Inicio_Action extends ActionSupport {
     public void setListaColonia(List<ColoniasBean> ListaColonia) {
         this.ListaColonia = ListaColonia;
     }
+
+    public List<GradoBean> getListaGrados() {
+        return ListaGrados;
+    }
+
+    public void setListaGrados(List<GradoBean> ListaGrados) {
+        this.ListaGrados = ListaGrados;
+    }
+
+    public List<PromedioBean> getListaPromedios() {
+        return ListaPromedios;
+    }
+
+    public void setListaPromedios(List<PromedioBean> ListaPromedios) {
+        this.ListaPromedios = ListaPromedios;
+    }
+    
+    
      
     
      
@@ -455,6 +613,16 @@ public class Inicio_Action extends ActionSupport {
         this.objRenapo = objRenapo;
     }
 
+    public AcademicoBean getObjDatosA() {
+        return objDatosA;
+    }
+
+    public void setObjDatosA(AcademicoBean objDatosA) {
+        this.objDatosA = objDatosA;
+    }
+    
+    
+
    
 
     public String getNivelUsuario() {
@@ -472,6 +640,16 @@ public class Inicio_Action extends ActionSupport {
     public void setBanColonia(boolean banColonia) {
         this.banColonia = banColonia;
     }
+
+    public boolean isBanFormAca() {
+        return banFormAca;
+    }
+
+    public void setBanFormAca(boolean banFormAca) {
+        this.banFormAca = banFormAca;
+    }
+    
+    
     
     
     

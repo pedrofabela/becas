@@ -19,6 +19,11 @@ public class ColoniaMapper implements Mapper {
         } else {
             dat.setMUNICIPIO(rs.getString("desc_mpio"));
         }
+        if (rs.getString("idn_mpio") != null) {
+            dat.setID_MUNICIPIO(rs.getString("idn_mpio").trim());
+        } else {
+            dat.setID_MUNICIPIO(rs.getString("idn_mpio"));
+        }
         
          
         return dat;

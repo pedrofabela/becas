@@ -158,83 +158,72 @@
                                             <s:fielderror fieldName="GENERO" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
-                                          <s:select  data-style="select-with-transition" title="Estado Civil"  name="objRenapo.ID_ESTADO_CIVIL" id="objRenapo.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
-                                          <s:iterator value="ListaEstadosCivil" id="ListaEstadosCivil" status="stat">                        
-                                              <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL"></s:hidden>
-                                              <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ESTADO_CIVIL" id="ESTADO_CIVIL"></s:hidden>
-                                          </s:iterator>
+                                      <s:textfield  cssClass="form-control"  name="objRenapo.ID_ESTADO_CIVIL" id="objRenapo.ID_ESTADO_CIVIL" readonly="true" />                                      
                                            <s:fielderror fieldName="IDESTADO" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.DOMICILIO" id="objRenapo.DOMICILIO"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.DOMICILIO" id="objRenapo.DOMICILIO" readonly="true"/>
                                            <s:fielderror fieldName="DOMICILIO" cssClass="alert alert-danger" ></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Entre Calle </label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE1" id="objRenapo.CALLE1"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE1" id="objRenapo.CALLE1" readonly="true"/>
                                             <s:fielderror fieldName="CALLE1" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating"> Y Calle</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE2" id="objRenapo.CALLE2"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE2" id="objRenapo.CALLE2" readonly="true"/>
                                             <s:fielderror fieldName="CALLE2" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating"> Otra referencia de domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.REFERENCIA" id="objRenapo.REFERENCIA"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.REFERENCIA" id="objRenapo.REFERENCIA" readonly="true"/>
                                             <s:fielderror fieldName="REFERENCIA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
 
                                       <div class="form-group col-md-4">
                                        
                                           <label for="examplePass" class="bmd-label-floating">Codigo Postal</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.CP" id="CP" onchange="Javascript:ConsultaCP('ConsultaCP')" maxLength="5"/>
+                                          <s:textfield cssClass="form-control" name="objRenapo.CP" id="CP" onchange="Javascript:ConsultaCP('ConsultaCP')" maxLength="5" readonly="true"/>
                                           <s:fielderror fieldName="NoCP" cssClass="alert alert-danger"></s:fielderror>
                                           
-                                      </div>
-                                          <s:if test="banColonia">   
-                                              <s:hidden name="banColonia" value="%{banColonia}"></s:hidden>
+                                      </div>                                            
                                               <div class="form-group col-md-4">
-                                                   <label for="examplePass" class="bmd-label-floating">Colonia: </label>
-                                                  <s:select  data-style="select-with-transition"   name="objRenapo.COLONIA" id="objRenapo.COLONIA" list="ListaColonia"  listKey="COLONIA"  listValue="COLONIA" headerValue="COLONIA"  cssClass="selectpicker "  />
-                                                  <s:iterator value="ListaColonia" id="ListaColonia" status="stat">                        
-                                                      <s:hidden  name = "ListaColonia[%{#stat.index}].COLONIA" id="COLONIA"></s:hidden>
-                                                  </s:iterator>
-                                                   <s:fielderror fieldName="COLONIA" cssClass="alert alert-danger"></s:fielderror>
+                                                  <label for="examplePass" class="bmd-label-floating">Colonia: </label>
+                                              <s:textfield cssClass="form-control"  name="objRenapo.COLONIA" id="objRenapo.COLONIA" readonly="true" />
+                                              <s:fielderror fieldName="COLONIA" cssClass="alert alert-danger"></s:fielderror>
                                               </div>  
                                               <div class="form-group col-md-4">
                                                   <label for="examplePass" class="bmd-label-floating">Municipio</label>
-                                                  <s:textfield cssClass="form-control" name="objRenapo.MUNICIPIO" id="objRenapo.MUNICIPIO" readonly="true"/>
-                                                   <s:fielderror fieldName="MUNICIPIO" cssClass="alert alert-danger"></s:fielderror>
-                                              </div>    
-                                          </s:if>  
+                                              <s:textfield cssClass="form-control" name="objRenapo.MUNICIPIO" id="objRenapo.MUNICIPIO" readonly="true"/>
+                                              <s:fielderror fieldName="MUNICIPIO" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>    
+             
                                        <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.TELEFONO" id="objRenapo.TELEFONO"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.TELEFONO" id="objRenapo.TELEFONO" readonly="true"/>
                                             <s:fielderror fieldName="TEL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CELULAR" id="objRenapo.CELULAR"/>
+                                           <s:textfield cssClass="form-control" name="objRenapo.CELULAR" id="objRenapo.CELULAR" readonly="true"/>
                                             <s:fielderror fieldName="CEL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Email</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.EMAIL" id="objRenapo.EMAIL" required="true"/>
+                                          <s:textfield cssClass="form-control" name="objRenapo.EMAIL" id="objRenapo.EMAIL" readonly="true"/>
                                           <s:fielderror fieldName="EMAIL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">
-                                          <s:textfield cssClass="form-control" name="objRenapo.ID_ASPIRANTE" id="objRenapo.ID_ASPIRANTE" cssStyle="display:none;" required="true"/>
-                                      </div>
-                                          
+                                          <s:textfield cssClass="form-control" name="objRenapo.ID_ASPIRANTE" id="objRenapo.ID_ASPIRANTE" required="true"/>
+                                      </div>      
 
 
 
                                   </div>
                               </div>                         
-                      </div> 
-                                      
+                      </div>  
                       <div class="dropdown-divider"></div>
                        <div class="card-header card-header-rose card-header-icon">
                           <div class="card-icon">
@@ -245,7 +234,14 @@
                       <div class="card-body">  
                               <div class="col-sm-12">
                                   <div class="row">
-                                                                                  
+                                       
+
+                                      <div class="form-group col-md-12">                                    
+                                          <label for="examplePass" class="bmd-label-floating">Ingrese la CCT a consultar </label>
+                                          <s:textfield cssClass="form-control" name="objDatosA.CCTAUX" id="objDatosA.CCTAUX" onchange="Javascript:Consulta('ConsultaCCT')" maxLength="10"/>
+                                          <s:fielderror fieldName="NOCCT" cssClass="alert alert-danger"></s:fielderror>          
+                                          <s:fielderror fieldName="ERRORCCT" cssClass="alert alert-danger"></s:fielderror> 
+                                      </div>                                            
                                           <s:if test="banFormAca">
                                               <s:hidden name="banFormAca" value="%{banFormAca}"></s:hidden>
                                        <div class="form-group col-md-12">                                    
@@ -296,10 +292,9 @@
 
                                   </div>
                               </div>                         
-                      </div> 
-                                      
+                      </div>                  
                       <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaAspirante')" class="btn btn-round btn-primary">Guardar y Continuar</a>
+                          <a href="Javascript:Consulta('GuardaDatosAcademicos')" class="btn btn-round btn-primary">Guardar Datos Academicos y Continuar</a>
                       </div>
                   </div>                 
                   
@@ -689,9 +684,9 @@
             }
          function ConsultaCP(accion) {
              
-                        valor = document.getElementById("CP").value;
+                        valor = document.getElementById("CP").value;                   
+                        variable=valor.length;  
                         
-                        variable=valor.length;           
                     if(variable==5){
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";

@@ -8,6 +8,7 @@ public class ColoniasBean implements Serializable {
 
 	private String COLONIA;
 	private String MUNICIPIO;
+        private String ID_MUNICIPIO;
 
     public String getCOLONIA() {
         return COLONIA;
@@ -23,6 +24,14 @@ public class ColoniasBean implements Serializable {
 
     public void setMUNICIPIO(String MUNICIPIO) {
         this.MUNICIPIO = MUNICIPIO;
+    }
+
+    public String getID_MUNICIPIO() {
+        return ID_MUNICIPIO;
+    }
+
+    public void setID_MUNICIPIO(String ID_MUNICIPIO) {
+        this.ID_MUNICIPIO = ID_MUNICIPIO;
     }
 
    

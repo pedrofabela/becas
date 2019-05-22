@@ -24,6 +24,7 @@ public class renapoBean implements Serializable {
     public String NACIONALIDAD_RENAPO;
     public String CP;
     public String MUNICIPIO;
+    public String ID_MUNICIPIO;
     public String ID_ESTADO_CIVIL;
     public String DOMICILIO;
     public String CALLE1;
@@ -34,6 +35,7 @@ public class renapoBean implements Serializable {
     public String CELULAR;
     public String EMAIL;
     public String CONSULTA_CURP;
+    public String ID_ASPIRANTE;
 
     public String getCONSULTA_CURP() {
         return CONSULTA_CURP;
@@ -115,6 +117,15 @@ public class renapoBean implements Serializable {
         this.MUNICIPIO = MUNICIPIO;
     }
 
+    public String getID_MUNICIPIO() {
+        return ID_MUNICIPIO;
+    }
+
+    public void setID_MUNICIPIO(String ID_MUNICIPIO) {
+        this.ID_MUNICIPIO = ID_MUNICIPIO;
+    }
+    
+    
     public String getID_ESTADO_CIVIL() {
         return ID_ESTADO_CIVIL;
     }
@@ -185,6 +196,14 @@ public class renapoBean implements Serializable {
 
     public void setEMAIL(String EMAIL) {
         this.EMAIL = EMAIL;
+    }
+
+    public String getID_ASPIRANTE() {
+        return ID_ASPIRANTE;
+    }
+
+    public void setID_ASPIRANTE(String ID_ASPIRANTE) {
+        this.ID_ASPIRANTE = ID_ASPIRANTE;
     }
     
     
