@@ -55,6 +55,12 @@ public class BecasMapper implements Mapper {
             dat.setESTATUS_FECHA(rs.getString("ESTATUS_FECHA"));
         } 
          
+           if (rs.getString("RESTRICCION_ESC") != null) {
+            dat.setRESTRICCION_ESC(rs.getString("RESTRICCION_ESC").trim());
+        } else {
+            dat.setRESTRICCION_ESC(rs.getString("RESTRICCION_ESC"));
+        } 
+         
         return dat;
     }
 
