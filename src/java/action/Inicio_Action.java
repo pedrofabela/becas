@@ -47,6 +47,7 @@ public class Inicio_Action extends ActionSupport {
     
     private boolean banColonia=false;
     private boolean banFormAca=false;
+
             
    
     
@@ -84,6 +85,36 @@ public class Inicio_Action extends ActionSupport {
         return "SUCCESS";
     }
     
+    public String ConsultaCct() {
+        try {
+            //validando session***********************************************************************
+           
+
+            ConsultasBusiness con=new ConsultasBusiness();
+            
+            Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
+  System.out.println("Entre a validar CCT:");
+            if(objdatos.getRESTRICCION_ESC().equals("1")){
+            
+                System.out.println("vor a validar en la tabla de cct restriccion");
+            }     
+           
+          
+            
+            
+            
+            
+            
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+    
     public String ConsultaReq() {
         try {
             //validando session***********************************************************************
@@ -96,6 +127,27 @@ public class Inicio_Action extends ActionSupport {
             MuestraBecas();         
             ListaBases=(ArrayList<BecasBean>) con.ConsultaBases(objdatos);
             ListaRequisitos=(ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
+            
+            //System.out.println("auxiliar de beca:"+ objdatos.getID_BECA_AUX());
+            
+            
+            objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
+            
+           
+            objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+            
+            
+            
+            
+            
+           // System.out.println("id de l cilclo es:"+ con.ConsultaCiclo(objdatos));
+
+            
+          
+            
+            
+            
+            
             Constantes.enviaMensajeConsola("lista Req: "+ListaRequisitos.size());
           
 

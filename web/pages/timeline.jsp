@@ -6,6 +6,30 @@
 
 
 
+<script>
+    
+    var m = "D";
+  var expreg = new RegExp("^[A-C]$");
+  
+  if(expreg.test(m))
+    alert("La letra si pasa");
+  else
+    alert("La letra no pasa");
+    
+    
+    
+    
+</script>
+
+
+
+
+
+
+
+
+
+
 
  <script type="text/javascript"> 
           
@@ -206,6 +230,32 @@ function curpValida(curp) {
                           
                           
                           <div class="row">
+                              
+                              
+                              
+                                <div class="col-md-12 text-center">
+                                  <div style="margin: auto;"><h4 style="color:purple">Favor de Capturar la Clave de Centro de Trabajo de tu Escuela (CCT)</h4></div>
+                                  
+                              </div>
+
+                              <div class="col-md-12" style="margin-top: 15px;">
+                                  <label for="examplePass" class="bmd-label-floating">CCT</label>
+                                    <s:textfield name="objRenapo.CCT" id="CONSULTA_CCT"  cssClass="form-control " placeholder="Elemplo: 15ETV0027B" ></s:textfield>
+                              </div>
+                              
+                              
+                              
+                              
+                              <div class="col-md-12 text-center" style="margin-top: 40px;">
+                                  
+                                  
+                              </div>
+                              
+                               <div class="col-md-12"  >
+                                            <a href="Javascript:Regreso('Registro')" class="btn btn-success" >Registrar Beca</a>
+                                </div>
+                              
+                              
                               
                               
                               <div class="col-md-12 text-center">
@@ -411,7 +461,9 @@ function curpValida(curp) {
                               
                               
        <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-     
+        <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" ></s:textfield>  
+        <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" ></s:textfield>  
+       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
      </s:form>                       
                               
                               

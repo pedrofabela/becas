@@ -150,7 +150,7 @@
                                          </div>
                                              
                                                  <s:if test="ESTATUS_BECA==1 && ESTATUS_FECHA==1">
-                                             <a href="Javascript:Accion('ConsultaReq','<s:property value="ID_BECA"/>')">
+                                             <a href="Javascript:Accion('ConsultaReq','<s:property value="ID_BECA"/>','<s:property value="RESTRICCION_ESC"/>')">
                                                  <div class="btn btn-success " style="margin-left: 10px;" >
                                                       Solicitar Beca
                                                  </div>
@@ -550,9 +550,10 @@
               
                <script type="text/javascript">
       
-       function Accion(accion, valor) {
+       function Accion(accion, valor, valor2) {
                     
                     document.altaPetiForm.ID.value = valor;
+                    document.altaPetiForm.RESTRICCION.value = valor2;
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";
                     document.altaPetiForm.submit();
@@ -560,7 +561,8 @@
 
             }
   </script>  
-       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>                  
+       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>   
+         <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
     </s:form>           
 </body>
 

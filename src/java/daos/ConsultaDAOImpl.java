@@ -23,7 +23,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     OracleDAOFactory oraDaoFac = new OracleDAOFactory();
 
     public List ConsultaBecas() throws Exception {
-        String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN, CASE WHEN (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO  THEN '1' ELSE '0' END AS ESTATUS_FECHA FROM  CAT_BECAS";
+        String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN, CASE WHEN (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO  THEN '1' ELSE '0' END AS ESTATUS_FECHA, RESTRICCION_ESC FROM  CAT_BECAS WHERE ACTIVO=1";
         //System.out.println("QueryConsultaCatalogos ---> " + query);
         List list = null;
         list = queryForList(query, new BecasMapper());
@@ -52,6 +52,23 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         List list = null;
         list = queryForList(query, new RequisitoBuenoMapper());
         return list;
+    }
+       
+       
+        public String ConsultaCiclo(BecasBean obj) throws Exception {
+        String query = "SELECT ID_CICLO FROM CAT_CICLOS WHERE ID_BECA='"+obj.getID_BECA_AUX()+"' AND ESTATUS=1";
+        Constantes.enviaMensajeConsola("ListaReq ---> " + query);
+        String ciclo = null;
+        ciclo = queryStringUnCampo(query);
+        return ciclo;
+    }
+        
+         public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
+        Constantes.enviaMensajeConsola("ListaReq ---> " + query);
+        String intervalo = null;
+        intervalo = queryStringUnCampo(query);
+        return intervalo;
     }
        
     public List ConsultaEstadosCivil() throws Exception {

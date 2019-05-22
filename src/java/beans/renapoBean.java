@@ -36,7 +36,36 @@ public class renapoBean implements Serializable {
     public String EMAIL;
     public String CONSULTA_CURP;
     public String ID_ASPIRANTE;
+    public String ID_CICLO;
+    public String INTERVALO;
+     public String CCT;
 
+    public String getCCT() {
+        return CCT;
+    }
+
+    public void setCCT(String CCT) {
+        this.CCT = CCT;
+    }
+     
+     
+     
+    public String getINTERVALO() {
+        return INTERVALO;
+    }
+
+    public void setINTERVALO(String INTERVALO) {
+        this.INTERVALO = INTERVALO;
+    }
+
+    public String getID_CICLO() {
+        return ID_CICLO;
+    }
+
+    public void setID_CICLO(String ID_CICLO) {
+        this.ID_CICLO = ID_CICLO;
+    }
+    
     public String getCONSULTA_CURP() {
         return CONSULTA_CURP;
     }

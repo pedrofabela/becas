@@ -19,7 +19,22 @@ public class BecasBean implements Serializable {
         private String ID_BASE;
         private String ID_REQUISITO;
         private String REQUISITO;
-         private String ESTATUS_FECHA;
+        private String ESTATUS_FECHA;
+        private String RESTRICCION_ESC;
+
+        
+        
+        
+        
+        
+    public String getRESTRICCION_ESC() {
+        return RESTRICCION_ESC;
+    }
+
+    public void setRESTRICCION_ESC(String RESTRICCION_ESC) {
+        this.RESTRICCION_ESC = RESTRICCION_ESC;
+    }
+           
 
     public String getESTATUS_FECHA() {
         return ESTATUS_FECHA;
