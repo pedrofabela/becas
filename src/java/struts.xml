@@ -71,24 +71,43 @@
         </action>       
         
         <action name="GuardaAspirante" class="action.Inicio_Action" method="GuardaAspirante">
-            <result name="SUCCESS">/pages/Registro.jsp</result>			              
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
             <result name="ERROR">/pages/Registro.jsp</result>
             <result name="input">/pages/Registro.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>    
-        <action name="ConsultaCCT" class="action.Inicio_Action" method="ConsultaCCT">
-            <result name="SUCCESS">/pages/RegistraCCT.jsp</result>			              
-            <result name="ERROR">/pages/RegistroCCT.jsp</result>
-            <result name="input">/pages/RegistroCCT.jsp</result>
+        <action name="ConsultaCurpP" class="action.Inicio_Action" method="ConsultaCurpP">
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>        
-        
-        <action name="GuardaDatosAcademicos" class="action.Inicio_Action" method="GuardaDatosAcademicos">
-            <result name="SUCCESS">/pages/RegistraDatosTutor.jsp</result>			              
-            <result name="ERROR">/pages/RegistraCCT.jsp</result>
-            <result name="input">/pages/RegistraCCT.jsp</result>
+                
+         <action name="ConsultaCPP" class="action.Inicio_Action" method="ConsultaCPP">
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
-        </action>             	             	
+        </action> 
+        
+         <action name="muestraFormCobe" class="action.Inicio_Action" method="muestraFormCobe">
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>    
+        <action name="ConsultaCurpC" class="action.Inicio_Action" method="ConsultaCurpC">
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>   
+         <action name="GuardaDatosTutor" class="action.Inicio_Action" method="GuardaTutorCobe">
+            <result name="SUCCESS">/pages/RegistraSocioEconomico.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>                                               	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
     </package>
 	
 </struts>

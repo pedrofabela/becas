@@ -113,110 +113,29 @@
                                   <div class="row">
                                        <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">CURP</label>
-                                          <s:textfield  cssClass="form-control " name="objRenapo.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
+                                          <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
                                           <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
                                       </div>
 
                                       <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
 
-                                          <s:textfield  cssClass="form-control " name="objRenapo.NOMBRE_RENAPO" id="objRenapo.NOMBRE_RENAPO" readonly="true"/>
+                                          <s:textfield  cssClass="form-control " name="objAspirante.NOMBRE_RENAPO" id="objAspirante.NOMBRE_RENAPO" readonly="true"/>
                                           <s:fielderror fieldName="NOMA" id="NOMA" cssClass="alert alert-danger"></s:fielderror>
 
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.APATERNO_RENAPO" id="objRenapo.APATERNO_RENAPO" readonly="true"/>
+                                          <s:textfield cssClass="form-control" name="objAspirante.APATERNO_RENAPO" id="objAspirante.APATERNO_RENAPO" readonly="true"/>
                                            <s:fielderror fieldName="APA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.AMATERNO_RENAPO" id="objRenapo.AMATERNO_RENAPO" readonly="true"/>
+                                           <s:textfield cssClass="form-control" name="objAspirante.AMATERNO_RENAPO" id="objAspirante.AMATERNO_RENAPO" readonly="true"/>
                                             <s:fielderror fieldName="AMA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
-                                      
                                        <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Fecha de Nacimiento</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.FEC_NAC_RENAPO" id="objRenapo.FEC_NAC_RENAPO" readonly="true"/>
-                                            <s:fielderror fieldName="FECNAN" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Nacionalidad</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.NACIONALIDAD_RENAPO" id="objRenapo.NACIONALIDAD_RENAPO" readonly="true"/>
-                                            <s:fielderror fieldName="NAC" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Entidad de Nacimiento</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.ENTIDAD_NACIMINETO_RENAPO" id="objRenapo.ENTIDAD_NACIMINETO_RENAPO" readonly="true"/>
-                                            <s:fielderror fieldName="ENTIDADNAC" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      
-                                      
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Genero</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.GENERO_RENAPO" id="objRenapo.GENERO_RENAPO" readonly="true"/>
-                                            <s:fielderror fieldName="GENERO" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                      <s:textfield  cssClass="form-control"  name="objRenapo.ID_ESTADO_CIVIL" id="objRenapo.ID_ESTADO_CIVIL" readonly="true" />                                      
-                                           <s:fielderror fieldName="IDESTADO" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.DOMICILIO" id="objRenapo.DOMICILIO" readonly="true"/>
-                                           <s:fielderror fieldName="DOMICILIO" cssClass="alert alert-danger" ></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Entre Calle </label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE1" id="objRenapo.CALLE1" readonly="true"/>
-                                            <s:fielderror fieldName="CALLE1" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating"> Y Calle</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CALLE2" id="objRenapo.CALLE2" readonly="true"/>
-                                            <s:fielderror fieldName="CALLE2" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating"> Otra referencia de domicilio</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.REFERENCIA" id="objRenapo.REFERENCIA" readonly="true"/>
-                                            <s:fielderror fieldName="REFERENCIA" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-
-                                      <div class="form-group col-md-4">
-                                       
-                                          <label for="examplePass" class="bmd-label-floating">Codigo Postal</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.CP" id="CP" onchange="Javascript:ConsultaCP('ConsultaCP')" maxLength="5" readonly="true"/>
-                                          <s:fielderror fieldName="NoCP" cssClass="alert alert-danger"></s:fielderror>
-                                          
-                                      </div>                                            
-                                              <div class="form-group col-md-4">
-                                                  <label for="examplePass" class="bmd-label-floating">Colonia: </label>
-                                              <s:textfield cssClass="form-control"  name="objRenapo.COLONIA" id="objRenapo.COLONIA" readonly="true" />
-                                              <s:fielderror fieldName="COLONIA" cssClass="alert alert-danger"></s:fielderror>
-                                              </div>  
-                                              <div class="form-group col-md-4">
-                                                  <label for="examplePass" class="bmd-label-floating">Municipio</label>
-                                              <s:textfield cssClass="form-control" name="objRenapo.MUNICIPIO" id="objRenapo.MUNICIPIO" readonly="true"/>
-                                              <s:fielderror fieldName="MUNICIPIO" cssClass="alert alert-danger"></s:fielderror>
-                                          </div>    
-             
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.TELEFONO" id="objRenapo.TELEFONO" readonly="true"/>
-                                            <s:fielderror fieldName="TEL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
-                                           <s:textfield cssClass="form-control" name="objRenapo.CELULAR" id="objRenapo.CELULAR" readonly="true"/>
-                                            <s:fielderror fieldName="CEL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Email</label>
-                                          <s:textfield cssClass="form-control" name="objRenapo.EMAIL" id="objRenapo.EMAIL" readonly="true"/>
-                                          <s:fielderror fieldName="EMAIL" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                       <div class="form-group col-md-4">
-                                          <s:textfield cssClass="form-control" name="objRenapo.ID_ASPIRANTE" id="objRenapo.ID_ASPIRANTE" required="true"/>
+                                          <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true"/>
                                       </div>      
 
 
@@ -229,72 +148,243 @@
                           <div class="card-icon">
                               <i class="material-icons">local_library</i>
                           </div>
-                          <h4 class="card-title">Datos Academicos</h4>
+                          <h4 class="card-title">Datos del Padre o Tutor</h4>
                       </div>
                       <div class="card-body">  
-                              <div class="col-sm-12">
-                                  <div class="row">
-                                       
+                          <div class="col-sm-12">                              
+                              <div class="row">
+                                  <div class="form-group col-md-12">                                    
+                                      <label for="examplePass" class="bmd-label-floating">Ingrese la curp del padre o tutor </label>
+                                      <s:textfield cssClass="form-control" name="objDatosP.CURPAUX" id="objDatosP.CURPAUX" onchange="Javascript:Consulta('ConsultaCurpP')" maxLength="18"/>
+                                      <s:fielderror fieldName="NOCURP" cssClass="alert alert-danger"></s:fielderror>          
+                                      <s:fielderror fieldName="ERRORCURPAUX" cssClass="alert alert-danger"></s:fielderror> 
+                                      </div>  
+                                  <s:if test="BanFormP">
+                                      <s:hidden name="BanFormP" value="%{BanFormP}"></s:hidden>
+                                          <div class="form-group col-md-4">
+                                              <label for="exampleEmail" class="bmd-label-floating">CURP</label>
+                                          <s:textfield  cssClass="form-control " name="objDatosP.CONSULTA_CURP_TU" id="objDatosP.CONSULTA_CURP_TU" readonly="true"/>
+                                          <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
+                                          </div>
 
-                                      <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">Ingrese la CCT a consultar </label>
-                                          <s:textfield cssClass="form-control" name="objDatosA.CCTAUX" id="objDatosA.CCTAUX" onchange="Javascript:Consulta('ConsultaCCT')" maxLength="10"/>
-                                          <s:fielderror fieldName="NOCCT" cssClass="alert alert-danger"></s:fielderror>          
-                                          <s:fielderror fieldName="ERRORCCT" cssClass="alert alert-danger"></s:fielderror> 
-                                      </div>                                            
-                                          <s:if test="banFormAca">
-                                              <s:hidden name="banFormAca" value="%{banFormAca}"></s:hidden>
-                                       <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">CCT </label>
-                                       <s:textfield cssClass="form-control" name="objDatosA.CCT" id="objDatosA.CCT" readonly="true"/>
-                                          <s:fielderror fieldName="CCT" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">NOMBRE DE LA INSTITUCIÓN </label>
-                                       <s:textfield cssClass="form-control" name="objDatosA.NOMCCT" id="objDatosA.NOMCCT" readonly="true"/>
-                                          <s:fielderror fieldName="NOMCCT" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">DOMICILIO DE LA INSTITUCIÓN </label>
-                                       <s:textfield cssClass="form-control" name="objDatosA.DOMCCT" id="objDatosA.DOMCCT" readonly="true" />
-                                          <s:fielderror fieldName="DOMCCT" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">NIVEL EDUCATIVO </label>
-                                       <s:textfield cssClass="form-control" name="objDatosA.NIVELCCT" id="objDatosA.NIVELCCT" readonly="true"/>
-                                          <s:fielderror fieldName="NIVELCCT" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-12">                                    
-                                          <label for="examplePass" class="bmd-label-floating">TURNO</label>
-                                       <s:textfield cssClass="form-control" name="objDatosA.TURNO" id="objDatosA.TURNO" readonly="true"/>
-                                          <s:fielderror fieldName="TURNO" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-6">                                    
-                                          <label for="examplePass" class="bmd-label-floating">GRADO</label>
-                                       <s:select  data-style="select-with-transition"   name="objDatosA.GRADO" id="objDatosA.GRADO" list="ListaGrados"  listKey="ID_GRADO"  listValue="GRADO" headerKey="" headerValue="--SELECCIONAR--"  cssClass="selectpicker "  />
-                                          <s:iterator value="ListaGrados" id="ListaGrados" status="stat">                        
-                                              <s:hidden  name = "ListaGrados[%{#stat.index}].ID_GRADO" id="ID_GRADO"></s:hidden>
-                                              <s:hidden  name = "ListaGrados[%{#stat.index}].GRADO" id="GRADO"></s:hidden>
+                                          <div class="form-group col-md-4">
+                                              <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
+
+                                          <s:textfield  cssClass="form-control " name="objDatosP.NOMBRE_RENAPO_TU" id="objDatosP.NOMBRE_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="NOMT" id="NOMA" cssClass="alert alert-danger"></s:fielderror>
+
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.APATERNO_RENAPO_TU" id="objDatosP.APATERNO_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="APT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.AMATERNO_RENAPO_TU" id="objDatosP.AMATERNO_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="AMT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Fecha de Nacimiento</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.FEC_NAC_RENAPO_TU" id="objDatosP.FEC_NAC_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="FECNANT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Nacionalidad</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.NACIONALIDAD_RENAPO_TU" id="objDatosP.NACIONALIDAD_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="NACT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Entidad de Nacimiento</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.ENTIDAD_NACIMINETO_RENAPO_TU" id="objDatosP.ENTIDAD_NACIMINETO_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="ENTIDADNACT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+
+
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Genero</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.GENERO_RENAPO_TU" id="objDatosP.GENERO_RENAPO_TU" readonly="true"/>
+                                          <s:fielderror fieldName="GENEROT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Parentesco: </label>
+                                          <s:select  data-style="select-with-transition"   name="objDatosP.PARENTESCO" id="objDatosP.PARENTESCO" list="ListaParentesco"  listKey="ID_PARENTESCO"  listValue="NOM_PARENTESCO" headerKey="" headerValue="--SELECCIONE--"  cssClass="selectpicker "  />
+                                          <s:iterator value="ListaParentesco" id="ListaParentesco" status="stat">  
+                                              <s:hidden  name = "ListaParentesco[%{#stat.index}].ID_PARENTESCO" id="ID_PARENTESCO"></s:hidden>
+                                              <s:hidden  name = "ListaParentesco[%{#stat.index}].NOM_PARENTESCO" id="NOM_PARENTESCO"></s:hidden>
                                           </s:iterator>
-                                          <s:fielderror fieldName="GRADO" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div> 
-                                       <div class="form-group col-md-6">                                    
-                                          <label for="examplePass" class="bmd-label-floating">PROMEDIO</label>
-                                       <s:select  data-style="select-with-transition"   name="objDatosA.PROMEDIO" id="objDatosA.PROMEDIO" list="ListaPromedios"  listKey="ID_PROMEDIO"  listValue="PROMEDIO" headerKey="" headerValue="--SELECCIONAR--" cssClass="selectpicker "  />
-                                          <s:iterator value="ListaPromedios" id="ListaPromedios" status="stat">                        
-                                              <s:hidden  name = "ListaPromedios[%{#stat.index}].ID_PROMEDIO" id="ID_PROMEDIO"></s:hidden>
-                                              <s:hidden  name = "ListaPromedios[%{#stat.index}].PROMEDIO" id="PROMEDIO"></s:hidden>
-                                          </s:iterator>
-                                          <s:fielderror fieldName="PROMEDIO" cssClass="alert alert-danger"></s:fielderror>                                        
-                                      </div>     
+                                          <s:fielderror fieldName="PARENTESCOT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>                                        
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Domicilio</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.DOMICILIO_TU" id="objDatosP.DOMICILIO_TU" />
+                                          <s:fielderror fieldName="DOMICILIOT" cssClass="alert alert-danger" ></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Entre Calle </label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.CALLE1_TU" id="objDatosP.CALLE1_TU" />
+                                          <s:fielderror fieldName="CALLE1T" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating"> Y Calle</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.CALLE2_TU" id="objDatosP.CALLE2_TU"/>
+                                          <s:fielderror fieldName="CALLE2T" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating"> Otra referencia de domicilio</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.REFERENCIA_TU" id="objDatosP.REFERENCIA_TU" />
+                                          <s:fielderror fieldName="REFERENCIAT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
 
-                                      </s:if>
+                                          <div class="form-group col-md-4">
 
-                                  </div>
+                                              <label for="examplePass" class="bmd-label-floating">Codigo Postal</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.CP_TU" id="CP" onchange="Javascript:ConsultaCP('ConsultaCPP')" maxLength="5"/>
+                                          <s:fielderror fieldName="NoCPP" cssClass="alert alert-danger"></s:fielderror>
+                                          <s:fielderror fieldName="CPT" cssClass="alert alert-danger"></s:fielderror>
+
+                                          </div>
+                                      <s:if test="banColoniaP">   
+                                          <s:hidden name="banColonia" value="%{banColonia}"></s:hidden>
+                                              <div class="form-group col-md-4">
+                                                  <label for="examplePass" class="bmd-label-floating">Colonia: </label>
+                                              <s:select  data-style="select-with-transition"   name="objDatosP.COLONIA_TU" id="objDatosP.COLONIA_TU" list="ListaColonia"  listKey="COLONIA"  listValue="COLONIA" headerValue="COLONIA"  cssClass="selectpicker "  />
+                                              <s:iterator value="ListaColonia" id="ListaColonia" status="stat">                        
+                                                  <s:hidden  name = "ListaColonia[%{#stat.index}].COLONIA" id="COLONIA"></s:hidden>
+                                              </s:iterator>
+                                              <s:fielderror fieldName="COLONIAT" cssClass="alert alert-danger"></s:fielderror>
+                                              </div>  
+                                              <div class="form-group col-md-4">
+                                                  <label for="examplePass" class="bmd-label-floating">Municipio</label>
+                                              <s:textfield cssClass="form-control" name="objDatosP.MUNICIPIO_TU" id="objDatosP.MUNICIPIO_TU" readonly="true"/>
+                                              <s:fielderror fieldName="MUNICIPIOT" cssClass="alert alert-danger"></s:fielderror>
+                                              </div>    
+                                      </s:if>  
+
+                                      <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.TELEFONO_TU" id="objDatosP.TELEFONO_TU" />
+                                          <s:fielderror fieldName="TELT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.CELULAR_TU" id="objDatosP.CELULAR_TU" />
+                                          <s:fielderror fieldName="CELT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                              <label for="examplePass" class="bmd-label-floating">Email</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.EMAIL_TU" id="objDatosP.EMAIL_TU" />
+                                          <s:fielderror fieldName="EMAILT" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
+
+                                          <div class="form-group col-md-12">
+                                              <div class="dropdown-divider"></div>
+                                              <div class="row">
+                                                  <label class="col-sm-11 col-form-label label-checkbox">MARQUE LA CASILLA SI EL COBENEFICIARIO DEL ALUMNO ES OTRA PERSONA.</label>
+                                                  <div class="col-sm-1 col-sm-offset-1 checkbox-radios">
+                                                      <div class="form-check">
+                                                          <label class="form-check-label">
+                                                          <s:checkbox  type="checkbox" name="VALCOB" id="VALCOB" onchange="Javascript:FormCobe('muestraFormCobe')" /> 
+
+                                                      </label>
+                                                  </div>                                  
+                                              </div> 
+                                          </div>
+                                          <div class="dropdown-divider"></div>
+                                      </div>
+                                  </div>    
                               </div>                         
-                      </div>                  
+                          </div>                  
+
+                          <s:if test="banFormCobe">
+                              <s:hidden name="banFormCobe" value="%{banFormCobe}"></s:hidden>
+                                  <div class="dropdown-divider"></div>
+                                  <div class="card-header card-header-rose card-header-icon">
+                                      <div class="card-icon">
+                                          <i class="material-icons">supervisor_account</i>
+                                      </div>
+                                      <h4 class="card-title">Datos del Cobeneficiario</h4>
+                                  </div>
+                                  <div class="card-body">  
+                                      <div class="col-sm-12">
+                                          <div class="row">
+
+
+                                              <div class="form-group col-md-12">                                    
+                                                  <label for="examplePass" class="bmd-label-floating">Ingrese la curp del cobeneficiario </label>
+                                              <s:textfield cssClass="form-control" name="objDatosC.CURPAUX_CO" id="objDatosC.CURPAUX_CO" onchange="Javascript:Consulta('ConsultaCurpC')" maxLength="18"/>
+                                              <s:fielderror fieldName="NOCURP" cssClass="alert alert-danger"></s:fielderror>          
+                                              <s:fielderror fieldName="ERRORCURPAUX" cssClass="alert alert-danger"></s:fielderror> 
+                                              </div>  
+                                          <s:if test="banMuestraCobe">
+                                              <s:hidden name="banMuestraCobe" value="%{banMuestraCobe}"></s:hidden>
+
+                                                  <div class="form-group col-md-4">
+                                                      <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
+
+                                                  <s:textfield  cssClass="form-control " name="objDatosC.NOMBRE_RENAPO_CO" id="objDatosC.NOMBRE_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="NOMC" id="NOMA" cssClass="alert alert-danger"></s:fielderror>
+
+                                                  </div>
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.APATERNO_RENAPO_CO" id="objDatosP.APATERNO_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="APAC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.AMATERNO_RENAPO_CO" id="objDatosC.AMATERNO_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="AMAC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Fecha de Nacimiento</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.FEC_NAC_RENAPO_CO" id="objDatosC.FEC_NAC_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="FECNANC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Nacionalidad</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.NACIONALIDAD_RENAPO_CO" id="objDatosC.NACIONALIDAD_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="NACC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Entidad de Nacimiento</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.ENTIDAD_NACIMINETO_RENAPO_CO" id="objDatosC.ENTIDAD_NACIMINETO_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="ENTIDADNACC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+
+
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Genero</label>
+                                                  <s:textfield cssClass="form-control" name="objDatosC.GENERO_RENAPO_CO" id="objDatosC.GENERO_RENAPO_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="GENEROC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+                                                  <div class="form-group col-md-4">
+                                                      <label for="examplePass" class="bmd-label-floating">Parentesco: </label>
+                                                  <s:select  data-style="select-with-transition"   name="objDatosC.PARENTESCO_CO" id="objDatosC.PARENTESCO_CO" list="ListaParentesco"  listKey="ID_PARENTESCO"  listValue="NOM_PARENTESCO" headerKey="" headerValue="--SELECCIONE--"  cssClass="selectpicker "  />
+                                                  <s:fielderror fieldName="PARENTESCOC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div> 
+                                                  <div class="form-group col-md-4">
+                                                  <s:select  data-style="select-with-transition" title="Estado Civil"  name="objDatosC.ID_ESTADO_CIVIL" id="objDatosC.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
+                                                  <s:iterator value="ListaEstadosCivil" id="ListaEstadosCivil" status="stat">                        
+                                                      <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL"></s:hidden>
+                                                      <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ESTADO_CIVIL" id="ESTADO_CIVIL"></s:hidden>
+                                                  </s:iterator>
+                                                  <s:fielderror fieldName="IDESTADOC" cssClass="alert alert-danger"></s:fielderror>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                              </s:if>
+                          </s:if>
+
+                      </s:if>
+
+
                       <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaDatosAcademicos')" class="btn btn-round btn-primary">Guardar Datos Academicos y Continuar</a>
+                          <a href="Javascript:Consulta('GuardaDatosTutor')" class="btn btn-round btn-primary">Guardar Datos del Tutor y Continuar</a>
                       </div>
                   </div>                 
                   
@@ -338,6 +428,12 @@
           </div>
         </div>
          
+           <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
+   <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" ></s:textfield>  
+   <s:textfield  name="objDatosP.ID_MUNICIPIO_TU" id="objDatosP.ID_MUNICIPIO_TU" ></s:textfield>  
+   <s:textfield  name="objDatosC.VALIDACHECK" id="vaco" ></s:textfield>  
+
+          
       </footer>
     </div>
   </div>
@@ -700,6 +796,22 @@
                 
 
             }    
+            
+             function FormCobe(accion) {
+             
+                    valor = document.getElementById("VALCOB").checked;                                         
+                    document.getElementById("vaco").value=valor;
+                        
+                    
+                    document.altaPetiForm.action = accion;
+                    document.altaPetiForm.target = "_self";
+                    document.altaPetiForm.submit();  
+                   
+                    
+                
+
+            }    
+
       
        function Accion(accion, valor) {
                
@@ -711,9 +823,7 @@
 
             }
   </script>    
-   <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-   <s:textfield  name="objRenapo.ID_MUNICIPIO" id="objRenapo.ID_MUNICIPIO" ></s:textfield>  
-     
+       
      </s:form>
 </body>
 

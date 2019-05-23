@@ -1,6 +1,7 @@
 package business;
 
 import beans.AcademicoBean;
+import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.ColoniasBean;
 import beans.renapoBean;
@@ -49,12 +50,12 @@ public class ConsultasBusiness {
         return lista;
     }
     
-    public List ConsultaColonia(renapoBean obj) throws Exception {
+    public List ConsultaColonia(AspiranteBean obj) throws Exception {
         List lista = this.con.ConsultaColonia(obj);
         return lista;
     }
     
-    public boolean GuardaDatosPersonales(renapoBean objg) throws Exception{
+    public boolean GuardaDatosPersonales(AspiranteBean objg) throws Exception{
         return this.con.GuardaDatosPersonales(objg);
     }
     
@@ -72,13 +73,18 @@ public class ConsultasBusiness {
         return lista;
     }
         
-         public String ConsultaAspirante(renapoBean obj) throws Exception {
+         public String ConsultaAspirante(AspiranteBean obj) throws Exception {
         String id = this.con.ConsultaAspirante(obj);
         return id;
     }
     
-     public boolean GuardaDatosAcademicos(AcademicoBean objg) throws Exception{
+    public boolean GuardaDatosAcademicos(AcademicoBean objg) throws Exception {
         return this.con.GuardaDatosAcademicos(objg);
+    }
+    
+     public List ConsultaParentesco() throws Exception {
+        List lista = this.con.ConsultaParentesco();
+        return lista;
     }
      
 

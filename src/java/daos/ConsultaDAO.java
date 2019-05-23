@@ -5,6 +5,7 @@
 package daos;
 
 import beans.AcademicoBean;
+import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.ColoniasBean;
 import beans.renapoBean;
@@ -26,9 +27,9 @@ public interface ConsultaDAO {
 
     public List ConsultaEstadosCivil() throws Exception;
     
-    public List ConsultaColonia(renapoBean obj) throws Exception;
+    public List ConsultaColonia(AspiranteBean obj) throws Exception;
     
-    public boolean GuardaDatosPersonales(renapoBean objg) throws Exception;
+    public boolean GuardaDatosPersonales(AspiranteBean objg) throws Exception;
     
     public AcademicoBean ConsultaCCT(AcademicoBean cct) throws Exception;
     
@@ -36,8 +37,10 @@ public interface ConsultaDAO {
     
     public List ConsultaPromedios() throws Exception;
     
-    public String ConsultaAspirante(renapoBean obj) throws Exception;
+    public String ConsultaAspirante(AspiranteBean obj) throws Exception;
     
     public boolean GuardaDatosAcademicos(AcademicoBean objg) throws Exception;
+    
+    public List ConsultaParentesco() throws Exception;
 
 }

@@ -1,6 +1,7 @@
 package daos;
 
 import beans.AcademicoBean;
+import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.renapoBean;
 
@@ -12,6 +13,7 @@ import mappers.CCTMapper;
 import mappers.ColoniaMapper;
 import mappers.EstadosMapper;
 import mappers.GradosMapper;
+import mappers.ParentescosMapper;
 import mappers.PromediosMapper;
 import mappers.RequisitoBuenoMapper;
 import mappers.RequisitosMapper;
@@ -79,7 +81,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return list;
     }
     
-         public List ConsultaColonia(renapoBean obj) throws Exception {
+         public List ConsultaColonia(AspiranteBean obj) throws Exception {
         String query = "SELECT cp.asenta,mun.idn_mpio,mun.desc_mpio from cat_cp cp INNER JOIN cat_mpio_nal mun on cp.idn_mpio=mun.idn_mpio WHERE cp.cp='"+obj.getCP()+"'";
         Constantes.enviaMensajeConsola("CONSULTA COLONIAS ---> " + query);
         List list = null;
@@ -87,7 +89,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return list;
     }
     
-        public boolean GuardaDatosPersonales(renapoBean objg) throws Exception {
+        public boolean GuardaDatosPersonales(AspiranteBean objg) throws Exception {
 
 //Crear un ArrayList para agregar los campos a insertar
         ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
@@ -170,7 +172,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return list;
     }     
      
-     public String ConsultaAspirante(renapoBean obj) throws Exception {
+     public String ConsultaAspirante(AspiranteBean obj) throws Exception {
         String query = "SELECT id_aspirante  FROM "+Constantes.TablaAspirantes+" where curp_as='"+obj.getCONSULTA_CURP()+"'";
         Constantes.enviaMensajeConsola("CONSULTA aspirante ---> " + query);
         String aspirante = null;
@@ -209,5 +211,13 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert(Constantes.TablaDatosAcademicos, arregloCampos);
     } 
-  
+
+     
+     public List ConsultaParentesco() throws Exception{
+          String query = "SELECT ID_PARENTESCO,NOM_PARENTESCO FROM cat_parentesco";
+        Constantes.enviaMensajeConsola("CONSULTA parentescos ---> " + query);
+        List list = null;
+        list = queryForList(query, new ParentescosMapper());
+        return list;
+     }
 }
