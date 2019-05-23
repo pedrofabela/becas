@@ -47,7 +47,8 @@ public class Inicio_Action extends ActionSupport {
     
     private boolean banColonia=false;
     private boolean banFormAca=false;
-
+    private boolean banConCct=false;
+    private boolean banConCurp=false;
             
    
     
@@ -90,14 +91,44 @@ public class Inicio_Action extends ActionSupport {
             //validando session***********************************************************************
            
 
-            ConsultasBusiness con=new ConsultasBusiness();
-            
-            Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
-  System.out.println("Entre a validar CCT:");
-            if(objdatos.getRESTRICCION_ESC().equals("1")){
-            
-                System.out.println("vor a validar en la tabla de cct restriccion");
-            }     
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            String CctParticipa = "";
+
+            Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
+            Constantes.enviaMensajeConsola("RESTRICCION ESCUELA " + objdatos.getRESTRICCION_ESC());
+
+            Constantes.enviaMensajeConsola("ID DEL CICLO ESCOLAR " + objRenapo.getID_CICLO());
+
+            if (objdatos.getRESTRICCION_ESC().equals("1")) {
+
+                CctParticipa = con.ConsultaEscParticipa(objdatos, objRenapo);
+
+                Constantes.enviaMensajeConsola("Tamaño participa" + CctParticipa.length());
+
+                if (CctParticipa.length() > 0) {
+
+                    Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
+                    
+                    objDatosA.setCCTAUX(CctParticipa);
+                    objDatosA=con.ConsultaCCT(objDatosA);
+                    
+                    banConCct=false;
+                    banConCurp=true;
+                    
+
+                } else {
+                    
+                     banConCct=true;
+                    banConCurp=false;
+
+                     addFieldError("NOPARTICIPA", "La escuela no participa en está Beca");
+                   
+                     
+                     Constantes.enviaMensajeConsola("LA ESCUELA NO PARTICIPA EN ESTA BECA");
+                }
+
+            }
            
           
             
@@ -134,9 +165,23 @@ public class Inicio_Action extends ActionSupport {
             objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
             
            
+            
+            
+            
+            
             objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
             
+            objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
             
+            
+            
+            
+            
+            
+            
+            banConCct=true;
+            objDatosA=null;
+             banConCurp=false;
             
             
             
@@ -699,6 +744,22 @@ public class Inicio_Action extends ActionSupport {
 
     public void setBanFormAca(boolean banFormAca) {
         this.banFormAca = banFormAca;
+    }
+
+    public boolean isBanConCct() {
+        return banConCct;
+    }
+
+    public void setBanConCct(boolean banConCct) {
+        this.banConCct = banConCct;
+    }
+
+    public boolean isBanConCurp() {
+        return banConCurp;
+    }
+
+    public void setBanConCurp(boolean banConCurp) {
+        this.banConCurp = banConCurp;
     }
     
     

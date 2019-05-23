@@ -23,6 +23,10 @@ public interface ConsultaDAO {
     public String ConsultaCiclo(BecasBean obj) throws Exception;
     
     public String ConsultaIntervalo(BecasBean obj,  renapoBean ren) throws Exception;
+   
+    public String ConsultaNivel(BecasBean obj,  renapoBean ren) throws Exception;
+    
+     public String ConsultaEscParticipa(BecasBean obj,  renapoBean ren) throws Exception;
 
     public List ConsultaEstadosCivil() throws Exception;
     

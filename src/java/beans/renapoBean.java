@@ -39,6 +39,17 @@ public class renapoBean implements Serializable {
     public String ID_CICLO;
     public String INTERVALO;
      public String CCT;
+     
+    private String NIVEL;
+
+    public String getNIVEL() {
+        return NIVEL;
+    }
+
+    public void setNIVEL(String NIVEL) {
+        this.NIVEL = NIVEL;
+    }
+
 
     public String getCCT() {
         return CCT;

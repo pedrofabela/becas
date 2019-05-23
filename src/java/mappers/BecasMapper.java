@@ -60,6 +60,7 @@ public class BecasMapper implements Mapper {
         } else {
             dat.setRESTRICCION_ESC(rs.getString("RESTRICCION_ESC"));
         } 
+           
          
         return dat;
     }

@@ -43,6 +43,14 @@ public class ConsultasBusiness {
         String ciclo = this.con.ConsultaIntervalo(obj,ren);
         return ciclo;
     }
+      public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
+        String ciclo = this.con.ConsultaNivel(obj,ren);
+        return ciclo;
+    }
+      public String ConsultaEscParticipa(BecasBean obj, renapoBean ren) throws Exception {
+        String participa = this.con.ConsultaEscParticipa(obj,ren);
+        return participa;
+    }
     
     public List ConsultaEstadosCivil() throws Exception {
         List lista = this.con.ConsultaEstadosCivil();

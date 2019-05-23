@@ -63,6 +63,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return ciclo;
     }
         
+        
          public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
         String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
@@ -70,7 +71,29 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         intervalo = queryStringUnCampo(query);
         return intervalo;
     }
+         
+            public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT NIVEL FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
+        Constantes.enviaMensajeConsola("ListaReq ---> " + query);
+        String intervalo = null;
+        intervalo = queryStringUnCampo(query);
+        return intervalo;
+    }
+         
        
+        public String ConsultaEscParticipa(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT  CCT FROM TBL_ESCPART_CICLO WHERE ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND CCT='"+ren.getCCT()+"' AND ROWNUM=1";
+        Constantes.enviaMensajeConsola("ListaReq ---> " + query);
+        String participa = null;
+        participa = queryStringUnCampo(query);
+        return participa;
+    }
+         
+         
+         
+         
+         
+         
     public List ConsultaEstadosCivil() throws Exception {
         String query = "SELECT ID_ESTADO_CIVIL, ESTADO_CIVIL FROM "+Constantes.TablaEstados+"";
         //System.out.println("QueryConsultaCatalogos ---> " + query);
@@ -148,7 +171,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         
          public AcademicoBean ConsultaCCT(AcademicoBean cct) throws Exception {
         String query = "";
-        query = "SELECT cct,nombre,domicilio,vertiente,turno_1 FROM cat_ccts where cct='"+cct.getCCTAUX()+"'";
+        query = "SELECT cct,nombre,domicilio,FILTRO_PARA_TABLERO AS VERTIENTE,turno_1 FROM cat_ccts where cct='"+cct.getCCTAUX()+"' AND ROWNUM=1";
         Constantes.enviaMensajeConsola(" query consulta CCTS --> " + query);
         AcademicoBean resu = (AcademicoBean) oraDaoFac.queryForObject(query, new CCTMapper());
         return resu;

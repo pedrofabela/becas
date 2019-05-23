@@ -562,7 +562,8 @@
             }
   </script>  
        <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>   
-         <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
+       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
+         
     </s:form>           
 </body>
 
