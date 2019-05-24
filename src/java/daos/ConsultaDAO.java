@@ -7,7 +7,9 @@ package daos;
 import beans.AcademicoBean;
 import beans.AspiranteBean;
 import beans.BecasBean;
+import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.TutorBean;
 import beans.renapoBean;
 import java.util.List;
 
@@ -46,5 +48,11 @@ public interface ConsultaDAO {
     public boolean GuardaDatosAcademicos(AcademicoBean objg) throws Exception;
     
     public List ConsultaParentesco() throws Exception;
+    
+     public boolean GuardaDatosTutor(TutorBean objg) throws Exception;
+     
+     public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
+     
+     public List ConsultaRespuestas() throws Exception;
 
 }

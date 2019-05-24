@@ -40,6 +40,7 @@ public class TutorBean implements Serializable {
     public String INTERVALO_TU;
     public String CURPAUX;
     public String PARENTESCO;
+    public String STATUS;
   
 
     public String getNOMBRE_RENAPO_TU() {
@@ -240,6 +241,14 @@ public class TutorBean implements Serializable {
 
     public void setPARENTESCO(String PARENTESCO) {
         this.PARENTESCO = PARENTESCO;
+    }
+
+    public String getSTATUS() {
+        return STATUS;
+    }
+
+    public void setSTATUS(String STATUS) {
+        this.STATUS = STATUS;
     }
 
    

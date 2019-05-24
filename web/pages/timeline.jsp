@@ -7,58 +7,31 @@
 
 
 <script>
-    
-    var m = "D";
+  var m = "D";
   var expreg = new RegExp("^[A-C]$");
   
   if(expreg.test(m))
-    alert("La letra si pasa");
+   // alert("La letra si pasa");
   else
-    alert("La letra no pasa");
-    
-    
-    
-    
+    //alert("La letra no pasa");
+        
 </script>
-
-
-
-
-
-
-
-
-
-
 
  <script type="text/javascript"> 
           
-   
-          
-          
-          
-          function validarInput(input) {
+     function validarInput(input) {
 	var curp = input.value.toUpperCase(),
     	resultado = document.getElementById("resultado"),
         valido = "No válido";
- div = document.getElementById('btnvalidar');
-            div.style.display = 'none';
-            
-            
-            
-            
-            
-        
+        div = document.getElementById('btnvalidar');
+        div.style.display = 'none';
+                
     if (curpValida(curp)) {
     	valido = "Válido";
         resultado.classList.add("ok");
         
         div = document.getElementById('btnvalidar');
-            div.style.display = '';
-        
-        
-        
-        
+        div.style.display = '';    
     } else {
     	resultado.classList.remove("ok");
     }
@@ -68,8 +41,7 @@
 
 function curpValida(curp) {
 	var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0\d|1[0-2])(?:[0-2]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-
-                
+       
                 validado = curp.match(re);
 	
     if (!validado)  //Coincide con el formato general?
@@ -93,76 +65,28 @@ function curpValida(curp) {
         
 	return true; //Validado
 }
-
-          
-          
-          
-          
-          
-          
+     
           </script>
-
-
-
-
-<script type="text/javascript"> 
-          
-   
-  
-   
-   
-   
-   
-          
-          
-       
-
-          
-          
-          
-          
-          
-          
-          </script>
-
-
 
 
 <script>
 function myFunction() {
   var x = document.getElementById("myInput").value;
   
-  
-        
-          
-
   div = document.getElementById('btnvalidar2');
             div.style.display = 'none';
    
-  
-  
+ 
   x=x.toUpperCase();
-  
-  
   myFunction2(x);
-  
-    
-  
-  
-  
-  
-  
-  
   
 }
 
 function myFunction2(x){
     
-   
   var expreg = /^[1]{1}[5]{1}[A-Z]{3}[0-9]{4}[A-Z]{1}$/;
   
-  if(expreg.test(x)){
-      
+  if(expreg.test(x)){   
         div = document.getElementById('btnvalidar2');
             div.style.display = '';
             
@@ -170,44 +94,24 @@ function myFunction2(x){
             
 	document.getElementById("demo").innerHTML = "CCT Correcta ";
         
-        
-        
-  
         }
   else {
    
    if(x.length==10){
    document.getElementById("demo").innerHTML = "CCT no valida favor de verificar " ;
-   
   
-   
    }
     else 
         
         
    document.getElementById("demo").innerHTML = "validando CCT...";
    
-   
-
-  
-   
-   
-   
         }
     
 }
 
 
-
-
-
- 
-
-
 </script>
-
-
-
 
 
 <html lang="en">
@@ -316,27 +220,16 @@ function myFunction2(x){
                   <div class="card">
                       <div class="card-header card-header-image" data-header-animation="true">
                           <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
+                              <s:if test="objdatos.ID_BECA_AUX==ID_BECA"> 
+                                  <img class="img" src="assets/img/<s:property value="IMAGEN"/>"/>
+                              </s:if>     
+                                   <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
+                                   <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
+                                   <s:hidden name = "ListaBecas[%{#stat.index}].IMAGEN" id="IMAGEN"></s:hidden>
+                          </s:iterator>   
 
-                              <s:if test="objdatos.ID_BECA_AUX==ID_BECA"> <img class="img" src="assets/img/<s:property value="IMAGEN"/>"></s:if>
-
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
-                                  <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="IMAGEN"></s:hidden>
-
-                              </s:iterator>   
-                                  
                       </div>  
-                      <div class="card-body">
-                      
-                          <div class="progress" style="margin-top: -45px; height: 10px;">
-                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                          </div>
-                      
-                          
-                      </div>
-                      <div class="card-footer">
-                          
-                          
+                      <div class="card-footer">                    
                           <div class="row">
                               
                               <s:if test="banConCct">
@@ -350,49 +243,31 @@ function myFunction2(x){
                                       <label for="examplePass" class="bmd-label-floating">CCT</label>
                                       <s:textfield name="objRenapo.CCT" id="myInput"  cssClass="form-control " placeholder="Elemplo: 15ETV0027B" oninput="myFunction()" cssStyle="text-transform: uppercase;"  ></s:textfield>
                                   </div>
-
-
                                   <div class="col-md-12" style="margin-top: 15px; " >
 
                                       <p id="demo"></p>
 
-                                  </div>
-
-
-
-
-                                 
+                                  </div>                           
                                   <div id="btnvalidar2">
                                       <div class="col-md-12"  >
                                           <a href="Javascript:consultaCctBase('ConsultaCct')" class="btn btn-success" >Buscar Escuela</a>
                                       </div>
-
-
-
                                   </div>
                               
-                             </s:if>
-                              
-                              <div class="col-md-12"  >
-                              
+                             </s:if>                             
+                              <div class="col-md-12"  >                       
                               <s:fielderror fieldName="NOPARTICIPA" cssClass="alert alert-danger"></s:fielderror> 
-                              </div>
-                              
-                               
+                              </div>                       
                               <s:if test="objDatosA.NOMCCT.length()>0">
                                   <div class="col-md-12 text-center" style="margin-top: 20px;">
                                       <div style="margin: auto;"><h4 style="color:purple">Datos de la Escuela Elegida</h4></div>
 
                                   </div>
-
                                   <div class="form-group col-md-12">                                    
                                       <label for="examplePass" class="bmd-label-floating">CCT </label>
                                       <s:textfield cssClass="form-control" name="objDatosA.CCT" id="objDatosA.CCT" readonly="true"/>
                                       <s:fielderror fieldName="CCT" cssClass="alert alert-danger"></s:fielderror>                                        
                                       </div> 
-
-
-
                                       <div class="form-group col-md-12">                                    
                                           <label for="examplePass" class="bmd-label-floating">NOMBRE DE LA INSTITUCIÓN </label>
                                       <s:textfield cssClass="form-control" name="objDatosA.NOMCCT" id="NOMCCT" readonly="true"/>
@@ -416,11 +291,6 @@ function myFunction2(x){
 
 
                                       <h6 class="text-center">Si esta no es tu Escuela pulsa  <a href="Javascript:Regreso2('ConsultaReq')">Aquí </a>para buscar de nuevo</h6>
-
-
-
-
-
 
                               </s:if> 
 
@@ -474,13 +344,6 @@ function myFunction2(x){
                                </s:if>
                               
                           </div>
-                          
-                          
-                          
-                          
-                          
-                          
-
                       </div>
                      
                   </div>
@@ -504,10 +367,7 @@ function myFunction2(x){
                                           <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
 
                                               <s:property value="POB_OBJ"/>  
-
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="IMAGEN"></s:hidden>
+                                              <s:hidden name = "ListaBecas[%{#stat.index}].POB_OBJ" id="POB_OBJ"></s:hidden>
 
                                           </s:iterator>   
                                       </div>
@@ -527,11 +387,14 @@ function myFunction2(x){
                                           <div class="list-group">
 
                                               <s:iterator value="ListaBases" id="ListaBses" status="stat">
-                                                  <a href="#" class="list-group-item list-group-item-action"><i class="material-icons" >verified_user</i> &nbsp; &nbsp; <s:property value="BASE"></s:property></a>
+                                                  <a href="#" class="list-group-item list-group-item-action">
+                                                      <i class="material-icons" >verified_user</i> &nbsp; &nbsp; <s:property value="BASE"></s:property>
+                                                  </a>
+                                                  
+                                                  <s:hidden name = "ListaBases[%{#stat.index}].BASE" id="BASE"></s:hidden>
+                                                  
                                               </s:iterator>
                                           </div>
-
-
                                       </div>
                                   </div>
                               </div>
@@ -548,7 +411,10 @@ function myFunction2(x){
                                       <div class="card-body">
                                           <div class="list-group">
                                               <s:iterator value="ListaRequisitos" id="ListaBsesRequisitos" status="stat">
-                                                  <a href="#" class="list-group-item list-group-item-action"><i class="material-icons" >check_circle_outline</i> &nbsp; &nbsp; <s:property value="REQUISITO"></s:property></a>
+                                                  <a href="#" class="list-group-item list-group-item-action">
+                                                      <i class="material-icons" >check_circle_outline</i> &nbsp; &nbsp; <s:property value="REQUISITO"></s:property>
+                                                  </a>
+                                                   <s:hidden name = "ListaRequisitos[%{#stat.index}].REQUISITO" id="REQUISITO"></s:hidden>
                                               </s:iterator>
                                           </div>
                                       </div>
@@ -559,24 +425,7 @@ function myFunction2(x){
                   </div>
               </div> 
           </div>
-            
-           
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                
         </div>
       </div>
       <footer class="footer">

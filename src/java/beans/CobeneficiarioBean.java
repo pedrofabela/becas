@@ -29,6 +29,7 @@ public class CobeneficiarioBean implements Serializable {
     public String CURPAUX_CO;
     public String PARENTESCO_CO;
     public String VALIDACHECK;
+    public String CURP_CO;
 
     public String getNOMBRE_RENAPO_CO() {
         return NOMBRE_RENAPO_CO;
@@ -140,6 +141,14 @@ public class CobeneficiarioBean implements Serializable {
 
     public void setVALIDACHECK(String VALIDACHECK) {
         this.VALIDACHECK = VALIDACHECK;
+    }
+
+    public String getCURP_CO() {
+        return CURP_CO;
+    }
+
+    public void setCURP_CO(String CURP_CO) {
+        this.CURP_CO = CURP_CO;
     }
 
     

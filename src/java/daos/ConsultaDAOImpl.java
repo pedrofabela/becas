@@ -3,6 +3,8 @@ package daos;
 import beans.AcademicoBean;
 import beans.AspiranteBean;
 import beans.BecasBean;
+import beans.CobeneficiarioBean;
+import beans.TutorBean;
 import beans.renapoBean;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import mappers.ParentescosMapper;
 import mappers.PromediosMapper;
 import mappers.RequisitoBuenoMapper;
 import mappers.RequisitosMapper;
+import mappers.RespuestasMapper;
 import utilidades.Constantes;
 import utilidades.ObjPrepareStatement;
 
@@ -26,7 +29,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 
     public List ConsultaBecas() throws Exception {
         String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN, CASE WHEN (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO  THEN '1' ELSE '0' END AS ESTATUS_FECHA, RESTRICCION_ESC FROM  CAT_BECAS WHERE ACTIVO=1";
-        //System.out.println("QueryConsultaCatalogos ---> " + query);
+        Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new BecasMapper());
         return list;
@@ -243,4 +246,120 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         list = queryForList(query, new ParentescosMapper());
         return list;
      }
+     
+     public boolean GuardaDatosTutor(TutorBean objg) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS TUTOR...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_ASPIRANTE", "STRING", objg.getID_ASPIRANTE_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CURP_TU", "STRING", objg.getCONSULTA_CURP_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NOMBRE_TU", "STRING", objg.getNOMBRE_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("APATERNO_TU", "STRING", objg.getAPATERNO_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("AMATERNO_TU", "STRING", objg.getAMATERNO_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("FECHA_NAC_AS", "STRING", objg.getFEC_NAC_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTIDAD_NAC", "STRING", objg.getENTIDAD_NACIMINETO_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NACIONALIDAD", "STRING", objg.getNACIONALIDAD_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CP", "STRING", objg.getCP_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("MUNICIPIO", "STRING", objg.getID_MUNICIPIO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("DOMICILIO_TU", "STRING", objg.getDOMICILIO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("LOCALIDAD_ATU", "STRING", objg.getCOLONIA_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTRECALLE1_TU", "STRING", objg.getCALLE1_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTRECALLE2_TU", "STRING", objg.getCALLE2_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("REFERENCIA_DOM_TU", "STRING", objg.getREFERENCIA_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("TELEFONO_FIJO_TU", "STRING", objg.getTELEFONO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("TELEFONO_CELULAR_TU", "STRING", objg.getCELULAR_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CORREO_TU", "STRING", objg.getEMAIL_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ESTATUS", "STRING", objg.getSTATUS().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_PARENTESCO", "STRING", objg.getPARENTESCO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getID_CICLO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+              
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert(Constantes.TablaTutor, arregloCampos);
+    } 
+     
+      public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS COBENEFICIARIO...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_ASPIRANTE", "STRING", objg.getID_ASPIRANTE_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CURP_COB", "STRING", objg.getCURP_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NOMBRE_COB", "STRING", objg.getNOMBRE_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("APATERNO_COB", "STRING", objg.getAPATERNO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("AMATERNO_COB", "STRING", objg.getAMATERNO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("FECHA_NAC_COB", "STRING", objg.getFEC_NAC_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTIDAD_NAC", "STRING", objg.getENTIDAD_NACIMINETO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NACIONALIDAD", "STRING", objg.getNACIONALIDAD_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_PARENTESCO", "STRING", objg.getPARENTESCO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL_CO().toUpperCase());
+        arregloCampos.add(temporal); 
+        temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getID_CICLO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+       
+        
+        
+        
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert(Constantes.TablaCobeneficiario, arregloCampos);
+    } 
+      
+      
+      public List ConsultaRespuestas() throws Exception {
+        String query = "SELECT ID_RESPUESTA,RESPUESTA FROM CAT_RESPUESTA WHERE STATUS='1'";
+        Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
+        List list = null;
+        list = queryForList(query, new RespuestasMapper());
+        return list;
+    }
+ 
+     
+     
 }

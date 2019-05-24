@@ -344,8 +344,8 @@
         </div>
           
           <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-   <s:textfield  name="objAspirante.ID_MUNICIPIO" id="objAspirante.ID_MUNICIPIO" ></s:textfield>  
-   <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" ></s:textfield>  
+          <s:textfield  name="objAspirante.ID_MUNICIPIO" id="objAspirante.ID_MUNICIPIO" ></s:textfield>  
+          <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" ></s:textfield>  
           
       </footer>
     </div>

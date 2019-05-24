@@ -7,9 +7,11 @@ import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
 import beans.EstadoCivilBean;
 import beans.GradoBean;
+import beans.IngresosBean;
 import beans.ParentezcoBean;
 import beans.PromedioBean;
 import beans.RequisitosBean;
+import beans.RespuestasBean;
 import beans.TutorBean;
 
 import beans.moduloAuxBean;
@@ -35,6 +37,7 @@ public class Inicio_Action extends ActionSupport {
     AcademicoBean objDatosA = new AcademicoBean();
     TutorBean objDatosP = new TutorBean();
     CobeneficiarioBean objDatosC = new CobeneficiarioBean();
+    IngresosBean objDatosE=new IngresosBean();
 
     //************************************
     //VARIABLES REQUERIDAS//
@@ -50,6 +53,7 @@ public class Inicio_Action extends ActionSupport {
     private List<GradoBean> ListaGrados = new ArrayList<GradoBean>();
     private List<PromedioBean> ListaPromedios = new ArrayList<PromedioBean>();
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
+    private List<RespuestasBean> ListaRespuestas= new ArrayList<RespuestasBean>();
 
     private boolean banColonia = false;
     private boolean banColoniaP = false;
@@ -57,17 +61,14 @@ public class Inicio_Action extends ActionSupport {
     private boolean banFormP = false;
     private boolean banFormCobe = false;
     private boolean banMuestraCobe = false;
-    
-    private boolean banConCct=false;
-    private boolean banConCurp=false;
-            
+
+    private boolean banConCct = false;
+    private boolean banConCurp = false;
+    private boolean banFormIngresos=false;
 
     private String VALCOB;
+    private String valingreso;
 
-   
-    
-   
-    
     //****************************//
     // xxxxxxxxxxxxxxxxxxxxxSESIONxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     private usuarioBean usuariocons;
@@ -111,8 +112,8 @@ public class Inicio_Action extends ActionSupport {
 
             Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
             Constantes.enviaMensajeConsola("RESTRICCION ESCUELA " + objdatos.getRESTRICCION_ESC());
-
             Constantes.enviaMensajeConsola("ID DEL CICLO ESCOLAR " + objRenapo.getID_CICLO());
+            ListaBecas = (ArrayList<BecasBean>) con.ConsultaBecas();
 
             if (objdatos.getRESTRICCION_ESC().equals("1")) {
 
@@ -123,27 +124,24 @@ public class Inicio_Action extends ActionSupport {
                 if (CctParticipa.length() > 0) {
 
                     Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
-                    
+
                     objDatosA.setCCTAUX(CctParticipa);
-                    objDatosA=con.ConsultaCCT(objDatosA);
-                    
-                    banConCct=false;
-                    banConCurp=true;
-                    
+                    objDatosA = con.ConsultaCCT(objDatosA);
+
+                    banConCct = false;
+                    banConCurp = true;
 
                 } else {
-                    
-                     banConCct=true;
-                    banConCurp=false;
 
-                     addFieldError("NOPARTICIPA", "La escuela no participa en está Beca");
-                   
-                     
-                     Constantes.enviaMensajeConsola("LA ESCUELA NO PARTICIPA EN ESTA BECA");
+                    banConCct = true;
+                    banConCurp = false;
+
+                    addFieldError("NOPARTICIPA", "La escuela no participa en está Beca");
+
+                    Constantes.enviaMensajeConsola("LA ESCUELA NO PARTICIPA EN ESTA BECA");
                 }
 
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,50 +155,27 @@ public class Inicio_Action extends ActionSupport {
         try {
             //validando session***********************************************************************
 
-           ConsultasBusiness con=new ConsultasBusiness();
-            
-            Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
+            ConsultasBusiness con = new ConsultasBusiness();
 
-            MuestraBecas();         
-            ListaBases=(ArrayList<BecasBean>) con.ConsultaBases(objdatos);
-            ListaRequisitos=(ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
-            
+            Constantes.enviaMensajeConsola("ID_BECA_AUX EN METODO ConsultaREQ: " + objdatos.getID_BECA_AUX());
+
+            MuestraBecas();
+            ListaBases = (ArrayList<BecasBean>) con.ConsultaBases(objdatos);
+            ListaRequisitos = (ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
+
             //System.out.println("auxiliar de beca:"+ objdatos.getID_BECA_AUX());
-            
-            
             objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
-            
-           
-            
-            
-            
-            
+
             objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
-            
+
             objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
-            
-            
-            
-            
-            
-            
-            
-            banConCct=true;
-            objDatosA=null;
-             banConCurp=false;
-            
-            
-            
-           // System.out.println("id de l cilclo es:"+ con.ConsultaCiclo(objdatos));
 
-            
-          
-            
-            
-            
-            
-            Constantes.enviaMensajeConsola("lista Req: "+ListaRequisitos.size());
+            banConCct = true;
+            objDatosA = null;
+            banConCurp = false;
 
+            // System.out.println("id de l cilclo es:"+ con.ConsultaCiclo(objdatos));
+            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -218,6 +193,8 @@ public class Inicio_Action extends ActionSupport {
             consultaRenapo renapo = new consultaRenapo();
 
             ListaEstadosCivil = con.ConsultaEstadosCivil();
+             Constantes.enviaMensajeConsola("parametro aspirante "+ objRenapo.getID_CICLO());
+             objAspirante.setID_CICLO(objRenapo.getID_CICLO());
 
             objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
 
@@ -231,8 +208,11 @@ public class Inicio_Action extends ActionSupport {
             objAspirante.setGENERO_RENAPO(objRenapo.getGENERO_RENAPO());
 
             //consulta cct*********************
-            objDatosA.setCCTAUX("15EPR0806K");
-            objAspirante.setID_CICLO("1");
+            objDatosA.setCCTAUX(objDatosA.getCCT());
+            
+            
+            
+           
 
             objDatosA = con.ConsultaCCT(objDatosA);
 
@@ -532,6 +512,7 @@ public class Inicio_Action extends ActionSupport {
                     objDatosP.setENTIDAD_NACIMINETO_RENAPO_TU(objRenapo.getENTIDAD_NACIMINETO_RENAPO());
 
                     ListaParentesco = con.ConsultaParentesco();
+                    ListaEstadosCivil = con.ConsultaEstadosCivil();
 
                     banFormP = true;
 
@@ -636,7 +617,7 @@ public class Inicio_Action extends ActionSupport {
 
                 } else {
 
-                    objDatosC.setCONSULTA_CURP_CO(objRenapo.getCONSULTA_CURP());
+                    objDatosC.setCURP_CO(objRenapo.getCONSULTA_CURP());
                     objDatosC.setNOMBRE_RENAPO_CO(objRenapo.getNOMBRE_RENAPO());
                     objDatosC.setAPATERNO_RENAPO_CO(objRenapo.getAPATERNO_RENAPO());
                     objDatosC.setAMATERNO_RENAPO_CO(objRenapo.getAMATERNO_RENAPO());
@@ -671,6 +652,8 @@ public class Inicio_Action extends ActionSupport {
         try {
             //validando session***********************************************************************
 
+            Constantes.enviaMensajeConsola("entro a metodo de guardar");
+
             ConsultasBusiness con = new ConsultasBusiness();
 
             boolean NOMBRE_TU = false;
@@ -691,6 +674,7 @@ public class Inicio_Action extends ActionSupport {
             boolean TELEFONO_TU = false;
             boolean CELULAR_TU = false;
             boolean EMAIL_TU = false;
+            boolean ID_ESTADO_CIVIL_TU = false;
 
             boolean NOMBRE_CO = false;
             boolean APATERNO_CO = false;
@@ -802,6 +786,7 @@ public class Inicio_Action extends ActionSupport {
                 CP_TU = false;
                 addFieldError("CPT", "Debe registrar un codigo postal del tutor");
             }
+
             if (objDatosP.getCOLONIA_TU().length() > 0) {
                 COLONIA_TU = true;
 
@@ -809,6 +794,8 @@ public class Inicio_Action extends ActionSupport {
                 COLONIA_TU = false;
                 addFieldError("COLONIAT", "Debe registrar una colonia del tutor");
             }
+            Constantes.enviaMensajeConsola("hasta aqui si");
+
             if (objDatosP.getMUNICIPIO_TU().length() > 0) {
                 MUNICIPIO_TU = true;
 
@@ -840,10 +827,20 @@ public class Inicio_Action extends ActionSupport {
                 addFieldError("EMAILT", "Debe registrar un correo electronico del tutor");
             }
 
+            if (objDatosP.getID_ESTADO_CIVIL_TU().length() > 0) {
+                ID_ESTADO_CIVIL_TU = true;
+
+            } else {
+                ID_ESTADO_CIVIL_TU = false;
+                addFieldError("IDESTADOP", "Debe seleccionar un estado civil del tutor");
+            }
+
             if (NOMBRE_TU && APATERNO_TU && AMATERNO_TU && GENERO_TU && ENTIDAD_NACIMINETO_TU && FEC_NAC_TU && NACIONALIDAD_TU && CP_TU && MUNICIPIO_TU
-                    && ID_PARENTESCO_TU && DOMICILIO_TU && CALLE1_TU && CALLE2_TU && REFERENCIA_TU && COLONIA_TU && TELEFONO_TU && CELULAR_TU && EMAIL_TU) {
+                    && ID_PARENTESCO_TU && DOMICILIO_TU && CALLE1_TU && CALLE2_TU && REFERENCIA_TU && COLONIA_TU && TELEFONO_TU && CELULAR_TU && EMAIL_TU && ID_ESTADO_CIVIL_TU) {
 
                 if (objDatosC.getVALIDACHECK().equals("true")) {
+
+                    Constantes.enviaMensajeConsola("entro a if de true");
 
                     if (objDatosC.getNOMBRE_RENAPO_CO().length() > 0) {
                         NOMBRE_CO = true;
@@ -906,7 +903,7 @@ public class Inicio_Action extends ActionSupport {
                         ID_PARENTESCO_CO = false;
                         addFieldError("PARENTESCOC", "Debe registrar el parentesco del cobeneficiario con el alumno");
                     }
-                    
+
                     if (objDatosC.getID_ESTADO_CIVIL_CO().length() > 0) {
                         ID_ESTADO_CIVIL_CO = true;
 
@@ -914,32 +911,80 @@ public class Inicio_Action extends ActionSupport {
                         ID_ESTADO_CIVIL_CO = false;
                         addFieldError("IDESTADOC", "Debe registrar el estado civil del cobeneficiarion");
                     }
-                    
-                    
-                    if (NOMBRE_CO && APATERNO_CO && AMATERNO_CO && GENERO_CO && ENTIDAD_NACIMINETO_CO && FEC_NAC_CO && NACIONALIDAD_CO && ID_PARENTESCO_CO &&ID_ESTADO_CIVIL_CO) {
-                        
-                        
-                        
-                        
+
+                    if (NOMBRE_CO && APATERNO_CO && AMATERNO_CO && GENERO_CO && ENTIDAD_NACIMINETO_CO && FEC_NAC_CO && NACIONALIDAD_CO && ID_PARENTESCO_CO && ID_ESTADO_CIVIL_CO) {
+
+                        objDatosC.setID_ASPIRANTE_CO(objDatosA.getID_ASPIRANTE());
+                        objDatosP.setID_ASPIRANTE_TU(objDatosA.getID_ASPIRANTE());
+                        objDatosC.setID_CICLO_CO(objAspirante.getID_CICLO());
+                        objDatosP.setID_CICLO_TU(objAspirante.getID_CICLO());
+                        objDatosP.setSTATUS("1");
+
+                        Constantes.enviaMensajeConsola("llego a los metodos de guardar");
+
+                        con.GuardaDatosTutor(objDatosP);
+                        con.GuardaDatosCobeneficiario(objDatosC);
+
                     } else {
+                        return "ERROR";
                     }
-                    
-                    
 
                 } else {
+
+                    objDatosC.setID_ASPIRANTE_CO(objDatosA.getID_ASPIRANTE());
+                    objDatosC.setID_CICLO_CO(objAspirante.getID_CICLO());
+                    objDatosC.setCURP_CO(objDatosP.getCONSULTA_CURP_TU());
+                    objDatosC.setNOMBRE_RENAPO_CO(objDatosP.getNOMBRE_RENAPO_TU());
+                    objDatosC.setAPATERNO_RENAPO_CO(objDatosP.getAPATERNO_RENAPO_TU());
+                    objDatosC.setAMATERNO_RENAPO_CO(objDatosP.getAMATERNO_RENAPO_TU());
+                    objDatosC.setFEC_NAC_RENAPO_CO(objDatosP.getFEC_NAC_RENAPO_TU());
+                    objDatosC.setENTIDAD_NACIMINETO_RENAPO_CO(objDatosP.getENTIDAD_NACIMINETO_RENAPO_TU());
+                    objDatosC.setNACIONALIDAD_RENAPO_CO(objDatosP.getNACIONALIDAD_RENAPO_TU());
+                    objDatosC.setPARENTESCO_CO(objDatosP.getPARENTESCO());
+                    objDatosC.setID_ESTADO_CIVIL_CO(objDatosP.getID_ESTADO_CIVIL_TU());
+                    objDatosC.setID_CICLO_CO(objDatosP.getID_CICLO_TU());
+                    objDatosC.setGENERO_RENAPO_CO(objDatosP.getGENERO_RENAPO_TU());
+
+                    objDatosC.setID_ASPIRANTE_CO(objDatosA.getID_ASPIRANTE());
+                    objDatosP.setID_ASPIRANTE_TU(objDatosA.getID_ASPIRANTE());
+                    objDatosC.setID_CICLO_CO(objAspirante.getID_CICLO());
+                    objDatosP.setID_CICLO_TU(objAspirante.getID_CICLO());
+                    objDatosP.setSTATUS("1");
+
+                    con.GuardaDatosTutor(objDatosP);
+                    con.GuardaDatosCobeneficiario(objDatosC);
+
                 }
-
-                con.GuardaDatosPersonales(objAspirante);
-
-                objAspirante.setID_ASPIRANTE(con.ConsultaAspirante(objAspirante));
-
-                objDatosA.setID_ASPIRANTE(objAspirante.getID_ASPIRANTE());
-                objDatosA.setID_CICLO(objAspirante.getID_CICLO());
-
-                con.GuardaDatosAcademicos(objDatosA);
+                
+                ListaRespuestas=con.ConsultaRespuestas();
 
             } else {
                 return "ERROR";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
+    
+     public String muestraFormIngreso() {
+        try {
+            //validando session***********************************************************************
+
+            Constantes.enviaMensajeConsola("si entro ");
+
+         valingreso=objDatosE.getVALIDACHECK();
+
+            if (objDatosE.getVALIDACHECK().equals("true")) {
+
+                Constantes.enviaMensajeConsola("entro al if");
+                banFormIngresos = true;
+
+            } else {
+                banFormIngresos = false;
             }
 
         } catch (Exception e) {
@@ -1006,6 +1051,16 @@ public class Inicio_Action extends ActionSupport {
     public void setListaParentesco(List<ParentezcoBean> ListaParentesco) {
         this.ListaParentesco = ListaParentesco;
     }
+
+    public List<RespuestasBean> getListaRespuestas() {
+        return ListaRespuestas;
+    }
+
+    public void setListaRespuestas(List<RespuestasBean> ListaRespuestas) {
+        this.ListaRespuestas = ListaRespuestas;
+    }
+    
+    
 
     public BecasBean getObjdatos() {
         return objdatos;
@@ -1095,6 +1150,16 @@ public class Inicio_Action extends ActionSupport {
         this.objDatosC = objDatosC;
     }
 
+    public IngresosBean getObjDatosE() {
+        return objDatosE;
+    }
+
+    public void setObjDatosE(IngresosBean objDatosE) {
+        this.objDatosE = objDatosE;
+    }
+    
+    
+
     public String getNivelUsuario() {
         return nivelUsuario;
     }
@@ -1150,8 +1215,6 @@ public class Inicio_Action extends ActionSupport {
     public void setBanMuestraCobe(boolean banMuestraCobe) {
         this.banMuestraCobe = banMuestraCobe;
     }
-    
-    
 
     public boolean isBanConCct() {
         return banConCct;
@@ -1168,6 +1231,14 @@ public class Inicio_Action extends ActionSupport {
     public void setBanConCurp(boolean banConCurp) {
         this.banConCurp = banConCurp;
     }
+
+    public boolean isBanFormIngresos() {
+        return banFormIngresos;
+    }
+
+    public void setBanFormIngresos(boolean banFormIngresos) {
+        this.banFormIngresos = banFormIngresos;
+    }
     
     
 
@@ -1178,5 +1249,15 @@ public class Inicio_Action extends ActionSupport {
     public void setVALCOB(String VALCOB) {
         this.VALCOB = VALCOB;
     }
+
+    public String getValingreso() {
+        return valingreso;
+    }
+
+    public void setValingreso(String valingreso) {
+        this.valingreso = valingreso;
+    }
+    
+     
 
 }

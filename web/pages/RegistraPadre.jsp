@@ -215,7 +215,15 @@
                                               <s:hidden  name = "ListaParentesco[%{#stat.index}].NOM_PARENTESCO" id="NOM_PARENTESCO"></s:hidden>
                                           </s:iterator>
                                           <s:fielderror fieldName="PARENTESCOT" cssClass="alert alert-danger"></s:fielderror>
-                                          </div>                                        
+                                          </div> 
+                                              <div class="form-group col-md-4">
+                                              <s:select  data-style="select-with-transition" title="Estado Civil"  name="objDatosP.ID_ESTADO_CIVIL_TU" id="objDatosP.ID_ESTADO_CIVIL_TU" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
+                                              <s:iterator value="ListaEstadosCivil" id="ListaEstadosCivil" status="stat">                        
+                                                  <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL"></s:hidden>
+                                                  <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ESTADO_CIVIL" id="ESTADO_CIVIL"></s:hidden>
+                                              </s:iterator>
+                                              <s:fielderror fieldName="IDESTADOP" cssClass="alert alert-danger"></s:fielderror>
+                                          </div>
                                           <div class="form-group col-md-4">
                                               <label for="examplePass" class="bmd-label-floating">Domicilio</label>
                                           <s:textfield cssClass="form-control" name="objDatosP.DOMICILIO_TU" id="objDatosP.DOMICILIO_TU" />
@@ -246,10 +254,10 @@
 
                                           </div>
                                       <s:if test="banColoniaP">   
-                                          <s:hidden name="banColonia" value="%{banColonia}"></s:hidden>
+                                          <s:hidden name="banColoniaP" value="%{banColoniaP}"></s:hidden>
                                               <div class="form-group col-md-4">
                                                   <label for="examplePass" class="bmd-label-floating">Colonia: </label>
-                                              <s:select  data-style="select-with-transition"   name="objDatosP.COLONIA_TU" id="objDatosP.COLONIA_TU" list="ListaColonia"  listKey="COLONIA"  listValue="COLONIA" headerValue="COLONIA"  cssClass="selectpicker "  />
+                                              <s:select  data-style="select-with-transition"   name="objDatosP.COLONIA_TU" id="objDatosP.COLONIA_TU" list="ListaColonia"  listKey="COLONIA"  listValue="COLONIA"  headerValue="COLONIA"  cssClass="selectpicker "  />
                                               <s:iterator value="ListaColonia" id="ListaColonia" status="stat">                        
                                                   <s:hidden  name = "ListaColonia[%{#stat.index}].COLONIA" id="COLONIA"></s:hidden>
                                               </s:iterator>
@@ -319,7 +327,13 @@
                                               </div>  
                                           <s:if test="banMuestraCobe">
                                               <s:hidden name="banMuestraCobe" value="%{banMuestraCobe}"></s:hidden>
+                                                   <div class="form-group col-md-4">
+                                                      <label for="exampleEmail" class="bmd-label-floating">CURP</label>
 
+                                                  <s:textfield  cssClass="form-control " name="objDatosC.CURP_CO" id="objDatosC.CURP_CO" readonly="true"/>
+                                                  <s:fielderror fieldName="CURPC"  cssClass="alert alert-danger"></s:fielderror>
+
+                                                  </div>
                                                   <div class="form-group col-md-4">
                                                       <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
 
@@ -366,11 +380,8 @@
                                                   <s:fielderror fieldName="PARENTESCOC" cssClass="alert alert-danger"></s:fielderror>
                                                   </div> 
                                                   <div class="form-group col-md-4">
-                                                  <s:select  data-style="select-with-transition" title="Estado Civil"  name="objDatosC.ID_ESTADO_CIVIL" id="objDatosC.ID_ESTADO_CIVIL" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
-                                                  <s:iterator value="ListaEstadosCivil" id="ListaEstadosCivil" status="stat">                        
-                                                      <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ID_ESTADO_CIVIL" id="ID_ESTADO_CIVIL"></s:hidden>
-                                                      <s:hidden  name = "ListaEstadosCivil[%{#stat.index}].ESTADO_CIVIL" id="ESTADO_CIVIL"></s:hidden>
-                                                  </s:iterator>
+                                                  <s:select  data-style="select-with-transition" title="Estado Civil"  name="objDatosC.ID_ESTADO_CIVIL_CO" id="objDatosC.ID_ESTADO_CIVIL_CO" list="ListaEstadosCivil"  listKey="ID_ESTADO_CIVIL"  listValue="ESTADO_CIVIL"  cssClass="selectpicker "  />
+                                                 
                                                   <s:fielderror fieldName="IDESTADOC" cssClass="alert alert-danger"></s:fielderror>
                                                   </div>
                                               </div>

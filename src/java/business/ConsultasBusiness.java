@@ -3,7 +3,9 @@ package business;
 import beans.AcademicoBean;
 import beans.AspiranteBean;
 import beans.BecasBean;
+import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.TutorBean;
 import beans.renapoBean;
 import java.util.List;
 import daos.ConsultaDAO;
@@ -94,6 +96,19 @@ public class ConsultasBusiness {
         List lista = this.con.ConsultaParentesco();
         return lista;
     }
-     
+        
+      public boolean GuardaDatosTutor(TutorBean objg) throws Exception {
+        return this.con.GuardaDatosTutor(objg);
+    }
+      
+       public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
+        return this.con.GuardaDatosCobeneficiario(objg);
+    }
+       
+     public List ConsultaRespuestas() throws Exception {
+        List lista = this.con.ConsultaRespuestas();
+        return lista;
+    }
+   
 
 }

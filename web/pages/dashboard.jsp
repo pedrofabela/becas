@@ -108,10 +108,7 @@
                       </button>    
                   </div>
               </nav>
-
-                       
-                         
-                                      
+                          
                         <div class="row">
                             
                             <div class="col-md-12" style="margin-bottom: 30px; margin-top: 35px;">
@@ -119,13 +116,7 @@
                                 <img src="assets/img/banner2.jpg" style="width: 100%;"></img>
                                 
                             </div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                                                
                              <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
                                  <div class="col-md-3">
                                      <div class="card card-product">

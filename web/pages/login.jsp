@@ -37,7 +37,7 @@
     <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('assets/img/login.jpg'); background-size: cover; background-position: top center;">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
       <div class="container">
-          <div class="col-lg-6 col-md-6 col-sm-8 ml-auto mr-auto"> 
+          <div class="col-lg-8 col-md-8 col-sm-8 ml-auto mr-auto"> 
           <div class="card ">
               <div class="card-header card-header-rose card-header-icon">
                   <div class="card-icon">
@@ -63,7 +63,6 @@
       </div>
         </div>
       </div>
-    
     </div>
   </div>
   <!--   Core JS Files   -->
