@@ -107,12 +107,43 @@ public class Inicio_Action extends ActionSupport {
 
             ConsultasBusiness con = new ConsultasBusiness();
 
+            String CctParticipa = "";
+
             Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
-            System.out.println("Entre a validar CCT:");
+            Constantes.enviaMensajeConsola("RESTRICCION ESCUELA " + objdatos.getRESTRICCION_ESC());
+
+            Constantes.enviaMensajeConsola("ID DEL CICLO ESCOLAR " + objRenapo.getID_CICLO());
+
             if (objdatos.getRESTRICCION_ESC().equals("1")) {
 
-                System.out.println("vor a validar en la tabla de cct restriccion");
+                CctParticipa = con.ConsultaEscParticipa(objdatos, objRenapo);
+
+                Constantes.enviaMensajeConsola("Tamaño participa" + CctParticipa.length());
+
+                if (CctParticipa.length() > 0) {
+
+                    Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
+                    
+                    objDatosA.setCCTAUX(CctParticipa);
+                    objDatosA=con.ConsultaCCT(objDatosA);
+                    
+                    banConCct=false;
+                    banConCurp=true;
+                    
+
+                } else {
+                    
+                     banConCct=true;
+                    banConCurp=false;
+
+                     addFieldError("NOPARTICIPA", "La escuela no participa en está Beca");
+                   
+                     
+                     Constantes.enviaMensajeConsola("LA ESCUELA NO PARTICIPA EN ESTA BECA");
+                }
+
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1119,6 +1150,8 @@ public class Inicio_Action extends ActionSupport {
     public void setBanMuestraCobe(boolean banMuestraCobe) {
         this.banMuestraCobe = banMuestraCobe;
     }
+    
+    
 
     public boolean isBanConCct() {
         return banConCct;
