@@ -43,6 +43,11 @@
         valido = "No válido";
  div = document.getElementById('btnvalidar');
             div.style.display = 'none';
+            
+            
+            
+            
+            
         
     if (curpValida(curp)) {
     	valido = "Válido";
@@ -63,7 +68,9 @@
 
 function curpValida(curp) {
 	var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0\d|1[0-2])(?:[0-2]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-    	validado = curp.match(re);
+
+                
+                validado = curp.match(re);
 	
     if (!validado)  //Coincide con el formato general?
     	return false;
@@ -97,6 +104,107 @@ function curpValida(curp) {
 
 
 
+
+<script type="text/javascript"> 
+          
+   
+  
+   
+   
+   
+   
+          
+          
+       
+
+          
+          
+          
+          
+          
+          
+          </script>
+
+
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput").value;
+  
+  
+        
+          
+
+  div = document.getElementById('btnvalidar2');
+            div.style.display = 'none';
+   
+  
+  
+  x=x.toUpperCase();
+  
+  
+  myFunction2(x);
+  
+    
+  
+  
+  
+  
+  
+  
+  
+}
+
+function myFunction2(x){
+    
+   
+  var expreg = /^[1]{1}[5]{1}[A-Z]{3}[0-9]{4}[A-Z]{1}$/;
+  
+  if(expreg.test(x)){
+      
+        div = document.getElementById('btnvalidar2');
+            div.style.display = '';
+            
+            document.altaPetiForm.myInput.value = x;
+            
+	document.getElementById("demo").innerHTML = "CCT Correcta ";
+        
+        
+        
+  
+        }
+  else {
+   
+   if(x.length==10){
+   document.getElementById("demo").innerHTML = "CCT no valida favor de verificar " ;
+   
+  
+   
+   }
+    else 
+        
+        
+   document.getElementById("demo").innerHTML = "validando CCT...";
+   
+   
+
+  
+   
+   
+   
+        }
+    
+}
+
+
+
+
+
+ 
+
+
+</script>
 
 
 
@@ -231,34 +339,96 @@ function curpValida(curp) {
                           
                           <div class="row">
                               
+                              <s:if test="banConCct">
                               
-                              
-                                <div class="col-md-12 text-center">
-                                  <div style="margin: auto;"><h4 style="color:purple">Favor de Capturar la Clave de Centro de Trabajo de tu Escuela (CCT)</h4></div>
-                                  
-                              </div>
+                                  <div class="col-md-12 text-center">
+                                      <div style="margin: auto;"><h4 style="color:purple">Favor de Capturar la Clave de Centro de Trabajo de tu Escuela (CCT)</h4></div>
 
-                              <div class="col-md-12" style="margin-top: 15px;">
-                                  <label for="examplePass" class="bmd-label-floating">CCT</label>
-                                    <s:textfield name="objRenapo.CCT" id="CONSULTA_CCT"  cssClass="form-control " placeholder="Elemplo: 15ETV0027B" ></s:textfield>
+                                  </div>
+
+                                  <div class="col-md-12" style="margin-top: 15px;">
+                                      <label for="examplePass" class="bmd-label-floating">CCT</label>
+                                      <s:textfield name="objRenapo.CCT" id="myInput"  cssClass="form-control " placeholder="Elemplo: 15ETV0027B" oninput="myFunction()" cssStyle="text-transform: uppercase;"  ></s:textfield>
+                                  </div>
+
+
+                                  <div class="col-md-12" style="margin-top: 15px; " >
+
+                                      <p id="demo"></p>
+
+                                  </div>
+
+
+
+
+                                 
+                                  <div id="btnvalidar2">
+                                      <div class="col-md-12"  >
+                                          <a href="Javascript:consultaCctBase('ConsultaCct')" class="btn btn-success" >Buscar Escuela</a>
+                                      </div>
+
+
+
+                                  </div>
+                              
+                             </s:if>
+                              
+                              <div class="col-md-12"  >
+                              
+                              <s:fielderror fieldName="NOPARTICIPA" cssClass="alert alert-danger"></s:fielderror> 
                               </div>
                               
+                               
+                              <s:if test="objDatosA.NOMCCT.length()>0">
+                                  <div class="col-md-12 text-center" style="margin-top: 20px;">
+                                      <div style="margin: auto;"><h4 style="color:purple">Datos de la Escuela Elegida</h4></div>
+
+                                  </div>
+
+                                  <div class="form-group col-md-12">                                    
+                                      <label for="examplePass" class="bmd-label-floating">CCT </label>
+                                      <s:textfield cssClass="form-control" name="objDatosA.CCT" id="objDatosA.CCT" readonly="true"/>
+                                      <s:fielderror fieldName="CCT" cssClass="alert alert-danger"></s:fielderror>                                        
+                                      </div> 
+
+
+
+                                      <div class="form-group col-md-12">                                    
+                                          <label for="examplePass" class="bmd-label-floating">NOMBRE DE LA INSTITUCIÓN </label>
+                                      <s:textfield cssClass="form-control" name="objDatosA.NOMCCT" id="NOMCCT" readonly="true"/>
+                                      <s:fielderror fieldName="NOMCCT" cssClass="alert alert-danger"></s:fielderror>                                        
+                                      </div> 
+                                      <div class="form-group col-md-12">                                    
+                                          <label for="examplePass" class="bmd-label-floating">DOMICILIO DE LA INSTITUCIÓN </label>
+                                      <s:textfield cssClass="form-control" name="objDatosA.DOMCCT" id="objDatosA.DOMCCT" readonly="true" />
+                                      <s:fielderror fieldName="DOMCCT" cssClass="alert alert-danger"></s:fielderror>                                        
+                                      </div> 
+                                      <div class="form-group col-md-12">                                    
+                                          <label for="examplePass" class="bmd-label-floating">NIVEL EDUCATIVO </label>
+                                      <s:textfield cssClass="form-control" name="objDatosA.NIVELCCT" id="objDatosA.NIVELCCT" readonly="true"/>
+                                      <s:fielderror fieldName="NIVELCCT" cssClass="alert alert-danger"></s:fielderror>                                        
+                                      </div> 
+                                      <div class="form-group col-md-12">                                    
+                                          <label for="examplePass" class="bmd-label-floating">TURNO</label>
+                                      <s:textfield cssClass="form-control" name="objDatosA.TURNO" id="objDatosA.TURNO" readonly="true"/>
+                                      <s:fielderror fieldName="TURNO" cssClass="alert alert-danger"></s:fielderror>                                        
+                                      </div> 
+
+
+                                      <h6 class="text-center">Si esta no es tu Escuela pulsa  <a href="Javascript:Regreso2('ConsultaReq')">Aquí </a>para buscar de nuevo</h6>
+
+
+
+
+
+
+                              </s:if> 
+
                               
                               
+                                      <s:if test="banConCurp">
                               
-                              <div class="col-md-12 text-center" style="margin-top: 40px;">
-                                  
-                                  
-                              </div>
-                              
-                               <div class="col-md-12"  >
-                                            <a href="Javascript:Regreso('Registro')" class="btn btn-success" >Registrar Beca</a>
-                                </div>
-                              
-                              
-                              
-                              
-                              <div class="col-md-12 text-center">
+                              <div class="col-md-12 text-center" style="margin-top: 25px;">
                                   <div style="margin: auto;"><h4 style="color:purple">Favor de capturar la CURP del Aspirante a la Beca</h4></div>
                                   
                               </div>
@@ -278,9 +448,6 @@ function curpValida(curp) {
 
                                         <div class="col-md-12" style="margin-top: 15px;">
                                        
-                                        
-                                        
-                                        
     
 
                                         <div class="togglebutton">
@@ -294,28 +461,18 @@ function curpValida(curp) {
                                         
                                         
                                         
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
                                         </div>
 
                                         <div class="col-md-12"  >
                                             <a href="Javascript:Regreso('Registro')" class="btn btn-success" >Registrar Beca</a>
                                         </div>
                                         
+                                       
+                                        
                                     </div>
+                              
+                               </s:if>
+                              
                           </div>
                           
                           
@@ -463,6 +620,7 @@ function curpValida(curp) {
        <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
         <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" ></s:textfield>  
         <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" ></s:textfield>  
+         <s:textfield  name="objRenapo.NIVEL" id="NIVEL" ></s:textfield>  
        <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
      </s:form>                       
                               
@@ -799,11 +957,35 @@ function curpValida(curp) {
                
                  var curp=document.getElementById("CONSULTA_CURP").value;
                  var acuerdo=document.getElementById("ACUERDO").checked;
-               
-             
+              
+              var intervalo=document.getElementById("INTERVALO").value;
+           
+      var primeraletra=curp.substr(0,1);
+      
+      
+       var pasa= validaLetra(intervalo, primeraletra);
+         
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
            
-           if(curp.length==18 && acuerdo==true){
+           if(curp.length==18 && acuerdo==true && pasa=="SI"){
                
            
                
@@ -816,6 +998,7 @@ function curpValida(curp) {
                          
             if(acuerdo==false && curp.length==18){
                  alert("Debe Aceptar las bases y requisitos de la beca");
+                
             }
                      
                if(acuerdo==true && curp.length!=18){
@@ -828,11 +1011,17 @@ function curpValida(curp) {
                  
                  if(curp.length!=18 && acuerdo==false){
                
-           
+            
                
                   alert("Debe capturar una CURP y Aceptar las Bases y Requisitos de la Beca");
                    
         }  
+        
+        if(pasa=="NO"){
+            
+            alert("Hoy no le toca a tu letra el registro");
+            
+        }
                  
                  
                  
@@ -840,6 +1029,33 @@ function curpValida(curp) {
                  
 
             }
+            
+            
+            
+            function validaLetra(intervalo, primeraletra)
+            
+             {
+                
+                        var ExpReg = new RegExp("^[" + intervalo + "]$");
+
+
+                            if(ExpReg.test(primeraletra)){
+
+                                 return "SI";
+
+                                  }
+                            else {
+
+                             return "NO";
+
+                                  }
+
+
+              }
+            
+            
+            
+            
             
             
             
@@ -858,6 +1074,28 @@ function curpValida(curp) {
    
 
             }
+            
+              function consultaCctBase(accion) {
+               
+              
+                 var cctConsulta =document.getElementById("myInput").value;
+                 
+                 
+               if(cctConsulta.length==10){
+                    document.altaPetiForm.action = accion;
+                    document.altaPetiForm.target = "_self";
+                    document.altaPetiForm.submit();
+                }
+                else
+                    alert("Debe capturar una CCT valida");
+
+            }
+            
+            
+            
+            
+            
+            
       
        function Accion(accion, valor) {
            

@@ -57,9 +57,17 @@ public class Inicio_Action extends ActionSupport {
     private boolean banFormP = false;
     private boolean banFormCobe = false;
     private boolean banMuestraCobe = false;
+    
+    private boolean banConCct=false;
+    private boolean banConCurp=false;
+            
 
     private String VALCOB;
 
+   
+    
+   
+    
     //****************************//
     // xxxxxxxxxxxxxxxxxxxxxSESIONxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     private usuarioBean usuariocons;
@@ -118,21 +126,50 @@ public class Inicio_Action extends ActionSupport {
         try {
             //validando session***********************************************************************
 
-            ConsultasBusiness con = new ConsultasBusiness();
+           ConsultasBusiness con=new ConsultasBusiness();
+            
+            Constantes.enviaMensajeConsola("ID_BECA_AUX: "+objdatos.getID_BECA_AUX());
 
-            Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
-
-            MuestraBecas();
-            ListaBases = (ArrayList<BecasBean>) con.ConsultaBases(objdatos);
-            ListaRequisitos = (ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
-
+            MuestraBecas();         
+            ListaBases=(ArrayList<BecasBean>) con.ConsultaBases(objdatos);
+            ListaRequisitos=(ArrayList<BecasBean>) con.ConsultaRequisitos(objdatos);
+            
             //System.out.println("auxiliar de beca:"+ objdatos.getID_BECA_AUX());
+            
+            
             objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
-
+            
+           
+            
+            
+            
+            
             objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+            
+            objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+            
+            
+            
+            
+            
+            
+            
+            banConCct=true;
+            objDatosA=null;
+             banConCurp=false;
+            
+            
+            
+           // System.out.println("id de l cilclo es:"+ con.ConsultaCiclo(objdatos));
 
-            // System.out.println("id de l cilclo es:"+ con.ConsultaCiclo(objdatos));
-            Constantes.enviaMensajeConsola("lista Req: " + ListaRequisitos.size());
+            
+          
+            
+            
+            
+            
+            Constantes.enviaMensajeConsola("lista Req: "+ListaRequisitos.size());
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1082,6 +1119,24 @@ public class Inicio_Action extends ActionSupport {
     public void setBanMuestraCobe(boolean banMuestraCobe) {
         this.banMuestraCobe = banMuestraCobe;
     }
+
+    public boolean isBanConCct() {
+        return banConCct;
+    }
+
+    public void setBanConCct(boolean banConCct) {
+        this.banConCct = banConCct;
+    }
+
+    public boolean isBanConCurp() {
+        return banConCurp;
+    }
+
+    public void setBanConCurp(boolean banConCurp) {
+        this.banConCurp = banConCurp;
+    }
+    
+    
 
     public String getVALCOB() {
         return VALCOB;

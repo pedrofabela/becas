@@ -21,7 +21,7 @@ public class BecasBean implements Serializable {
         private String REQUISITO;
         private String ESTATUS_FECHA;
         private String RESTRICCION_ESC;
-
+       
         
         
         
