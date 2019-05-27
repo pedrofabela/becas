@@ -16,6 +16,7 @@ public class AcademicoBean implements Serializable {
         private String PROMEDIO;
         private String ID_CICLO;
         private String ID_ASPIRANTE;
+        private String CURP_AUX;
 
     public String getCCTAUX() {
         return CCTAUX;
@@ -96,7 +97,16 @@ public class AcademicoBean implements Serializable {
     public void setID_ASPIRANTE(String ID_ASPIRANTE) {
         this.ID_ASPIRANTE = ID_ASPIRANTE;
     }
-        
+
+    public String getCURP_AUX() {
+        return CURP_AUX;
+    }
+
+    public void setCURP_AUX(String CURP_AUX) {
+        this.CURP_AUX = CURP_AUX;
+    }
+    
+    
 
    
 

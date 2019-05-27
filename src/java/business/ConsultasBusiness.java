@@ -39,82 +39,103 @@ public class ConsultasBusiness {
         List lista = this.con.ConsultaRequisitos(obj);
         return lista;
     }
-     public String ConsultaCiclo(BecasBean obj) throws Exception {
+
+    public String ConsultaCiclo(BecasBean obj) throws Exception {
         String ciclo = this.con.ConsultaCiclo(obj);
         return ciclo;
     }
-      public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
-        String ciclo = this.con.ConsultaIntervalo(obj,ren);
+
+    public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
+        String ciclo = this.con.ConsultaIntervalo(obj, ren);
         return ciclo;
     }
-      public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
-        String ciclo = this.con.ConsultaNivel(obj,ren);
+
+    public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
+        String ciclo = this.con.ConsultaNivel(obj, ren);
         return ciclo;
     }
-      public String ConsultaEscParticipa(BecasBean obj, renapoBean ren) throws Exception {
-        String participa = this.con.ConsultaEscParticipa(obj,ren);
+
+    public String ConsultaEscParticipa(BecasBean obj, renapoBean ren) throws Exception {
+        String participa = this.con.ConsultaEscParticipa(obj, ren);
         return participa;
     }
-    
+
     public List ConsultaEstadosCivil() throws Exception {
         List lista = this.con.ConsultaEstadosCivil();
         return lista;
     }
-    
+
     public List ConsultaColonia(AspiranteBean obj) throws Exception {
         List lista = this.con.ConsultaColonia(obj);
         return lista;
     }
-    
-    public boolean GuardaDatosPersonales(AspiranteBean objg) throws Exception{
+
+    public boolean GuardaDatosPersonales(AspiranteBean objg) throws Exception {
         return this.con.GuardaDatosPersonales(objg);
     }
-    
-     public AcademicoBean ConsultaCCT(AcademicoBean cct) throws Exception {
+
+    public boolean ActualizaDatosPersonales(AspiranteBean objg) throws Exception {
+        return this.con.ActualizaDatosPersonales(objg);
+    }
+
+    public AcademicoBean ConsultaCCT(AcademicoBean cct) throws Exception {
         return con.ConsultaCCT(cct);
     }
-     
-      public List ConsultaGrados() throws Exception {
+
+    public List ConsultaGrados() throws Exception {
         List lista = this.con.ConsultaGrados();
         return lista;
     }
-      
-        public List ConsultaPromedios() throws Exception {
+
+    public List ConsultaPromedios() throws Exception {
         List lista = this.con.ConsultaPromedios();
         return lista;
     }
-        
-         public String ConsultaAspirante(AspiranteBean obj) throws Exception {
+
+    public String ConsultaAspirante(AspiranteBean obj) throws Exception {
         String id = this.con.ConsultaAspirante(obj);
         return id;
     }
-    
+
     public boolean GuardaDatosAcademicos(AcademicoBean objg) throws Exception {
         return this.con.GuardaDatosAcademicos(objg);
     }
+
+    public boolean ActualizaDatosAcademicos(AcademicoBean objg) throws Exception {
+        return this.con.ActualizaDatosAcademicos(objg);
+    }
     
-     public List ConsultaParentesco() throws Exception {
+     public TutorBean ConsultaTutor(AcademicoBean objg) throws Exception {
+        return con.ConsultaTutor(objg);
+    }
+     public CobeneficiarioBean ConsultaCobe(AcademicoBean objg) throws Exception {
+        return con.ConsultaCobe(objg);
+    }
+     
+    public CobeneficiarioBean ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
+        return con.ConsultaCobeXcurp(objg);
+    } 
+    
+    public List ConsultaParentesco() throws Exception {
         List lista = this.con.ConsultaParentesco();
         return lista;
     }
-        
-      public boolean GuardaDatosTutor(TutorBean objg) throws Exception {
+
+    public boolean GuardaDatosTutor(TutorBean objg) throws Exception {
         return this.con.GuardaDatosTutor(objg);
     }
-      
-       public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
+
+    public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
         return this.con.GuardaDatosCobeneficiario(objg);
     }
-       
-     public List ConsultaRespuestas() throws Exception {
+
+    public List ConsultaRespuestas() throws Exception {
         List lista = this.con.ConsultaRespuestas();
         return lista;
     }
-    
+
     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception {
         return this.con.GuardaSocioeconomico(objg);
     }
- 
-   
 
 }
