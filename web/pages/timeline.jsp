@@ -280,7 +280,7 @@ function myFunction2(x){
                                       </div> 
                                       <div class="form-group col-md-12">                                    
                                           <label for="examplePass" class="bmd-label-floating">NIVEL EDUCATIVO </label>
-                                      <s:textfield cssClass="form-control" name="objDatosA.NIVELCCT" id="objDatosA.NIVELCCT" readonly="true"/>
+                                      <s:textfield cssClass="form-control" name="objDatosA.NIVELCCT" id="NIVELCCT" readonly="true"/>
                                       <s:fielderror fieldName="NIVELCCT" cssClass="alert alert-danger"></s:fielderror>                                        
                                       </div> 
                                       <div class="form-group col-md-12">                                    
@@ -471,7 +471,11 @@ function myFunction2(x){
         <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" ></s:textfield>  
         <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" ></s:textfield>  
          <s:textfield  name="objRenapo.NIVEL" id="NIVEL" ></s:textfield>  
-       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
+       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>   
+        <s:textfield  name="objdatos.FECHA_INICIO" id="FECHA_INICIO" ></s:textfield>  
+         <s:textfield  name="objdatos.FECHA_TERMINO" id="FECHA_TERMINO" ></s:textfield>  
+          <s:textfield  name="objRenapo.EN_PERIODO" id="EN_PERIODO" ></s:textfield>  
+         
      </s:form>                       
                               
                               
@@ -803,86 +807,203 @@ function myFunction2(x){
   
    <script type="text/javascript">
        
-        function Regreso(accion) {
-               
-                 var curp=document.getElementById("CONSULTA_CURP").value;
-                 var acuerdo=document.getElementById("ACUERDO").checked;
-              
-              var intervalo=document.getElementById("INTERVALO").value;
-           
-      var primeraletra=curp.substr(0,1);
-      
-      
-       var pasa= validaLetra(intervalo, primeraletra);
-         
-    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-           
-           if(curp.length==18 && acuerdo==true && pasa=="SI"){
-               
-           
-               
-                    document.altaPetiForm.action = accion;
-                    document.altaPetiForm.target = "_self";
-                     document.altaPetiForm.submit();
-                   
-        }
-         else{
-                         
-            if(acuerdo==false && curp.length==18){
-                 alert("Debe Aceptar las bases y requisitos de la beca");
-                
-            }
-                     
-               if(acuerdo==true && curp.length!=18){
-                 alert("Formato de curp no valido, favor de intentar de nuevo");
-            }
-                     
-                     
-                 }
-                 
-                 
-                 if(curp.length!=18 && acuerdo==false){
-               
-            
-               
-                  alert("Debe capturar una CURP y Aceptar las Bases y Requisitos de la Beca");
-                   
-        }  
+        function Regreso(accion)
         
-        if(pasa=="NO"){
+    {
+               
+        var curp=document.getElementById("CONSULTA_CURP").value;
+         var nivel=document.getElementById("NIVEL").value;
+           var en_periodo=document.getElementById("EN_PERIODO").value;
+        var acuerdo=document.getElementById("ACUERDO").checked;
+        var intervalo=document.getElementById("INTERVALO").value;           
+        var primeraletra=curp.substr(0,1);    
+        var pasa= validaLetra(intervalo, primeraletra);
+        var nivelcct="";    
+           
+      /* VALIDACIONES DE ENTRADA A PLATAFORMA DE BECAS */
+           
+                     
+                     
+                     if(curp.length==18 && acuerdo==true && en_periodo=="SI"){
+                         
+                         	
+             
+                         
+                         /* SIN RESTRICCIONES DE CAPTURA DE BECA */
+                        
+                        if(intervalo.length==0 && nivel.length==0){
+                             
+                
+                        document.altaPetiForm.action = accion;
+                        document.altaPetiForm.target = "_self";
+                        document.altaPetiForm.submit();
+                        
+                      
+                        }
+                        
+                        
+                        /* CON RESTRICCION DE LETRA*/
+                        
+                        if(intervalo.length==3 && nivel.length==0){
+                            
+                            
+                            if(pasa=="SI"){
+                                
+                         document.altaPetiForm.action = accion;
+                        document.altaPetiForm.target = "_self";
+                        document.altaPetiForm.submit();
+                                
+                            }
+                            
+                            else
+                            {
+                                alert("hoy no l etoca a tu letra el registro  de solicitud de beca");
+                            }
+                                
+                
+                            
+                            
+                        }
+                        
+                        
+                          /* CON RESTRICCION DE NIVEL*/
+                        
+                        if(intervalo.length==0 && nivel.length>0){
+                            
+                            
+                           nivelcct=document.getElementById("NIVELCCT").value;
+                           
+                           if(nivel==nivelcct){
+                               
+                        document.altaPetiForm.action = accion;
+                        document.altaPetiForm.target = "_self";
+                        document.altaPetiForm.submit();
+                               
+                           }
+                           
+                           else{
+                               
+                              alert("Hoy no le toca a tu nivel educativo, el registro de la Beca"); 
+                           }
+                                
+                
+                            
+                            
+                        }
+                        
+                        
+                        if(intervalo.length==3 && nivel.length>0){
+                            
+                            
+                           nivelcct=document.getElementById("NIVELCCT").value;
+                           
+                           if(nivel==nivelcct && pasa=="SI"){
+                               
+                        document.altaPetiForm.action = accion;
+                        document.altaPetiForm.target = "_self";
+                        document.altaPetiForm.submit();
+                               
+                           }
+                           
+                           else{
+                               
+                               
+                               if(pasa=="NO" && nivel==nivelcct ){
+                                   
+                                  alert("Hoy no le toca a tu letra el registro de la beca");  
+                                   
+                               }
+                               
+                             
+                              if(nivel!=nivelcct && pasa=="SI"){
+                                   
+                                  alert("Hoy no le toca a tu nivel educativo el registro de la beca");  
+                                   
+                               }
+                               
+                               
+                                if(pasa=="NO" && nivel!=nivelcct){
+                                   
+                                  alert("Hoy no le toca a tu letra y nivel educativo el registro de la beca");  
+                                   
+                               }
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                           }
+                                
+                
+                            
+                            
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
             
-            alert("Hoy no le toca a tu letra el registro");
+                     }
+                     
+                     else{
+                         
+                         
+                         if(en_periodo=="NO"){
+                             
+                      
+                            alert("Te encuentras fuera de las fechas estipuladas de registro para la beca");
             
-        }
-                 
-                 
-                 
-                 
-                 
+                      
+                             
+                             
+                             
+                            }
+                            
+                            else{
+                                
+                                
+                                  if(acuerdo==false && curp.length==18){
+                                  alert("Debe Aceptar las bases y requisitos de la beca");
+                            }
+                                if(acuerdo==true && curp.length!=18){
+                                  alert("Formato de curp no valido, favor de intentar de nuevo");
+                             }
+                            }
+                             
+                             
+                             
+                         
+                     }
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                
 
-            }
-            
-            
-            
-            function validaLetra(intervalo, primeraletra)
+
+
+    }
+
+
+     function validaLetra(intervalo, primeraletra)
             
              {
                 
@@ -890,14 +1011,10 @@ function myFunction2(x){
 
 
                             if(ExpReg.test(primeraletra)){
-
                                  return "SI";
-
                                   }
                             else {
-
                              return "NO";
-
                                   }
 
 
@@ -949,24 +1066,14 @@ function myFunction2(x){
       
        function Accion(accion, valor) {
            
-           
-          
-           
-           
-        
-               
-          
-           
-           
-               
                     document.altaPetiForm.ID_BECA.value = valor;
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";
                     document.altaPetiForm.submit();
-              
-                
 
             }
+            
+            
   </script>    
   
   

@@ -41,6 +41,32 @@ public class renapoBean implements Serializable {
      public String CCT;
      
     private String NIVEL;
+    private String NIVEL_AUX;
+    private String EN_PERIODO;
+
+    
+    
+    public String getEN_PERIODO() {
+        return EN_PERIODO;
+    }
+
+    public void setEN_PERIODO(String EN_PERIODO) {
+        this.EN_PERIODO = EN_PERIODO;
+    }
+    
+    
+    
+
+    public String getNIVEL_AUX() {
+        return NIVEL_AUX;
+    }
+
+    public void setNIVEL_AUX(String NIVEL_AUX) {
+        this.NIVEL_AUX = NIVEL_AUX;
+    }
+    
+    
+    
 
     public String getNIVEL() {
         return NIVEL;

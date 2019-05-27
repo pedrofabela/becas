@@ -24,6 +24,10 @@ public class ConsultasBusiness {
         List lista = this.con.ConsultaBecas();
         return lista;
     }
+      public List ConsultaFechasBeca(BecasBean obj, renapoBean ren) throws Exception {
+        List lista = this.con.ConsultaFechasBeca(obj,ren);
+        return lista;
+    }
 
     public List ConsultaReq(BecasBean obj) throws Exception {
         List lista = this.con.ConsultaReq(obj);
