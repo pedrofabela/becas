@@ -200,10 +200,15 @@ public class Inicio_Action extends ActionSupport {
 
             ListaEstadosCivil = con.ConsultaEstadosCivil();
             Constantes.enviaMensajeConsola("parametro aspirante " + objRenapo.getID_CICLO());
+           
+            //consulta a tabla de aspirantes antes de renapo
+            
+            
+            
             objAspirante.setID_CICLO(objRenapo.getID_CICLO());
-
+            
             objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
-
+             
             objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
             objAspirante.setNOMBRE_RENAPO(objRenapo.getNOMBRE_RENAPO());
             objAspirante.setAPATERNO_RENAPO(objRenapo.getAPATERNO_RENAPO());
