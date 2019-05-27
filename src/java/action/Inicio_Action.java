@@ -56,6 +56,9 @@ public class Inicio_Action extends ActionSupport {
     private List<PromedioBean> ListaPromedios = new ArrayList<PromedioBean>();
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
     private List<RespuestasBean> ListaRespuestas = new ArrayList<RespuestasBean>();
+    
+     private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
+     
 
     private boolean banColonia = false;
     private boolean banColoniaP = false;
@@ -120,19 +123,88 @@ public class Inicio_Action extends ActionSupport {
             Constantes.enviaMensajeConsola("RESTRICCION ESCUELA " + objdatos.getRESTRICCION_ESC());
             Constantes.enviaMensajeConsola("ID DEL CICLO ESCOLAR " + objRenapo.getID_CICLO());
             ListaBecas = (ArrayList<BecasBean>) con.ConsultaBecas();
+          
+            
+            
+            
+            
+            
+            
+            
 
             if (objdatos.getRESTRICCION_ESC().equals("1")) {
 
                 CctParticipa = con.ConsultaEscParticipa(objdatos, objRenapo);
+                
+                
+                
+                
+                
+                
 
                 Constantes.enviaMensajeConsola("Tamaño participa" + CctParticipa.length());
 
                 if (CctParticipa.length() > 0) {
 
                     Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
+                    
+                    
+                 
+                    
+                    
+                    
+                    
+                    
+                      
+          
+            
+                    
+                    
 
                     objDatosA.setCCTAUX(CctParticipa);
                     objDatosA = con.ConsultaCCT(objDatosA);
+                    
+              
+                    objRenapo.setNIVEL_AUX(objDatosA.getNIVELCCT());
+                    
+                    
+                    
+                    
+           objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+
+            objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+            
+            ListaFechas= (ArrayList<BecasBean>) con.ConsultaFechasBeca(objdatos, objRenapo);
+            
+                    Iterator LF = ListaFechas.iterator();
+                    
+                    BecasBean obj2;
+                    
+                    while (LF.hasNext()) {
+                        obj2 = (BecasBean) LF.next();
+                        
+                        objdatos.setFECHA_INICIO(obj2.getFECHA_INICIO());
+                        
+                         objdatos.setFECHA_TERMINO(obj2.getFECHA_TERMINO());
+                        
+                    }
+                   
+                     
+                    
+                       if(ListaFechas.size()>0){
+                           
+                           objRenapo.setEN_PERIODO("SI");
+                           
+                           
+                       }
+                       else {
+                           
+                            objRenapo.setEN_PERIODO("NO");
+                       }
+                    
+                    
+                    
+                    
 
                     banConCct = false;
                     banConCurp = true;
@@ -172,9 +244,7 @@ public class Inicio_Action extends ActionSupport {
             //System.out.println("auxiliar de beca:"+ objdatos.getID_BECA_AUX());
             objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
 
-            objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
-
-            objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+         
 
             banConCct = true;
             objDatosA = null;
@@ -1437,5 +1507,15 @@ public class Inicio_Action extends ActionSupport {
     public void setArchiFileName(String archiFileName) {
         this.archiFileName = archiFileName;
     }
+
+    public List<BecasBean> getListaFechas() {
+        return ListaFechas;
+    }
+
+    public void setListaFechas(List<BecasBean> ListaFechas) {
+        this.ListaFechas = ListaFechas;
+    }
+    
+    
 
 }

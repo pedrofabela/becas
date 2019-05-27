@@ -21,6 +21,7 @@ import mappers.PromediosMapper;
 import mappers.RequisitoBuenoMapper;
 import mappers.RequisitosMapper;
 import mappers.RespuestasMapper;
+import mappers.fechasBecaMapper;
 import utilidades.Constantes;
 import utilidades.ObjPrepareStatement;
 
@@ -33,6 +34,13 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new BecasMapper());
+        return list;
+    }
+    public List ConsultaFechasBeca(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT FECHA_INICIO, FECHA_TERMINO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
+        Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
+        List list = null;
+        list = queryForList(query, new fechasBecaMapper());
         return list;
     }
     
@@ -71,7 +79,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         
         
          public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
+        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String intervalo = null;
         intervalo = queryStringUnCampo(query);
@@ -79,7 +87,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     }
          
             public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT NIVEL FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
+        String query = "SELECT NIVEL FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String intervalo = null;
         intervalo = queryStringUnCampo(query);

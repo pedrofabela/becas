@@ -17,6 +17,7 @@ import java.util.List;
 public interface ConsultaDAO {
 
     public List ConsultaBecas() throws Exception;
+        public List ConsultaFechasBeca(BecasBean obj,  renapoBean ren) throws Exception;
 
     public List ConsultaReq(BecasBean obj) throws Exception;
 
