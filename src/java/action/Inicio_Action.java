@@ -126,7 +126,7 @@ public class Inicio_Action extends ActionSupport {
           
             
             
-            
+              objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
             
             
             
