@@ -4,6 +4,7 @@ import beans.AcademicoBean;
 import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.CobeneficiarioBean;
+import beans.IngresosBean;
 import beans.TutorBean;
 import beans.renapoBean;
 
@@ -359,6 +360,43 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         list = queryForList(query, new RespuestasMapper());
         return list;
     }
+      
+     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception{
+         
+         //Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS SOCIOECONOMICOS...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_ASPIRANTE", "STRING", objg.getID_ASPIRANTE().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RESPUESTA1", "STRING", objg.getRESPUESTA1().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RESPUESTA2", "STRING", objg.getRESPUESTA2().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("MONTO", "STRING", objg.getMONTO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getID_CICLO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_BECA", "STRING", objg.getID_BECA().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RUTA_ARCHIVO", "STRING", objg.getARCHIVO_INGRESO());
+        arregloCampos.add(temporal);
+       
+        
+        
+        
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert(Constantes.TablaSocioEconomico, arregloCampos);
+
+         
+         
+     }   
  
      
      

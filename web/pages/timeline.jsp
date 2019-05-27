@@ -306,6 +306,7 @@ function myFunction2(x){
                               <div class="col-md-12" style="margin-top: 15px;">
                                   <label for="examplePass" class="bmd-label-floating">CURP</label>
                                     <s:textfield name="objRenapo.CONSULTA_CURP" id="CONSULTA_CURP"  cssClass="form-control " oninput="validarInput(this)"></s:textfield>
+                                     <s:fielderror fieldName="ERRORCURP" id="ERRORCURP" cssClass="alert alert-danger"></s:fielderror>
                               </div>
                               
                               <div class="col-md-12" style="margin-top: 15px;" >

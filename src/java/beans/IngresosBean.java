@@ -12,6 +12,8 @@ public class IngresosBean implements Serializable {
         private String VALIDACHECK;
         private String ID_ASPIRANTE;
         private String ARCHIVO_INGRESO;
+        private String ID_CICLO;
+        private String ID_BECA;
 
     public String getRESPUESTA1() {
         return RESPUESTA1;
@@ -60,6 +62,24 @@ public class IngresosBean implements Serializable {
     public void setARCHIVO_INGRESO(String ARCHIVO_INGRESO) {
         this.ARCHIVO_INGRESO = ARCHIVO_INGRESO;
     }
+
+    public String getID_CICLO() {
+        return ID_CICLO;
+    }
+
+    public void setID_CICLO(String ID_CICLO) {
+        this.ID_CICLO = ID_CICLO;
+    }
+
+    public String getID_BECA() {
+        return ID_BECA;
+    }
+
+    public void setID_BECA(String ID_BECA) {
+        this.ID_BECA = ID_BECA;
+    }
+    
+    
         
         
 

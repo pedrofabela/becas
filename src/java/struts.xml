@@ -113,6 +113,12 @@
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
             <result name="input">/pages/RegistroSocioEconomico.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
+        </action>  
+        <action name="GuardaSocioEconomico" class="action.Inicio_Action" method="GuardaSocioEconomico">
+            <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
+            <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
+            <result name="input">/pages/RegistroSocioEconomico.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
         </action>                                              	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
     </package>
 	

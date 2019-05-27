@@ -109,109 +109,135 @@
                       </div>
                       <div class="card-body">  
                           <div class="dropdown-divider"></div>
-                              <div class="col-sm-12">
-                                  <div class="row">
-                                       <div class="form-group col-md-4">
-                                          <label for="exampleEmail" class="bmd-label-floating">CURP</label>
-                                          <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
-                                          <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
+                          <div class="col-sm-12">
+                              <div class="row">
+                                  <div class="form-group col-md-4">
+                                      <label for="exampleEmail" class="bmd-label-floating">CURP</label>
+                                      <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
+                                      <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
                                       </div>
 
                                       <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">Nombre</label>
 
-                                          <s:textfield  cssClass="form-control " name="objAspirante.NOMBRE_RENAPO" id="objAspirante.NOMBRE_RENAPO" readonly="true"/>
-                                          <s:fielderror fieldName="NOMA" id="NOMA" cssClass="alert alert-danger"></s:fielderror>
+                                      <s:textfield  cssClass="form-control " name="objAspirante.NOMBRE_RENAPO" id="objAspirante.NOMBRE_RENAPO" readonly="true"/>
+                                      <s:fielderror fieldName="NOMA" id="NOMA" cssClass="alert alert-danger"></s:fielderror>
 
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Paterno</label>
-                                          <s:textfield cssClass="form-control" name="objAspirante.APATERNO_RENAPO" id="objAspirante.APATERNO_RENAPO" readonly="true"/>
-                                           <s:fielderror fieldName="APA" cssClass="alert alert-danger"></s:fielderror>
+                                      <s:textfield cssClass="form-control" name="objAspirante.APATERNO_RENAPO" id="objAspirante.APATERNO_RENAPO" readonly="true"/>
+                                      <s:fielderror fieldName="APA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Apellido Materno</label>
-                                           <s:textfield cssClass="form-control" name="objAspirante.AMATERNO_RENAPO" id="objAspirante.AMATERNO_RENAPO" readonly="true"/>
-                                            <s:fielderror fieldName="AMA" cssClass="alert alert-danger"></s:fielderror>
+                                      <s:textfield cssClass="form-control" name="objAspirante.AMATERNO_RENAPO" id="objAspirante.AMATERNO_RENAPO" readonly="true"/>
+                                      <s:fielderror fieldName="AMA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
-                                       <div class="form-group col-md-4">
-                                          <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true"/>
-                                      </div>      
+                                      <div class="form-group col-md-4">
+                                      <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true"/>
+                                  </div>      
 
 
 
-                                  </div>
-                              </div>                         
+                              </div>
+                          </div>                         
                       </div> 
                                       <br></br>                
-                      <div class="dropdown-divider"></div>
-                       <div class="card-header card-header-rose card-header-icon">
-                          <div class="card-icon">
-                              <i class="material-icons">attach_money</i>
-                          </div>
-                          <h4 class="card-title">Datos SocioEconomicos</h4>
-                      </div>
-                      <div class="card-body">  
-                          <div class="col-sm-12">                              
-                              <div class="row">
-                                    
-                                    <div class="form-group col-md-12">
-                                      <label for="examplePass" class="bmd-label-floating">Cuenta con el apoyo del programa PROSPERA: </label>
-                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
-                                      <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
-                                  </div>
-                                
-                                   <div class="form-group col-md-12">
-                                      <label for="examplePass" class="bmd-label-floating">Cuenta con algún apoyo de tipo económico o en especie para su educación al momento de realizar esta solicitud: </label>
-                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
-                                      <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
-                                  </div>
-                                   <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Monto total de percepciones netas mensuales familiares : $</label>
-                                           <s:textfield cssClass="form-control" name="objDatosE.MONTO" id="objDatosE.MONTO" />
-                                            <s:fielderror fieldName="MONTO" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      
-                                  <div class="form-group col-md-4">
-                                              
-                                              <div class="row">
-                                                  <label class="col-sm-11 col-form-label label-checkbox">MARQUE LA CASILLA SI USTED CUENTA CON ALGUN COMPROBANTE DE INGRESOS.</label>
-                                                  <div class="col-sm-1 col-sm-offset-1 checkbox-radios">
-                                                      <div class="form-check">
-                                                          <label class="form-check-label">
-                                                          <s:checkbox  type="checkbox" name="valingreso" id="valingreso" onchange="Javascript:FormIngreso('muestraFormIngreso')" /> 
-
-                                                      </label>
-                                                  </div>                                  
-                                              </div> 
+                                      <div class="dropdown-divider"></div>
+                                      <div class="card-header card-header-rose card-header-icon">
+                                          <div class="card-icon">
+                                              <i class="material-icons">attach_money</i>
                                           </div>
-                                         
-                                      </div>                                                           
+                                          <h4 class="card-title">Datos SocioEconomicos</h4>
+                                      </div>
+                                      <div class="card-body">  
+                                          <div class="col-sm-12">                              
+                                              <div class="row">
+
+                                                  <div class="form-group col-md-12">
+                                                      <label for="examplePass" class="bmd-label-floating">Cuenta con el apoyo del programa PROSPERA: </label>
+                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
+                                                      <s:iterator value="ListaRespuestas" id="ListaRespuestas" status="stat">                        
+                                                          <s:hidden  name = "ListaRespuestas[%{#stat.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
+                                                          <s:hidden  name = "ListaRespuestas[%{#stat.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
+                                                      </s:iterator>
+                                                      <s:fielderror fieldName="RES1" cssClass="alert alert-danger"></s:fielderror>
+                                                      </div>
+
+                                                      <div class="form-group col-md-12">
+                                                          <label for="examplePass" class="bmd-label-floating">Cuenta con algún apoyo de tipo económico o en especie para su educación al momento de realizar esta solicitud: </label>
+                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
+                                                      <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
+                                                      </div>
+                                                      <div class="form-group col-md-4">
+                                                          <label for="examplePass" class="bmd-label-floating">Monto total de percepciones netas mensuales familiares : $</label>
+                                                      <s:textfield cssClass="form-control" name="objDatosE.MONTO" id="objDatosE.MONTO" />
+                                                      <s:fielderror fieldName="MONTO" cssClass="alert alert-danger"></s:fielderror>
+                                                      </div>
+
+                                                      <div class="form-group col-md-12">
+
+                                                          <div class="row">
+                                                              <label class="col-sm-11 col-form-label label-checkbox">MARQUE LA CASILLA SI USTED CUENTA CON ALGUN COMPROBANTE DE INGRESOS.</label>
+                                                              <div class="col-sm-1 col-sm-offset-1 checkbox-radios">
+                                                                  <div class="form-check">
+                                                                      <label class="form-check-label">
+                                                                      <s:checkbox  type="checkbox" name="valingreso" id="valingreso" onchange="Javascript:FormIngreso('muestraFormIngreso')" /> 
+
+                                                                  </label>
+                                                              </div>                                  
+                                                          </div> 
+                                                      </div>
+
+                                                  </div>  
+                                              </div>               
+                                          </div>                         
+                                      </div>    
                                                           <s:if test="banFormIngresos">
                                                               <s:hidden name="banFormIngresos" value="%{banFormIngresos}"></s:hidden>
-                                                               
-                                                                  <div class="form-group col-md-12">  
-                                                                      
-                                                                      
-                                                                      <div class="row">
-                                                                           <s:file   name="archi" id="archi" accept="application/vnd.ms-excel,application/vnd.ms-powerpoint, application/zip, application/x-rar-compressed, application/pdf" title="Solo archivos con extension xlsx,xls,zip,rar" />
-                                                                      </div>     
-                                                                      
 
-                                                                      
-                                                                 
-                                                                 
-                                                                  </div>  
+                                                                  <div class="card-header card-header-rose card-header-icon">
+                                                                      <div class="card-icon">
+                                                                          <i class="material-icons">archive</i>
+                                                                      </div>
+                                                                      <h4 class="card-title">CARGA DE COMPROBANTE DE INGRESOS</h4>
+                                                                  </div>
+                                                                  <div class="card-body">  
+                                                                      <div class="col-sm-12">                              
+                                                                          <div class="row">
 
-                                                          </s:if>                                            
-                                  </div>  
-                                  
-                                      
-                                      
-                              </div>                         
-                          </div>                  
+
+                                                                              <div class="col-md-4 col-sm-4">
+
+                                                                                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                                                      <div class="fileinput-new thumbnail">
+                                                                                          <div class="card-icon col-md-4">
+                                                                                              <i class="material-icons">cloud_upload</i>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                      <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                                                      <div>
+                                                                                          <span class="btn btn-rose btn-round btn-file">
+                                                                                              <span class="fileinput-new">Seleccionar Archivo</span>
+                                                                                              <span class="fileinput-exists">Cambiar</span>
+                                                                                              <input type="file" name="archi" id="archi" />
+                                                                                          </span>
+                                                                                          <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Eliminar</a>
+                                                                                           <s:fielderror fieldName="archi" cssClass="help-block" cssStyle="color:red"/> 
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+
+
+                                                                      </s:if> 
+                                                                  </div>               
+                                                              </div>                         
+                                                          </div>    
+
+                                              
                       <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaDatosTutor')" class="btn btn-round btn-primary">Guardar Datos Socioeconomicos</a>
+                          <a href="Javascript:Consulta('GuardaSocioEconomico')" class="btn btn-round btn-primary">Guardar Datos Socioeconomicos</a>
                       </div>
                   </div>                 
                   

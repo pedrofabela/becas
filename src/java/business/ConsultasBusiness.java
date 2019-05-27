@@ -5,6 +5,7 @@ import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.IngresosBean;
 import beans.TutorBean;
 import beans.renapoBean;
 import java.util.List;
@@ -109,6 +110,11 @@ public class ConsultasBusiness {
         List lista = this.con.ConsultaRespuestas();
         return lista;
     }
+    
+    public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception {
+        return this.con.GuardaSocioeconomico(objg);
+    }
+ 
    
 
 }

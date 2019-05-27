@@ -9,6 +9,7 @@ import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.IngresosBean;
 import beans.TutorBean;
 import beans.renapoBean;
 import java.util.List;
@@ -54,5 +55,7 @@ public interface ConsultaDAO {
      public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
      
      public List ConsultaRespuestas() throws Exception;
+     
+     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception;
 
 }

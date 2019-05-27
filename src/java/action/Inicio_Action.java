@@ -21,10 +21,12 @@ import beans.usuarioBean;
 import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 
 import utilidades.Constantes;
 
@@ -37,7 +39,7 @@ public class Inicio_Action extends ActionSupport {
     AcademicoBean objDatosA = new AcademicoBean();
     TutorBean objDatosP = new TutorBean();
     CobeneficiarioBean objDatosC = new CobeneficiarioBean();
-    IngresosBean objDatosE=new IngresosBean();
+    IngresosBean objDatosE = new IngresosBean();
 
     //************************************
     //VARIABLES REQUERIDAS//
@@ -53,7 +55,7 @@ public class Inicio_Action extends ActionSupport {
     private List<GradoBean> ListaGrados = new ArrayList<GradoBean>();
     private List<PromedioBean> ListaPromedios = new ArrayList<PromedioBean>();
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
-    private List<RespuestasBean> ListaRespuestas= new ArrayList<RespuestasBean>();
+    private List<RespuestasBean> ListaRespuestas = new ArrayList<RespuestasBean>();
 
     private boolean banColonia = false;
     private boolean banColoniaP = false;
@@ -64,10 +66,14 @@ public class Inicio_Action extends ActionSupport {
 
     private boolean banConCct = false;
     private boolean banConCurp = false;
-    private boolean banFormIngresos=false;
+    private boolean banFormIngresos = false;
+    private boolean banT = false;
 
     private String VALCOB;
     private String valingreso;
+
+    private File archi;
+    private String archiFileName;
 
     //****************************//
     // xxxxxxxxxxxxxxxxxxxxxSESIONxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -193,8 +199,8 @@ public class Inicio_Action extends ActionSupport {
             consultaRenapo renapo = new consultaRenapo();
 
             ListaEstadosCivil = con.ConsultaEstadosCivil();
-             Constantes.enviaMensajeConsola("parametro aspirante "+ objRenapo.getID_CICLO());
-             objAspirante.setID_CICLO(objRenapo.getID_CICLO());
+            Constantes.enviaMensajeConsola("parametro aspirante " + objRenapo.getID_CICLO());
+            objAspirante.setID_CICLO(objRenapo.getID_CICLO());
 
             objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
 
@@ -209,10 +215,6 @@ public class Inicio_Action extends ActionSupport {
 
             //consulta cct*********************
             objDatosA.setCCTAUX(objDatosA.getCCT());
-            
-            
-            
-           
 
             objDatosA = con.ConsultaCCT(objDatosA);
 
@@ -955,8 +957,8 @@ public class Inicio_Action extends ActionSupport {
                     con.GuardaDatosCobeneficiario(objDatosC);
 
                 }
-                
-                ListaRespuestas=con.ConsultaRespuestas();
+
+                ListaRespuestas = con.ConsultaRespuestas();
 
             } else {
                 return "ERROR";
@@ -969,14 +971,14 @@ public class Inicio_Action extends ActionSupport {
         }
         return "SUCCESS";
     }
-    
-     public String muestraFormIngreso() {
+
+    public String muestraFormIngreso() {
         try {
             //validando session***********************************************************************
 
             Constantes.enviaMensajeConsola("si entro ");
 
-         valingreso=objDatosE.getVALIDACHECK();
+            valingreso = objDatosE.getVALIDACHECK();
 
             if (objDatosE.getVALIDACHECK().equals("true")) {
 
@@ -993,6 +995,161 @@ public class Inicio_Action extends ActionSupport {
             return "ERROR";
         }
         return "SUCCESS";
+    }
+
+    public void validate2() {
+        try {
+//agregando la validacion de tipo de archivo...
+
+            if (archiFileName != null) {
+                Constantes.enviaMensajeConsola("--EL ARCHIVO ES .... " + archiFileName);
+//Constantes.enviaMensajeConsola("--entre a validar el tipo de arcivo.... " + sitio.getTIP_MSJ());
+                if (!(archiFileName.contains(".pdf"))) {
+                    archiFileName = "";
+                    addFieldError("archi", "*** La extension del archivo no es aceptada debe ser (pdf) ***");
+                    banT = true;
+
+                }
+                if (archiFileName.contains(" ")) {
+
+                    addFieldError("archi", "*** No se permiten espacios en el nombre del archivo, favor de remplazarlos por _ (guion bajo) ***");
+                    banT = true;
+
+                }
+                //if (archiFileName.length() > 2097152 ) 
+
+                if (5097152 <= FileUtils.sizeOf(archi)) {
+                    addFieldError("archi", "*** No se permiten archivos que pesen mas de 5Mbs de subir un archivo menor de 5Mbs ***");
+                    banT = true;
+
+                }
+
+            } else {
+
+                banT = true;
+                 addFieldError("archi", "*** Debe Seleccionar un archivo PDF. ***");
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+
+        }
+
+    }
+
+    public String GuardaSocioEconomico() {
+
+        try {
+
+            utilidades.Constantes.enviaMensajeConsola("LLEGA AL METODO guardardocumento");
+
+            ConsultasBusiness con = new ConsultasBusiness();
+            
+            String ruta = null;
+
+            boolean pregunta1;
+            boolean pregunta2;
+            boolean monto;
+            boolean archivo;
+
+            if (objDatosE.getRESPUESTA1().length() > 0) {
+                pregunta1 = true;
+
+            } else {
+                pregunta1 = false;
+                addFieldError("RES1", "Debe responder la pregunta 1");
+            }
+            if (objDatosE.getRESPUESTA2().length() > 0) {
+                pregunta2 = true;
+
+            } else {
+                pregunta2 = false;
+                addFieldError("RES2", "Debe responder la pregunta 2");
+            }
+            if (objDatosE.getMONTO().length() > 0) {
+                monto = true;
+
+            } else {
+                monto = false;
+                addFieldError("MONTO", "Debe ingresar el monto mensual neto");
+            }
+
+            if (objDatosE.getVALIDACHECK().equals("true")) {
+
+             
+                    validate2();   
+                    utilidades.Constantes.enviaMensajeConsola("sali de validate");
+
+                    
+                    if (banT) {
+                        
+                        archivo=false;
+                        
+                    } else {
+                        archivo=true;
+                    }
+                    
+                
+
+            } else {
+                Constantes.enviaMensajeConsola("entro a validacheck= false");
+                banT=true;
+                archivo=true;
+            }
+
+           
+
+           
+            if (pregunta1 && pregunta2 && monto && archivo) {
+                
+                Constantes.enviaMensajeConsola("PASO VALIDACIONES");
+
+                objDatosE.setID_ASPIRANTE(objDatosA.getID_ASPIRANTE());
+                objDatosE.setID_CICLO(objAspirante.getID_CICLO());
+                objDatosE.setID_BECA(objdatos.getID_BECA_AUX());
+                
+                Constantes.enviaMensajeConsola("paso asignaciones");
+
+                if (banT == false) {
+                     Constantes.enviaMensajeConsola("entro a banT=false");
+
+
+                    if (archiFileName != null) {
+
+                        archiFileName = "prueba" + archiFileName;
+                        objDatosE.setARCHIVO_INGRESO(archiFileName);
+                        ruta = Constantes.rutaArch + archiFileName;
+                        Constantes.enviaMensajeConsola(ruta);
+                        File newarch = new File(ruta);
+
+                        FileUtils.copyFile(archi, newarch);
+
+                        //FileUtils.sizeOf(archi)
+                        //AQUI VA METODO GUARDAR
+                        con.GuardaSocioeconomico(objDatosE);
+
+                        Constantes.enviaMensajeConsola("guardado con archivo");
+
+                        archiFileName = null;
+                    }
+                } else {
+                    Constantes.enviaMensajeConsola("guarda sin archivo");
+                    con.GuardaSocioeconomico(objDatosE);
+                    return "SUCCESS";
+                }
+
+            } 
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+
+        }
     }
 
     //******************************** FIN VARIABLE ARCHIVOS*********************************
@@ -1059,8 +1216,6 @@ public class Inicio_Action extends ActionSupport {
     public void setListaRespuestas(List<RespuestasBean> ListaRespuestas) {
         this.ListaRespuestas = ListaRespuestas;
     }
-    
-    
 
     public BecasBean getObjdatos() {
         return objdatos;
@@ -1157,8 +1312,6 @@ public class Inicio_Action extends ActionSupport {
     public void setObjDatosE(IngresosBean objDatosE) {
         this.objDatosE = objDatosE;
     }
-    
-    
 
     public String getNivelUsuario() {
         return nivelUsuario;
@@ -1239,8 +1392,14 @@ public class Inicio_Action extends ActionSupport {
     public void setBanFormIngresos(boolean banFormIngresos) {
         this.banFormIngresos = banFormIngresos;
     }
-    
-    
+
+    public boolean isBanT() {
+        return banT;
+    }
+
+    public void setBanT(boolean banT) {
+        this.banT = banT;
+    }
 
     public String getVALCOB() {
         return VALCOB;
@@ -1257,7 +1416,21 @@ public class Inicio_Action extends ActionSupport {
     public void setValingreso(String valingreso) {
         this.valingreso = valingreso;
     }
-    
-     
+
+    public File getArchi() {
+        return archi;
+    }
+
+    public void setArchi(File archi) {
+        this.archi = archi;
+    }
+
+    public String getArchiFileName() {
+        return archiFileName;
+    }
+
+    public void setArchiFileName(String archiFileName) {
+        this.archiFileName = archiFileName;
+    }
 
 }
