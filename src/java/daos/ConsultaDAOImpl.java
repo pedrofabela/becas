@@ -45,6 +45,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         list = queryForList(query, new fechasBecaMapper());
         return list;
     }
+   
 
     public List ConsultaReq(BecasBean obj) throws Exception {
         String query = "SELECT r.nom_requisito FROM tbl_beca_rec br INNER JOIN cat_requisitos r on br.id_requisito = r.id_requisito where br.id_beca='" + obj.getID_BECA_AUX() + "'";
@@ -71,7 +72,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     }
 
     public String ConsultaCiclo(BecasBean obj) throws Exception {
-        String query = "SELECT ID_CICLO FROM CAT_CICLOS WHERE ID_BECA='" + obj.getID_BECA_AUX() + "' AND ESTATUS=1";
+        String query = "SELECT ID_CICLO FROM CAT_CICLOS WHERE ID_BECA='" + obj.getID_BECA_AUX() + "' AND ESTATUS='1'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String ciclo = null;
         ciclo = queryStringUnCampo(query);
