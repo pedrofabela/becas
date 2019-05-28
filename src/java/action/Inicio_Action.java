@@ -126,7 +126,7 @@ public class Inicio_Action extends ActionSupport {
           
             
             
-              objRenapo.setID_CICLO(con.ConsultaCiclo(objdatos));
+            
             
             
             
@@ -199,7 +199,7 @@ public class Inicio_Action extends ActionSupport {
                        }
                        else {
                            
-                            objRenapo.setEN_PERIODO("NO");
+                            objRenapo.setEN_PERIODO("SI");
                        }
                     
                     

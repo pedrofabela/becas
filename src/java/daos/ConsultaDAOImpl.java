@@ -70,7 +70,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
        
        
         public String ConsultaCiclo(BecasBean obj) throws Exception {
-        String query = "SELECT ID_CICLO FROM CAT_CICLOS WHERE ID_BECA='"+obj.getID_BECA_AUX()+"' AND ESTATUS=1";
+        String query = "SELECT ID_CICLO FROM CAT_CICLOS WHERE ID_BECA='"+obj.getID_BECA_AUX()+"' AND ESTATUS='1'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String ciclo = null;
         ciclo = queryStringUnCampo(query);
