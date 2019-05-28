@@ -64,9 +64,17 @@ public interface ConsultaDAO {
     public boolean GuardaDatosTutor(TutorBean objg) throws Exception;
 
     public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
+    
+     public boolean ActualizaDatosTutor(TutorBean objg) throws Exception;
+
+    public boolean ActualizaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
 
     public List ConsultaRespuestas() throws Exception;
 
     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception;
+    
+     public IngresosBean consultaSocioEconomico(String idaspirante, String Ciclo) throws Exception;
+     
+      public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception;
 
 }

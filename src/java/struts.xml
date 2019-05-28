@@ -115,6 +115,12 @@
             <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>  
+         <action name="ActualizaDatosTutor" class="action.Inicio_Action" method="ActualizaDatosTutor">
+            <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
+            <result name="ERROR">/pages/RegistraPadre.jsp</result>
+            <result name="input">/pages/RegistraPadre.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>  
         <action name="muestraFormIngreso" class="action.Inicio_Action" method="muestraFormIngreso">
             <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
@@ -126,7 +132,14 @@
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
             <result name="input">/pages/RegistroSocioEconomico.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
+        </action>   
+        <action name="ActualizaSocioEconomico" class="action.Inicio_Action" method="ActualizaSocioEconomico">
+            <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
+            <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
+            <result name="input">/pages/RegistroSocioEconomico.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
         </action>                                              	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
+                                           	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
     </package>
 	
 </struts>

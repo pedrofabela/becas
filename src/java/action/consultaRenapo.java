@@ -22,8 +22,8 @@ import java.net.URL;
  * @author pedro
  */
 public class consultaRenapo {
-    
-       renapoBean objRenapo = new renapoBean();
+
+    renapoBean objRenapo = new renapoBean();
 
     public renapoBean getObjRenapo() {
         return objRenapo;
@@ -32,18 +32,8 @@ public class consultaRenapo {
     public void setObjRenapo(renapoBean objRenapo) {
         this.objRenapo = objRenapo;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     class request {
+
+    class request {
 
         private consulta consulta;
 
@@ -98,23 +88,17 @@ public class consultaRenapo {
         }
 
     }
-    
-    
-    public renapoBean consultaRenapo(String CURP) throws MalformedURLException, IOException{
-         
-        
-        
-          final String POST_PARAMS = "{\n"
+
+    public renapoBean consultaRenapo(String CURP) throws MalformedURLException, IOException {
+
+        final String POST_PARAMS = "{\n"
                 + "    \"request\": {\n"
                 + "        \"consulta\": \"CURP\",\n"
                 + "        \"data\": {\n"
-                + "            \"CURP\": \""+CURP+"\"\n"
+                + "            \"CURP\": \"" + CURP + "\"\n"
                 + "        }\n"
                 + "    }\n"
                 + "}";
-
-     
-      
 
         System.out.println(POST_PARAMS);
         URL obj = new URL("https://desabus.edomex.gob.mx/bussrv/sei/dkb_frRENAPO1.php/consulta");
@@ -128,43 +112,43 @@ public class consultaRenapo {
         os.flush();
         os.close();
         int responseCode = postConnection.getResponseCode();
-        
-     
 
-        
         if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader(postConnection.getInputStream()));
             String inputLine;
-            
-            
+
             StringBuffer response = new StringBuffer();
-            
-            
+
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
 
             }
-            
-            
+
             in.close();
-      
+
             String curpF;
             Gson gson = new Gson();
-            
+
             JsonElement elementoResultado = gson.fromJson(response.toString(), JsonElement.class);
             JsonObject jsonResultado = elementoResultado.getAsJsonObject();
 
             curpF = jsonResultado.get("response").toString().replace("[", "");
             curpF = curpF.replace("]", "");
 
-
             JsonElement elementoPersona = gson.fromJson(curpF, JsonElement.class);
             JsonObject jsonPersona = elementoPersona.getAsJsonObject();
 
             System.out.println("RESULTADO JSON: " + jsonResultado.get("response"));
-            System.out.println("PERSONA JSON : " + jsonPersona.get("apellidoMaterno"));
+            System.out.println("PERSONA JSON : " + jsonPersona.get("curp"));
+            System.out.println("PERSONA JSON : " + jsonPersona.get("nombre"));
             System.out.println("PERSONA JSON : " + jsonPersona.get("apellidoPaterno"));
-            
+            System.out.println("PERSONA JSON : " + jsonPersona.get("apellidoMaterno"));
+            System.out.println("PERSONA JSON : " + jsonPersona.get("sexo"));
+            System.out.println("PERSONA JSON : " + jsonPersona.get("cveEntidadNacimiento"));
+            System.out.println("PERSONA JSON : " + jsonPersona.get("fechaNacimientoAxu"));
+             System.out.println("PERSONA JSON : " + jsonPersona.get("nacionalidad"));
+
+
             objRenapo.setCONSULTA_CURP(String.valueOf(jsonPersona.get("curp")).replace("\"", ""));
             objRenapo.setNOMBRE_RENAPO(String.valueOf(jsonPersona.get("nombre")).replace("\"", ""));
             objRenapo.setAPATERNO_RENAPO(String.valueOf(jsonPersona.get("apellidoPaterno")).replace("\"", ""));
@@ -174,45 +158,27 @@ public class consultaRenapo {
             objRenapo.setFEC_NAC_RENAPO(String.valueOf(jsonPersona.get("fechaNacimientoAxu")).replace("\"", ""));
             objRenapo.setNACIONALIDAD_RENAPO(String.valueOf(jsonPersona.get("nacionalidad")).replace("\"", ""));
 
-            
-         if( objRenapo.getGENERO_RENAPO().equals("H")){
-             
-             objRenapo.setGENERO_RENAPO("HOMBRE");
-         }
-       
-          if( objRenapo.getGENERO_RENAPO().equals("M")){
-             
-             objRenapo.setGENERO_RENAPO("MUJER");
-         }
-           if( objRenapo.getGENERO_RENAPO().length()<1){
-             
-             objRenapo.setGENERO_RENAPO("SIN INFORMACIÓN");
-         }
-       
-        
-            
-            
-            
-            
-            
-            
-            
-           
-            
+            if (objRenapo.getGENERO_RENAPO().equals("H")) {
+
+                objRenapo.setGENERO_RENAPO("HOMBRE");
+            }
+
+            if (objRenapo.getGENERO_RENAPO().equals("M")) {
+
+                objRenapo.setGENERO_RENAPO("MUJER");
+            }
+            if (objRenapo.getGENERO_RENAPO().length() < 1) {
+
+                objRenapo.setGENERO_RENAPO("SIN INFORMACIÓN");
+            }
+
         } else {
             System.out.println("ERROR AL CONSULTAR");
-             
-        }
-      
 
-        
+        }
+
         return objRenapo;
-        
-        
-        
+
     }
-    
-    
-    
-    
+
 }

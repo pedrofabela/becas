@@ -38,7 +38,7 @@ public class renapoBean implements Serializable {
     public String ID_ASPIRANTE;
     public String ID_CICLO;
     public String INTERVALO;
-     public String CCT;
+    public String CCT;
      
     private String NIVEL;
     private String NIVEL_AUX;

@@ -400,7 +400,7 @@
                           <a href="Javascript:Consulta('GuardaDatosTutor')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Guardar Datos del Tutor y Continuar</a>
                        </s:if> 
                        <s:if test="banActualizaP">
-                            <s:hidden name="banActualizaP" value="%{banActualiza}"></s:hidden>
+                            <s:hidden name="banActualizaP" value="%{banActualizaP}"></s:hidden>
                           <a href="Javascript:Consulta('ActualizaDatosTutor')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Actualiza Datos del Tutor y Continuar</a>
                        </s:if>     
                       </div>

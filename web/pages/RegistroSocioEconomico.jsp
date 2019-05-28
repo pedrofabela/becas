@@ -157,7 +157,7 @@
 
                                                   <div class="form-group col-md-12">
                                                       <label for="examplePass" class="bmd-label-floating">Cuenta con el apoyo del programa PROSPERA: </label>
-                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
+                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
                                                       <s:iterator value="ListaRespuestas" id="ListaRespuestas" status="stat">                        
                                                           <s:hidden  name = "ListaRespuestas[%{#stat.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
                                                           <s:hidden  name = "ListaRespuestas[%{#stat.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
@@ -167,7 +167,7 @@
 
                                                       <div class="form-group col-md-12">
                                                           <label for="examplePass" class="bmd-label-floating">Cuenta con algún apoyo de tipo económico o en especie para su educación al momento de realizar esta solicitud: </label>
-                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="ID_RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
+                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
                                                       <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
                                                       </div>
                                                       <div class="form-group col-md-4">
@@ -237,7 +237,15 @@
 
                                               
                       <div class="card-footer ">
+                           <s:if test="banGuardaE">
+                           <s:hidden name="banGuardaE" value="%{banGuardaE}"></s:hidden>
                           <a href="Javascript:Consulta('GuardaSocioEconomico')" class="btn btn-round btn-primary">Guardar Datos Socioeconomicos</a>
+                       </s:if> 
+                       <s:if test="banActualizaE">
+                            <s:hidden name="banActualizaE" value="%{banActualizaE}"></s:hidden>
+                           <a href="Javascript:Consulta('ActualizaSocioEconomico')" class="btn btn-round btn-primary">Actualiza Datos Socioeconomicos</a>
+                       </s:if>   
+                         
                       </div>
                   </div>                 
                   

@@ -17,6 +17,7 @@ import mappers.CobeMapper;
 import mappers.ColoniaMapper;
 import mappers.EstadosMapper;
 import mappers.GradosMapper;
+import mappers.IngresoMapper;
 import mappers.ParentescosMapper;
 import mappers.PromediosMapper;
 import mappers.RequisitoBuenoMapper;
@@ -452,6 +453,73 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert(Constantes.TablaCobeneficiario, arregloCampos);
     }
+    
+    
+    public boolean ActualizaDatosTutor(TutorBean objg) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS TUTOR...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar    
+        temporal = new ObjPrepareStatement("CP", "STRING", objg.getCP_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("MUNICIPIO", "STRING", objg.getID_MUNICIPIO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("DOMICILIO_TU", "STRING", objg.getDOMICILIO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("LOCALIDAD_ATU", "STRING", objg.getCOLONIA_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTRECALLE1_TU", "STRING", objg.getCALLE1_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTRECALLE2_TU", "STRING", objg.getCALLE2_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("REFERENCIA_DOM_TU", "STRING", objg.getREFERENCIA_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("TELEFONO_FIJO_TU", "STRING", objg.getTELEFONO_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("TELEFONO_CELULAR_TU", "STRING", objg.getCELULAR_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CORREO_TU", "STRING", objg.getEMAIL_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_PARENTESCO", "STRING", objg.getPARENTESCO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL_TU", "STRING", objg.getID_ESTADO_CIVIL_TU().toUpperCase());
+        arregloCampos.add(temporal);
+        
+        String condicion="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE_TU()+"' AND ID_CICLO='"+objg.getID_CICLO_TU()+"'";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate(Constantes.TablaTutor, arregloCampos,condicion);
+    }
+
+    public boolean ActualizaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS COBENEFICIARIO...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+       
+       
+        temporal = new ObjPrepareStatement("ID_PARENTESCO", "STRING", objg.getPARENTESCO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        
+        String Condicion="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE_CO()+"' AND ID_CICLO='"+objg.getID_CICLO_CO()+"'";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate(Constantes.TablaCobeneficiario, arregloCampos, Condicion);
+    }
 
     public List ConsultaRespuestas() throws Exception {
         String query = "SELECT ID_RESPUESTA,RESPUESTA FROM CAT_RESPUESTA WHERE STATUS='1'";
@@ -491,5 +559,42 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return oraDaoFac.queryInsert(Constantes.TablaSocioEconomico, arregloCampos);
 
     }
+    
+     public IngresosBean consultaSocioEconomico(String ID , String Ciclo) throws Exception {
+        String query = "";
+        query = "SELECT respuesta1,respuesta2,monto,ruta_archivo FROM "+Constantes.TablaSocioEconomico+" WHERE id_aspirante='"+ID+"' and id_ciclo='"+Ciclo+"'";
+        Constantes.enviaMensajeConsola(" query consulta socioeconomico --> " + query);
+        IngresosBean resu = (IngresosBean) oraDaoFac.queryForObject(query, new IngresoMapper());
+        return resu;
+    }
+     
+    public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception {
+
+        //Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS SOCIOECONOMICOS...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("RESPUESTA1", "STRING", objg.getRESPUESTA1().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RESPUESTA2", "STRING", objg.getRESPUESTA2().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("MONTO", "STRING", objg.getMONTO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_BECA", "STRING", objg.getID_BECA().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RUTA_ARCHIVO", "STRING", objg.getARCHIVO_INGRESO());
+        arregloCampos.add(temporal);
+        
+        String condiciones="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE()+"' and ID_CICLO='"+objg.getID_CICLO()+"'";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate(Constantes.TablaSocioEconomico, arregloCampos,condiciones);
+
+    } 
 
 }
