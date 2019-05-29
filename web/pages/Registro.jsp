@@ -225,7 +225,7 @@
                                           <s:fielderror fieldName="EMAIL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">
-                                          <s:textfield cssClass="form-control" name="objAspirante.ID_ASPIRANTE" id="objAspirante.ID_ASPIRANTE" cssStyle="display:none;" required="true"/>
+                                       <s:textfield cssClass="form-control" name="objAspirante.ID_ASPIRANTE" id="objAspirante.ID_ASPIRANTE"   required="true"/>
                                       </div>
                                           
 
@@ -275,7 +275,7 @@
                                       </div> 
                                        <div class="form-group col-md-6">                                    
                                           <label for="examplePass" class="bmd-label-floating">GRADO</label>
-                                       <s:select  data-style="select-with-transition"   name="objDatosA.GRADO" id="objDatosA.GRADO" list="ListaGrados"  listKey="ID_GRADO"  listValue="GRADO" headerKey="" headerValue="--SELECCIONAR--"  cssClass="selectpicker "  />
+                                       <s:select  data-style="select-with-transition"   name="objDatosA.ID_GRADO" id="objDatosA.ID_GRADO" list="ListaGrados"  listKey="ID_GRADO"  listValue="GRADO" headerKey="" headerValue="--SELECCIONAR--"  cssClass="selectpicker "  />
                                           <s:iterator value="ListaGrados" id="ListaGrados" status="stat">                        
                                               <s:hidden  name = "ListaGrados[%{#stat.index}].ID_GRADO" id="ID_GRADO"></s:hidden>
                                               <s:hidden  name = "ListaGrados[%{#stat.index}].GRADO" id="GRADO"></s:hidden>
@@ -299,7 +299,14 @@
                       </div> 
                                       
                       <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaAspirante')" class="btn btn-round btn-primary">Guardar y Continuar</a>
+                          <s:if test="banGuarda">
+                                <s:hidden name="banGuarda" value="%{banGuarda}"></s:hidden>
+                              <a href="Javascript:Consulta('GuardaAspirante')" onclick="this.onclick = function () {return false} class="btn btn-round btn-primary">Guardar y Continuar</a>
+                          </s:if>
+                              <s:if test="banActualiza">
+                                    <s:hidden name="banActualiza" value="%{banActualiza}"></s:hidden>
+                                  <a href="Javascript:Consulta('ActualizaAspirante')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Actualizar y Continuar</a>
+                              </s:if>    
                       </div>
                   </div>                 
                   
@@ -719,6 +726,30 @@
                 
 
             }
+            
+            
+            
+            
+             window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                                    var pos = window.name || 0;
+                                    window.scrollTo(0, pos);
+
+                                    window.location.hash = "no-back-button";
+                                    window.location.hash = "Again-No-back-button" //chrome
+                                    window.onhashchange = function () {
+                                        window.location.hash = "no-back-button";
+                                    }
+
+                                }
+
+                                window.onunload = function () {
+                                    window.name = self.pageYOffset
+                                            || (document.documentElement.scrollTop + document.body.scrollTop);
+
+
+                                }
+
+            
   </script>    
    
      

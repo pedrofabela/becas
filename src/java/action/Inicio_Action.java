@@ -56,6 +56,8 @@ public class Inicio_Action extends ActionSupport {
     private List<PromedioBean> ListaPromedios = new ArrayList<PromedioBean>();
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
     private List<RespuestasBean> ListaRespuestas = new ArrayList<RespuestasBean>();
+    private List<AspiranteBean> ListaActualizaAspirante = new ArrayList<AspiranteBean>();
+     private List<AcademicoBean> ListaDatosAcad = new ArrayList<AcademicoBean>();
     
      private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
      
@@ -71,6 +73,10 @@ public class Inicio_Action extends ActionSupport {
     private boolean banConCurp = false;
     private boolean banFormIngresos = false;
     private boolean banT = false;
+    private boolean banActualiza=false;
+    private boolean banGuarda=false;
+     private boolean banActualizaP=false;
+    private boolean banGuardaP=false;
 
     private String VALCOB;
     private String valingreso;
@@ -149,32 +155,42 @@ public class Inicio_Action extends ActionSupport {
                     Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
                     
                     
-                 
-                    
-                    
-                    
-                    
-                    
-                      
-          
-            
-                    
-                    
-
                     objDatosA.setCCTAUX(CctParticipa);
+                    
                     objDatosA = con.ConsultaCCT(objDatosA);
-                    
-              
+                                  
                     objRenapo.setNIVEL_AUX(objDatosA.getNIVELCCT());
+                                                                    
+                    
+                   
+                    
+                    
+                    
+                    objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+                    
+                        objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+                    
+                    if(objRenapo.getINTERVALO().length()==0 && objRenapo.getNIVEL().length()==0){
+                        
+                        
+                            objRenapo.setINTERVALO(con.ConsultaIntervaloSinNivel(objdatos, objRenapo));
+                            
+                        
+                    }
                     
                     
                     
                     
-           objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+                    
 
-            objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+                
+            
+            
+            
             
             ListaFechas= (ArrayList<BecasBean>) con.ConsultaFechasBeca(objdatos, objRenapo);
+            
+            
             
                     Iterator LF = ListaFechas.iterator();
                     
@@ -199,7 +215,7 @@ public class Inicio_Action extends ActionSupport {
                        }
                        else {
                            
-                            objRenapo.setEN_PERIODO("SI");
+                            objRenapo.setEN_PERIODO("NO");
                        }
                     
                     
@@ -269,17 +285,107 @@ public class Inicio_Action extends ActionSupport {
             consultaRenapo renapo = new consultaRenapo();
 
             ListaEstadosCivil = con.ConsultaEstadosCivil();
+           
             Constantes.enviaMensajeConsola("parametro aspirante " + objRenapo.getID_CICLO());
            
             //consulta a tabla de aspirantes antes de renapo
             
-            
-            
+          
+                
             objAspirante.setID_CICLO(objRenapo.getID_CICLO());
             
-            objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP());
+          
+            
+            
+              ListaActualizaAspirante= con.ConsultaAspirante(objdatos, objRenapo);
+               
+              if(ListaActualizaAspirante.size()>0){
+            Iterator LAA =ListaActualizaAspirante.iterator();
+            
+            AspiranteBean obj3;
+     
+            while (LAA.hasNext()) {
+             obj3 = (AspiranteBean) LAA.next();
              
-            objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
+               objAspirante.setCONSULTA_CURP(obj3.getCONSULTA_CURP());
+             objAspirante.setID_ASPIRANTE(obj3.getID_ASPIRANTE());
+             objAspirante.setNOMBRE_RENAPO(obj3.getNOMBRE_RENAPO());
+             objAspirante.setAMATERNO_RENAPO(obj3.getAMATERNO_RENAPO());
+             objAspirante.setAPATERNO_RENAPO(obj3.getAPATERNO_RENAPO());
+             objAspirante.setFEC_NAC_RENAPO(obj3.getFEC_NAC_RENAPO());
+             objAspirante.setNACIONALIDAD_RENAPO(obj3.getNACIONALIDAD_RENAPO());
+             objAspirante.setENTIDAD_NACIMINETO_RENAPO(obj3.getENTIDAD_NACIMINETO_RENAPO());
+             objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
+             objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
+             objAspirante.setDOMICILIO(obj3.getDOMICILIO());
+             objAspirante.setCALLE1(obj3.getCALLE1());
+             objAspirante.setCALLE2(obj3.getCALLE2());
+             objAspirante.setREFERENCIA(obj3.getREFERENCIA());
+             objAspirante.setCP(obj3.getCP());
+              ListaColonia = con.ConsultaColonia(objAspirante);
+           Iterator LC = ListaColonia.iterator();
+                ColoniasBean objg;
+
+                while (LC.hasNext()) {
+                    objg = (ColoniasBean) LC.next();
+
+                    objAspirante.setMUNICIPIO(objg.getMUNICIPIO());
+                    objAspirante.setID_MUNICIPIO(objg.getID_MUNICIPIO());
+
+                }
+                
+                objAspirante.setTELEFONO(obj3.getTELEFONO());
+                 objAspirante.setCELULAR(obj3.getCELULAR());
+                 objAspirante.setEMAIL(obj3.getEMAIL());
+                
+            }
+              
+              banColonia=true;
+                banActualiza=true;
+                banFormAca=true;
+                
+                
+                
+                
+                
+                ListaDatosAcad=con.ConsultaDatosAca(objAspirante, objDatosA);
+                
+                  ListaGrados = con.ConsultaGrados();
+                ListaPromedios = con.ConsultaPromedios();
+            
+                
+                Iterator LDA=ListaDatosAcad.iterator();
+                
+                
+                AcademicoBean obj4;
+                
+                  while (LDA.hasNext()) {
+                   obj4 = (AcademicoBean) LDA.next();
+                      
+                   objDatosA.setID_GRADO(obj4.getGRADO());
+                   objDatosA.setPROMEDIO(obj4.getPROMEDIO());
+                   
+                   
+                   
+                  }
+                
+                
+                
+                
+                
+                
+                
+              }
+              
+              
+              
+             
+                        
+            else{
+                  banGuarda=true;
+          objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP().toUpperCase());
+             
+           objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
             objAspirante.setNOMBRE_RENAPO(objRenapo.getNOMBRE_RENAPO());
             objAspirante.setAPATERNO_RENAPO(objRenapo.getAPATERNO_RENAPO());
             objAspirante.setAMATERNO_RENAPO(objRenapo.AMATERNO_RENAPO);
@@ -307,7 +413,7 @@ public class Inicio_Action extends ActionSupport {
             Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
             Constantes.enviaMensajeConsola("lista Req: " + ListaReq.size());
             Constantes.enviaMensajeConsola("lista ESTADOS: " + ListaEstadosCivil.size());
-
+            }
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Ocurrio un error: " + e);
@@ -558,6 +664,233 @@ public class Inicio_Action extends ActionSupport {
         }
         return "SUCCESS";
     }
+    
+    public String ActualizaAspirante() {
+
+        try {
+            //validando session***********************************************************************
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            boolean NOMBRE_RENAPO = false;
+            boolean APATERNO_RENAPO = false;
+            boolean AMATERNO_RENAPO = false;
+            boolean GENERO_RENAPO = false;
+            boolean ENTIDAD_NACIMINETO_RENAPO = false;
+            boolean FEC_NAC_RENAPO = false;
+            boolean NACIONALIDAD_RENAPO = false;
+            boolean CP = false;
+            boolean MUNICIPIO = false;
+            boolean ID_ESTADO_CIVIL = false;
+            boolean DOMICILIO = false;
+            boolean CALLE1 = false;
+            boolean CALLE2 = false;
+            boolean REFERENCIA = false;
+            boolean COLONIA = false;
+            boolean TELEFONO = false;
+            boolean CELULAR = false;
+            boolean EMAIL = false;
+            boolean GRADO = false;
+            boolean PROMEDIO = false;
+
+            if (objAspirante.getNOMBRE_RENAPO().length() > 0) {
+                NOMBRE_RENAPO = true;
+
+            } else {
+                NOMBRE_RENAPO = false;
+                addFieldError("NOMA", "Debe registrar el nombre del alumno");
+            }
+
+            if (objAspirante.getAPATERNO_RENAPO().length() > 0) {
+                APATERNO_RENAPO = true;
+
+            } else {
+                APATERNO_RENAPO = false;
+                addFieldError("APA", "Debe registrar el apellido paterno del alumno");
+            }
+
+            if (objAspirante.getAMATERNO_RENAPO().length() > 0) {
+                AMATERNO_RENAPO = true;
+
+            } else {
+                AMATERNO_RENAPO = false;
+                addFieldError("AMA", "Debe registrar el apellido materno del alumno");
+            }
+            if (objAspirante.getFEC_NAC_RENAPO().length() > 0) {
+                FEC_NAC_RENAPO = true;
+
+            } else {
+                FEC_NAC_RENAPO = false;
+                addFieldError("FECNAN", "Debe registrar la fecha de nacimiento del alumno");
+            }
+
+            if (objAspirante.getNACIONALIDAD_RENAPO().length() > 0) {
+                NACIONALIDAD_RENAPO = true;
+
+            } else {
+                NACIONALIDAD_RENAPO = false;
+                addFieldError("NAC", "Debe registrar la nacionalidad del alumno");
+            }
+            if (objAspirante.getENTIDAD_NACIMINETO_RENAPO().length() > 0) {
+                ENTIDAD_NACIMINETO_RENAPO = true;
+
+            } else {
+                ENTIDAD_NACIMINETO_RENAPO = false;
+                addFieldError("ENTIDADNAC", "Debe registrar la entidad de nacimiento");
+            }
+
+            if (objAspirante.getGENERO_RENAPO().length() > 0) {
+                GENERO_RENAPO = true;
+
+            } else {
+                GENERO_RENAPO = false;
+                addFieldError("GENERO", "Debe registrar el genero del alumno");
+            }
+
+            if (objAspirante.getID_ESTADO_CIVIL().length() > 0) {
+                ID_ESTADO_CIVIL = true;
+
+            } else {
+                ID_ESTADO_CIVIL = false;
+                addFieldError("IDESTADO", "Debe Seleccionar un estado civil del alumno");
+            }
+            if (objAspirante.getDOMICILIO().length() > 0) {
+                DOMICILIO = true;
+
+            } else {
+                DOMICILIO = false;
+                addFieldError("DOMICILIO", "Debe registrar el domicilio del alumno");
+            }
+
+            if (objAspirante.getCALLE1().length() > 0) {
+                CALLE1 = true;
+
+            } else {
+                CALLE1 = false;
+                addFieldError("CALLE1", "Debe registrar entre calle del domicilio del alumno");
+            }
+            if (objAspirante.getCALLE2().length() > 0) {
+                CALLE2 = true;
+
+            } else {
+                CALLE2 = false;
+                addFieldError("CALLE2", "Debe registrar Y calle del domicilio del alumno");
+            }
+
+            if (objAspirante.getREFERENCIA().length() > 0) {
+                REFERENCIA = true;
+
+            } else {
+                REFERENCIA = false;
+                addFieldError("REFERENCIA", "Debe registrar otra referencia del domicilio del alumno");
+            }
+
+            if (objAspirante.getCP().length() > 0) {
+                CP = true;
+
+            } else {
+                CP = false;
+                addFieldError("CP", "Debe registrar un codigo postal del alumno");
+            }
+            if (objAspirante.getCOLONIA().length() > 0) {
+                COLONIA = true;
+
+            } else {
+                COLONIA = false;
+                addFieldError("COLONIA", "Debe registrar una colonia del alumno");
+            }
+            if (objAspirante.getMUNICIPIO().length() > 0) {
+                MUNICIPIO = true;
+
+            } else {
+                MUNICIPIO = false;
+                addFieldError("MUNICIPIO", "Debe registrar el municipio del alumno");
+            }
+            if (objAspirante.getTELEFONO().length() > 0) {
+                TELEFONO = true;
+
+            } else {
+                TELEFONO = false;
+                addFieldError("TEL", "Debe registrar un número telefonico del alumno");
+            }
+
+            if (objAspirante.getCELULAR().length() > 0) {
+                CELULAR = true;
+
+            } else {
+                CELULAR = false;
+                addFieldError("CEL", "Debe registrar un número celular del alumno");
+            }
+
+            if (objAspirante.getEMAIL().length() > 0) {
+                EMAIL = true;
+
+            } else {
+                EMAIL = false;
+                addFieldError("EMAIL", "Debe registrar un correo electronico del alumno");
+            }
+
+            if (objDatosA.getID_GRADO().length() > 0) {
+                GRADO = true;
+
+            } else {
+                GRADO = false;
+                addFieldError("GRADO", "Debe registrar el grado que cursa el alumno");
+            }
+
+            if (objDatosA.getPROMEDIO().length() > 0) {
+                PROMEDIO = true;
+
+            } else {
+                PROMEDIO = false;
+                addFieldError("PROMEDIO", "Debe registrar el promedio del alumno");
+            }
+
+            if (NOMBRE_RENAPO && APATERNO_RENAPO && AMATERNO_RENAPO && GENERO_RENAPO && ENTIDAD_NACIMINETO_RENAPO && FEC_NAC_RENAPO && NACIONALIDAD_RENAPO && CP && MUNICIPIO
+                    && ID_ESTADO_CIVIL && DOMICILIO && CALLE1 && CALLE2 && REFERENCIA && COLONIA && TELEFONO && CELULAR && EMAIL && GRADO && PROMEDIO) {
+
+                con.ActualizaDatosPersonales(objAspirante);
+
+                objDatosA.setID_ASPIRANTE(objAspirante.getID_ASPIRANTE());
+                objDatosA.setID_CICLO(objAspirante.getID_CICLO());
+
+                con.ActualizaDatosAcademicos(objDatosA);
+                
+                 ListaParentesco = con.ConsultaParentesco();
+                
+                objDatosP=con.ConsultaTutor(objDatosA);
+                
+                objDatosC=con.ConsultaCobe(objDatosA);
+                
+                 
+                
+                if (objDatosP!= null) {
+                    
+                    banFormP=true;
+                    banColoniaP=true;
+                    banFormCobe=true;
+                    banMuestraCobe=true;
+                    banActualizaP=true;
+                    VALCOB="true";
+                    objDatosC.setVALIDACHECK("true");
+                    
+                    
+                }else{
+                    banGuardaP=true;
+                }
+                
+
+            } else {
+                return "ERROR";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+        return "SUCCESS";
+    }
 
     public String ConsultaCurpP() {
         try {
@@ -590,6 +923,7 @@ public class Inicio_Action extends ActionSupport {
 
                     ListaParentesco = con.ConsultaParentesco();
                     ListaEstadosCivil = con.ConsultaEstadosCivil();
+                    
 
                     banFormP = true;
 
@@ -684,7 +1018,24 @@ public class Inicio_Action extends ActionSupport {
             Constantes.enviaMensajeConsola("cctaux: " + objDatosC.getCURPAUX_CO());
 
             if (objDatosC.getCURPAUX_CO().length() > 0 && objDatosC.getCURPAUX_CO().length() == 18) {
+                
+                
+                objDatosA.setID_ASPIRANTE(objAspirante.getID_ASPIRANTE());
+                objDatosA.setID_CICLO(objAspirante.getID_CICLO());
+                objDatosA.setCURP_AUX(objDatosC.getCURPAUX_CO());
+                
+                objDatosC=con.ConsultaCobeXcurp(objDatosA);
+                
+                
+                if (objDatosC != null) {
+                    
+                    ListaParentesco = con.ConsultaParentesco();
+                    ListaEstadosCivil = con.ConsultaEstadosCivil();
 
+                    banMuestraCobe = true;
+                    
+                } else {
+                
                 objRenapo = renapo.consultaRenapo(objDatosC.getCURPAUX_CO());
 
                 if (objRenapo == null) {
@@ -708,6 +1059,8 @@ public class Inicio_Action extends ActionSupport {
 
                     banMuestraCobe = true;
 
+                }
+                
                 }
 
             } else {
@@ -1476,6 +1829,41 @@ public class Inicio_Action extends ActionSupport {
         this.banT = banT;
     }
 
+    public boolean isBanActualiza() {
+        return banActualiza;
+    }
+
+    public void setBanActualiza(boolean banActualiza) {
+        this.banActualiza = banActualiza;
+    }
+
+    public boolean isBanGuarda() {
+        return banGuarda;
+    }
+
+    public void setBanGuarda(boolean banGuarda) {
+        this.banGuarda = banGuarda;
+    }
+
+    public boolean isBanActualizaP() {
+        return banActualizaP;
+    }
+
+    public void setBanActualizaP(boolean banActualizaP) {
+        this.banActualizaP = banActualizaP;
+    }
+
+    public boolean isBanGuardaP() {
+        return banGuardaP;
+    }
+
+    public void setBanGuardaP(boolean banGuardaP) {
+        this.banGuardaP = banGuardaP;
+    }
+    
+    
+    
+
     public String getVALCOB() {
         return VALCOB;
     }
@@ -1514,6 +1902,22 @@ public class Inicio_Action extends ActionSupport {
 
     public void setListaFechas(List<BecasBean> ListaFechas) {
         this.ListaFechas = ListaFechas;
+    }
+
+    public List<AspiranteBean> getListaActualizaAspirante() {
+        return ListaActualizaAspirante;
+    }
+
+    public void setListaActualizaAspirante(List<AspiranteBean> ListaActualizaAspirante) {
+        this.ListaActualizaAspirante = ListaActualizaAspirante;
+    }
+
+    public List<AcademicoBean> getListaDatosAcad() {
+        return ListaDatosAcad;
+    }
+
+    public void setListaDatosAcad(List<AcademicoBean> ListaDatosAcad) {
+        this.ListaDatosAcad = ListaDatosAcad;
     }
     
     

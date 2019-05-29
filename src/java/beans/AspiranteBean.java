@@ -38,7 +38,22 @@ public class AspiranteBean implements Serializable {
     public String ID_ASPIRANTE;
     public String ID_CICLO;
     public String INTERVALO;
-     public String CCT;
+    public String CCT;
+    public String LOCALIDAD;
+
+    
+    
+    
+    public String getLOCALIDAD() {
+        return LOCALIDAD;
+    }
+
+    public void setLOCALIDAD(String LOCALIDAD) {
+        this.LOCALIDAD = LOCALIDAD;
+    }
+    
+    
+    
 
     public String getCCT() {
         return CCT;

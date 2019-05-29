@@ -159,8 +159,8 @@
                                       <s:fielderror fieldName="NOCURP" cssClass="alert alert-danger"></s:fielderror>          
                                       <s:fielderror fieldName="ERRORCURPAUX" cssClass="alert alert-danger"></s:fielderror> 
                                       </div>  
-                                  <s:if test="BanFormP">
-                                      <s:hidden name="BanFormP" value="%{BanFormP}"></s:hidden>
+                                  <s:if test="banFormP">
+                                      <s:hidden name="banFormP" value="%{banFormP}"></s:hidden>
                                           <div class="form-group col-md-4">
                                               <label for="exampleEmail" class="bmd-label-floating">CURP</label>
                                           <s:textfield  cssClass="form-control " name="objDatosP.CONSULTA_CURP_TU" id="objDatosP.CONSULTA_CURP_TU" readonly="true"/>
@@ -395,7 +395,14 @@
 
 
                       <div class="card-footer ">
-                          <a href="Javascript:Consulta('GuardaDatosTutor')" class="btn btn-round btn-primary">Guardar Datos del Tutor y Continuar</a>
+                      <s:if test="banGuardaP">
+                           <s:hidden name="banGuardaP" value="%{banGuardaP}"></s:hidden>
+                          <a href="Javascript:Consulta('GuardaDatosTutor')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Guardar Datos del Tutor y Continuar</a>
+                       </s:if> 
+                       <s:if test="banActualizaP">
+                            <s:hidden name="banActualizaP" value="%{banActualiza}"></s:hidden>
+                          <a href="Javascript:Consulta('ActualizaDatosTutor')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Actualiza Datos del Tutor y Continuar</a>
+                       </s:if>     
                       </div>
                   </div>                 
                   
@@ -833,6 +840,29 @@
                 
 
             }
+            
+            
+             window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                                    var pos = window.name || 0;
+                                    window.scrollTo(0, pos);
+
+                                    window.location.hash = "no-back-button";
+                                    window.location.hash = "Again-No-back-button" //chrome
+                                    window.onhashchange = function () {
+                                        window.location.hash = "no-back-button";
+                                    }
+
+                                }
+
+                                window.onunload = function () {
+                                    window.name = self.pageYOffset
+                                            || (document.documentElement.scrollTop + document.body.scrollTop);
+
+
+                                }
+
+            
+            
   </script>    
        
      </s:form>

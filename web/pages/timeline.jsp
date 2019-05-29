@@ -812,8 +812,8 @@ function myFunction2(x){
     {
                
         var curp=document.getElementById("CONSULTA_CURP").value;
-         var nivel=document.getElementById("NIVEL").value;
-           var en_periodo=document.getElementById("EN_PERIODO").value;
+        var nivel=document.getElementById("NIVEL").value;
+        var en_periodo=document.getElementById("EN_PERIODO").value;
         var acuerdo=document.getElementById("ACUERDO").checked;
         var intervalo=document.getElementById("INTERVALO").value;           
         var primeraletra=curp.substr(0,1);    
@@ -821,6 +821,12 @@ function myFunction2(x){
         var nivelcct="";    
            
       /* VALIDACIONES DE ENTRADA A PLATAFORMA DE BECAS */
+      
+      if((nivel.length==0 && intervalo.length>0) ){
+          document.getElementById("EN_PERIODO").value = "SI";
+          en_periodo="SI";
+      }
+      
            
                      
                      

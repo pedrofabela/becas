@@ -49,7 +49,7 @@
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>  
         
-          <action name="ConsultaCct" class="action.Inicio_Action" method="ConsultaCct">
+        <action name="ConsultaCct" class="action.Inicio_Action" method="ConsultaCct">
             <result name="SUCCESS">/pages/timeline.jsp</result>			              
             <result name="ERROR">/pages/login.jsp</result>
             <result name="input">/pages/login.jsp</result>
@@ -63,7 +63,7 @@
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>             	
         
-	 <action name="ConsultaCP" class="action.Inicio_Action" method="ConsultaCP">
+        <action name="ConsultaCP" class="action.Inicio_Action" method="ConsultaCP">
             <result name="SUCCESS">/pages/Registro.jsp</result>			              
             <result name="ERROR">/pages/Registro.jsp</result>
             <result name="input">/pages/Registro.jsp</result>
@@ -76,6 +76,13 @@
             <result name="input">/pages/Registro.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>    
+        <action name="ActualizaAspirante" class="action.Inicio_Action" method="ActualizaAspirante">
+            <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
+            <result name="ERROR">/pages/Registro.jsp</result>
+            <result name="input">/pages/Registro.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>    
+
         <action name="ConsultaCurpP" class="action.Inicio_Action" method="ConsultaCurpP">
             <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
             <result name="ERROR">/pages/RegistraPadre.jsp</result>
@@ -83,14 +90,14 @@
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>        
                 
-         <action name="ConsultaCPP" class="action.Inicio_Action" method="ConsultaCPP">
+        <action name="ConsultaCPP" class="action.Inicio_Action" method="ConsultaCPP">
             <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
             <result name="ERROR">/pages/RegistraPadre.jsp</result>
             <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action> 
         
-         <action name="muestraFormCobe" class="action.Inicio_Action" method="muestraFormCobe">
+        <action name="muestraFormCobe" class="action.Inicio_Action" method="muestraFormCobe">
             <result name="SUCCESS">/pages/RegistraPadre.jsp</result>			              
             <result name="ERROR">/pages/RegistraPadre.jsp</result>
             <result name="input">/pages/RegistraPadre.jsp</result>
@@ -102,13 +109,13 @@
             <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>   
-         <action name="GuardaDatosTutor" class="action.Inicio_Action" method="GuardaTutorCobe">
+        <action name="GuardaDatosTutor" class="action.Inicio_Action" method="GuardaTutorCobe">
             <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
             <result name="ERROR">/pages/RegistraPadre.jsp</result>
             <result name="input">/pages/RegistraPadre.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>  
-         <action name="muestraFormIngreso" class="action.Inicio_Action" method="muestraFormIngreso">
+        <action name="muestraFormIngreso" class="action.Inicio_Action" method="muestraFormIngreso">
             <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
             <result name="input">/pages/RegistroSocioEconomico.jsp</result>
