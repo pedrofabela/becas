@@ -174,18 +174,19 @@ function myFunction2(x){
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item ">
-            <a class="nav-link" href="Javascript:Regreso('Inicio')">
+         <li class="nav-item ">
+            <a class="nav-link" href="Javascript:Regreso2('Inicio')">
               <i class="material-icons">dashboard</i>
-              <p> Dashboard </p>
+              <p> Inicio </p>
             </a>
-          </li>        
+          </li>  
+            <!-- 
           <li class="nav-item ">
             <a class="nav-link" href="examples/calendar.html">
               <i class="material-icons">date_range</i>
               <p> Calendar </p>
             </a>
-          </li>
+          </li>-->
         </ul>
       </div>   
     </div>
@@ -354,16 +355,17 @@ function myFunction2(x){
 
                       <div class="card-body">
                           <div id="accordion" role="tablist">
+                              
                               <div class="card-collapse">
                                   <div class="card-header" role="tab" id="headingOne">
                                       <h5 class="mb-0">
-                                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapsed">
+                                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
                                               Población Objetivo
                                               <i class="material-icons">keyboard_arrow_down</i>
                                           </a>
                                       </h5>
                                   </div>
-                                  <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                  <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
                                       <div class="card-body">
                                           <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
 
@@ -374,16 +376,19 @@ function myFunction2(x){
                                       </div>
                                   </div>
                               </div>
+                              
+                              
+                              
                               <div class="card-collapse">
                                   <div class="card-header" role="tab" id="headingTwo">
                                       <h5 class="mb-0">
-                                          <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                          <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                               Bases
                                               <i class="material-icons">keyboard_arrow_down</i>
                                           </a>
                                       </h5>
                                   </div>
-                                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                                  <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
                                       <div class="card-body">
                                           <div class="list-group">
 
@@ -467,14 +472,14 @@ function myFunction2(x){
       </footer>
                               
                               
-       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-        <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" ></s:textfield>  
-        <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" ></s:textfield>  
-         <s:textfield  name="objRenapo.NIVEL" id="NIVEL" ></s:textfield>  
-       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>   
-        <s:textfield  name="objdatos.FECHA_INICIO" id="FECHA_INICIO" ></s:textfield>  
-         <s:textfield  name="objdatos.FECHA_TERMINO" id="FECHA_TERMINO" ></s:textfield>  
-          <s:textfield  name="objRenapo.EN_PERIODO" id="EN_PERIODO" ></s:textfield>  
+                              <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" style='visibility:hidden' ></s:textfield>  
+        <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" style='visibility:hidden' ></s:textfield>  
+        <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" style='visibility:hidden' ></s:textfield>  
+         <s:textfield  name="objRenapo.NIVEL" id="NIVEL" style='visibility:hidden' ></s:textfield>  
+       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" style='visibility:hidden' ></s:textfield>   
+        <s:textfield  name="objdatos.FECHA_INICIO" id="FECHA_INICIO" style='visibility:hidden' ></s:textfield>  
+         <s:textfield  name="objdatos.FECHA_TERMINO" id="FECHA_TERMINO" style='visibility:hidden' ></s:textfield>  
+          <s:textfield  name="objRenapo.EN_PERIODO" id="EN_PERIODO" style='visibility:hidden'></s:textfield>  
          
      </s:form>                       
                               
@@ -863,7 +868,7 @@ function myFunction2(x){
                             
                             else
                             {
-                                alert("hoy no l etoca a tu letra el registro  de solicitud de beca");
+                                alert("La letra de tu Apellido no esta habilitada para el registro de la Beca en esta fecha");
                             }
                                 
                 
@@ -889,7 +894,7 @@ function myFunction2(x){
                            
                            else{
                                
-                              alert("Hoy no le toca a tu nivel educativo, el registro de la Beca"); 
+                              alert("Nivel educativo no habilitado en esta fecha, favor de verificar el periodo"); 
                            }
                                 
                 
@@ -916,21 +921,21 @@ function myFunction2(x){
                                
                                if(pasa=="NO" && nivel==nivelcct ){
                                    
-                                  alert("Hoy no le toca a tu letra el registro de la beca");  
+                                  alert("La letra de tu Apellido no esta habilitada para el registro de la Beca en esta fecha");  
                                    
                                }
                                
                              
                               if(nivel!=nivelcct && pasa=="SI"){
                                    
-                                  alert("Hoy no le toca a tu nivel educativo el registro de la beca");  
+                                  alert("Nivel educativo no habilitado en esta fecha, favor de verificar el periodo");  
                                    
                                }
                                
                                
                                 if(pasa=="NO" && nivel!=nivelcct){
                                    
-                                  alert("Hoy no le toca a tu letra y nivel educativo el registro de la beca");  
+                                  alert("Nivel Educativo y primera letra de primer apellido no habilitada para el registro de la beca en este periodo");  
                                    
                                }
                              
@@ -972,7 +977,7 @@ function myFunction2(x){
                          if(en_periodo=="NO"){
                              
                       
-                            alert("Te encuentras fuera de las fechas estipuladas de registro para la beca");
+                            alert("Te encuentras fuera de las fechas estipuladas de registro para la Beca");
             
                       
                              
@@ -984,7 +989,7 @@ function myFunction2(x){
                                 
                                 
                                   if(acuerdo==false && curp.length==18){
-                                  alert("Debe Aceptar las bases y requisitos de la beca");
+                                  alert("Debes Aceptar las bases y requisitos de la beca");
                             }
                                 if(acuerdo==true && curp.length!=18){
                                   alert("Formato de curp no valido, favor de intentar de nuevo");

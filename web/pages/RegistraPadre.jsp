@@ -63,9 +63,9 @@
         </div>
         <ul class="nav">
           <li class="nav-item ">
-            <a class="nav-link" href="Javascript:Regreso('Inicio')">
+            <a class="nav-link" href="Javascript:Regreso2('Inicio')">
               <i class="material-icons">dashboard</i>
-              <p> Dashboard </p>
+              <p> Inicio </p>
             </a>
           </li>        
         </ul>
@@ -135,7 +135,7 @@
                                             <s:fielderror fieldName="AMA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">
-                                          <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true"/>
+                                          <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true" style='visibility:hidden'/>
                                       </div>      
 
 
@@ -446,10 +446,10 @@
           </div>
         </div>
          
-           <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>  
-   <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" ></s:textfield>  
-   <s:textfield  name="objDatosP.ID_MUNICIPIO_TU" id="objDatosP.ID_MUNICIPIO_TU" ></s:textfield>  
-   <s:textfield  name="objDatosC.VALIDACHECK" id="vaco" ></s:textfield>  
+           <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" style='visibility:hidden' ></s:textfield>  
+   <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" style='visibility:hidden' ></s:textfield>  
+   <s:textfield  name="objDatosP.ID_MUNICIPIO_TU" id="objDatosP.ID_MUNICIPIO_TU" style='visibility:hidden' ></s:textfield>  
+   <s:textfield  name="objDatosC.VALIDACHECK" id="vaco" style='visibility:hidden' ></s:textfield>  
 
           
       </footer>
@@ -779,7 +779,7 @@
   
    <script type="text/javascript">
        
-        function Regreso(accion) {
+        function Regreso2(accion) {
                
                     document.altaPetiForm.action = accion;
                     document.altaPetiForm.target = "_self";

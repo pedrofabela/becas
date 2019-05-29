@@ -100,8 +100,8 @@ public class consultaRenapo {
                 + "    }\n"
                 + "}";
 
-        System.out.println(POST_PARAMS);
-        URL obj = new URL("https://bus.edomex.gob.mx/bussrv/sei/dkb_frRENAPO1.php/consulta");
+      System.out.println(POST_PARAMS);
+        URL obj = new URL("https://desabus.edomex.gob.mx/bussrv/sei/dkb_frRENAPO1.php/consulta");
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod("POST");
         postConnection.setRequestProperty("Authorization", "Basic Y21zcmVnOiM2RyV1am8j");

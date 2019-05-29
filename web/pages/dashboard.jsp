@@ -64,17 +64,17 @@
         </div>
         <ul class="nav">
           <li class="nav-item active ">
-            <a class="nav-link" href="pages/dashboard.jsp">
+            <a class="nav-link" href="Javascript:Regreso2('Inicio')">
               <i class="material-icons">dashboard</i>
-              <p> Dashboard </p>
+              <p> Inicio </p>
             </a>
           </li>
-          <li class="nav-item ">
+        <!--  <li class="nav-item ">
             <a class="nav-link" href="pages/calendar.jsp">
               <i class="material-icons">date_range</i>
               <p> Calendar </p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -551,9 +551,21 @@
                 
 
             }
+            
+             function Regreso2(accion) {
+               
+                
+               
+                    document.altaPetiForm.action = accion;
+                    document.altaPetiForm.target = "_self";
+                    document.altaPetiForm.submit();
+   
+
+            }
+            
   </script>  
-       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" ></s:textfield>   
-       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" ></s:textfield>    
+       <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" style='visibility:hidden' ></s:textfield>   
+       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION"  style='visibility:hidden' ></s:textfield>    
          
     </s:form>           
 </body>
