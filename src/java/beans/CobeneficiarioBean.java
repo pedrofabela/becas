@@ -151,8 +151,7 @@ public class CobeneficiarioBean implements Serializable {
         this.CURP_CO = CURP_CO;
     }
 
-    
-
+   
     
 
 }

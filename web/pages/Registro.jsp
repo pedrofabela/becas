@@ -191,6 +191,8 @@
                                           <label for="examplePass" class="bmd-label-floating">Codigo Postal</label>
                                           <s:textfield cssClass="form-control" name="objAspirante.CP" id="CP" onchange="Javascript:ConsultaCP('ConsultaCP')" maxLength="5"/>
                                           <s:fielderror fieldName="NoCP" cssClass="alert alert-danger"></s:fielderror>
+                                          <s:fielderror fieldName="CP" cssClass="alert alert-danger"></s:fielderror>
+
                                           
                                       </div>
                                           <s:if test="banColonia">   
@@ -210,13 +212,13 @@
                                               </div>    
                                           </s:if>  
                                        <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
-                                           <s:textfield cssClass="form-control" name="objAspirante.TELEFONO" id="objAspirante.TELEFONO"/>
+                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo Ej.(722)1234567</label>
+                                       <s:textfield cssClass="form-control" name="objAspirante.TELEFONO" id="objAspirante.TELEFONO" maxLength="12"/>
                                             <s:fielderror fieldName="TEL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
-                                           <s:textfield cssClass="form-control" name="objAspirante.CELULAR" id="objAspirante.CELULAR"/>
+                                          <label for="examplePass" class="bmd-label-floating">Teléfono Celular Ej.(044)1234567890</label>
+                                      <s:textfield cssClass="form-control" name="objAspirante.CELULAR" id="objAspirante.CELULAR" maxLength="15"/>
                                             <s:fielderror fieldName="CEL" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                        <div class="form-group col-md-4">

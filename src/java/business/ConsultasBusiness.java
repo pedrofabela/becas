@@ -137,8 +137,9 @@ public class ConsultasBusiness {
         return con.ConsultaCobe(objg);
     }
      
-    public CobeneficiarioBean ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
-        return con.ConsultaCobeXcurp(objg);
+    public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
+        List lista=this.con.ConsultaCobeXcurp(objg);
+        return lista;
     } 
     
     public List ConsultaParentesco() throws Exception {
@@ -153,6 +154,14 @@ public class ConsultasBusiness {
     public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
         return this.con.GuardaDatosCobeneficiario(objg);
     }
+    
+     public boolean ActualizaDatosTutor(TutorBean objg) throws Exception {
+        return this.con.ActualizaDatosTutor(objg);
+    }
+
+    public boolean ActualizaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
+        return this.con.ActualizaDatosCobeneficiario(objg);
+    }
 
     public List ConsultaRespuestas() throws Exception {
         List lista = this.con.ConsultaRespuestas();
@@ -161,6 +170,14 @@ public class ConsultasBusiness {
 
     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception {
         return this.con.GuardaSocioeconomico(objg);
+    }
+    
+     public IngresosBean consultaSocioEconomico(String idaspirante, String Ciclo) throws Exception {
+        return con.consultaSocioEconomico(idaspirante,Ciclo);
+    } 
+     
+      public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception {
+        return this.con.ActualizaSocioeconomico(objg);
     }
 
 }
