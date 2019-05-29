@@ -66,7 +66,7 @@
           <li class="nav-item active ">
             <a class="nav-link" href="Javascript:Regreso2('Inicio')">
               <i class="material-icons">dashboard</i>
-              <p> Inicio </p>
+              <p>Inicio</p>
             </a>
           </li>
         <!--  <li class="nav-item ">

@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -135,7 +134,7 @@
                                       <s:fielderror fieldName="AMA" cssClass="alert alert-danger"></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
-                                      <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true"style='visibility:hidden' />
+                                      <s:textfield cssClass="form-control" name="objDatosA.ID_ASPIRANTE" id="objDatosA.ID_ASPIRANTE" required="true" style='visibility:hidden' />
                                   </div>      
 
 
