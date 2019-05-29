@@ -335,13 +335,14 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return resu;
     }
 
-    public CobeneficiarioBean ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
+   public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
         String query = "";
         query = "SELECT curp_cob,nombre_cob,apaterno_cob,amaterno_cob,TO_CHAR(fecha_nac_cob,'DD/MM/YYYY') as fecha_nac_cob,entidad_nac,nacionalidad,id_parentesco,id_estado_civil,genero "
                 + " FROM " + Constantes.TablaCobeneficiario + " where ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "' AND ID_CICLO='" + objg.getID_CICLO() + "' and curp_cob='"+objg.getCURP_AUX()+"'";
         Constantes.enviaMensajeConsola(" query consulta COBE --> " + query);
-        CobeneficiarioBean resu = (CobeneficiarioBean) oraDaoFac.queryForObject(query, new CobeMapper());
-        return resu;
+        List list = null;
+        list= queryForList(query, new CobeMapper());
+        return list;
     }
 
     public List ConsultaParentesco() throws Exception {
@@ -509,9 +510,25 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
        
        
+       temporal = new ObjPrepareStatement("CURP_COB", "STRING", objg.getCURP_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NOMBRE_COB", "STRING", objg.getNOMBRE_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("APATERNO_COB", "STRING", objg.getAPATERNO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("AMATERNO_COB", "STRING", objg.getAMATERNO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("FECHA_NAC_COB", "STRING", objg.getFEC_NAC_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENTIDAD_NAC", "STRING", objg.getENTIDAD_NACIMINETO_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NACIONALIDAD", "STRING", objg.getNACIONALIDAD_RENAPO_CO().toUpperCase());
+        arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_PARENTESCO", "STRING", objg.getPARENTESCO_CO().toUpperCase());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL_CO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO_CO().toUpperCase());
         arregloCampos.add(temporal);
         
         String Condicion="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE_CO()+"' AND ID_CICLO='"+objg.getID_CICLO_CO()+"'";

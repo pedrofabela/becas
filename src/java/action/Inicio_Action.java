@@ -60,6 +60,7 @@ public class Inicio_Action extends ActionSupport {
     private List<PromedioBean> ListaPromedios = new ArrayList<PromedioBean>();
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
     private List<RespuestasBean> ListaRespuestas = new ArrayList<RespuestasBean>();
+    private List<CobeneficiarioBean> VerificaCobe= new ArrayList<CobeneficiarioBean>();
 
     private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
 
@@ -289,12 +290,12 @@ public class Inicio_Action extends ActionSupport {
             
              if (personas.getSexo().equals("H")) {
 
-                objAspirante.setGENERO_RENAPO("HOMBRE");
+                objAspirante.setGENERO_RENAPO("hombre");
             }
 
             if (personas.getSexo().equals("M")) {
 
-                objAspirante.setGENERO_RENAPO("MUJER");
+                objAspirante.setGENERO_RENAPO("mujer");
             }
 
             
@@ -928,12 +929,35 @@ public class Inicio_Action extends ActionSupport {
                 Constantes.enviaMensajeConsola("id ciclo: " + objDatosA.getID_CICLO());
                 Constantes.enviaMensajeConsola("id curp: " + objDatosA.getCURP_AUX());
 
-                objDatosC = con.ConsultaCobeXcurp(objDatosA);
+                VerificaCobe = con.ConsultaCobeXcurp(objDatosA);
 
-                Constantes.enviaMensajeConsola("salio de la consulta" + objDatosC);
+                Constantes.enviaMensajeConsola("salio de la consulta" + VerificaCobe);
 
-                if (objDatosC != null) {
+                if (VerificaCobe.size()>0) {
                     Constantes.enviaMensajeConsola("entro al if : " + objDatosC.getCURPAUX_CO());
+                    
+                    Iterator VC=VerificaCobe.iterator();
+                    
+                    CobeneficiarioBean objg;
+                    
+                    while (VC.hasNext()) {
+                        objg = (CobeneficiarioBean) VC.next();
+                        
+                        objDatosC.setCURP_CO(objg.getCURP_CO());
+                        objDatosC.setNOMBRE_RENAPO_CO(objg.getNOMBRE_RENAPO_CO());
+                        objDatosC.setAPATERNO_RENAPO_CO(objg.getAPATERNO_RENAPO_CO());
+                        objDatosC.setAMATERNO_RENAPO_CO(objg.getAMATERNO_RENAPO_CO());
+                        objDatosC.setFEC_NAC_RENAPO_CO(objg.getFEC_NAC_RENAPO_CO());
+                        objDatosC.setGENERO_RENAPO_CO(objg.getGENERO_RENAPO_CO());
+                        objDatosC.setNACIONALIDAD_RENAPO_CO(objg.getNACIONALIDAD_RENAPO_CO());
+                        objDatosC.setENTIDAD_NACIMINETO_RENAPO_CO(objg.getENTIDAD_NACIMINETO_RENAPO_CO());
+                        objDatosC.setID_ESTADO_CIVIL_CO(objg.getID_ESTADO_CIVIL_CO());
+                        objDatosC.setPARENTESCO_CO(objg.getPARENTESCO_CO());
+
+                        
+                    }
+                    
+                    
                     ListaParentesco = con.ConsultaParentesco();
                     ListaEstadosCivil = con.ConsultaEstadosCivil();
 
@@ -942,10 +966,13 @@ public class Inicio_Action extends ActionSupport {
 
                 } else {
 
-                    Constantes.enviaMensajeConsola("entro a buscar a renapo con curp: " + objDatosA.getCURP_AUX());
+                    Constantes.enviaMensajeConsola("entro a buscar a renapo con curp: " + objDatosC.getCURPAUX_CO());
 
                     // objDatosC.setCURPAUX_CO(objDatosA.getCURP_AUX());
-                    objRenapo = renapo.consultaRenapo(objDatosA.getCURP_AUX());
+                    objRenapo = renapo.consultaRenapo(objDatosC.getCURPAUX_CO());
+                    
+                    objDatosC.setID_ESTADO_CIVIL_CO("");
+                    objDatosC.setPARENTESCO_CO("");
 
                     Constantes.enviaMensajeConsola("regresa de renapo: " + objRenapo);
 
@@ -1639,6 +1666,16 @@ public class Inicio_Action extends ActionSupport {
                 if (objDatosE != null) {
                     
                                        
+                    Constantes.enviaMensajeConsola("esto es lo que trae archivo: "+objDatosE.getARCHIVO_INGRESO());
+                    
+                    if (objDatosE.getARCHIVO_INGRESO().length()>0) {
+                        valingreso="true";
+                        objDatosE.setVALIDACHECK("true");
+                        
+                    } else {
+                        valingreso="false";
+                        objDatosE.setVALIDACHECK("true");
+                    }
                     
                     banActualizaE=true;
                     
@@ -2001,6 +2038,16 @@ public class Inicio_Action extends ActionSupport {
     public void setListaRespuestas(List<RespuestasBean> ListaRespuestas) {
         this.ListaRespuestas = ListaRespuestas;
     }
+
+    public List<CobeneficiarioBean> getVerificaCobe() {
+        return VerificaCobe;
+    }
+
+    public void setVerificaCobe(List<CobeneficiarioBean> VerificaCobe) {
+        this.VerificaCobe = VerificaCobe;
+    }
+    
+    
 
     public BecasBean getObjdatos() {
         return objdatos;

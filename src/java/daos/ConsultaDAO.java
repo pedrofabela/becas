@@ -55,7 +55,7 @@ public interface ConsultaDAO {
 
     public CobeneficiarioBean ConsultaCobe(AcademicoBean objg) throws Exception;
 
-    public CobeneficiarioBean ConsultaCobeXcurp(AcademicoBean objg) throws Exception;
+   public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception;
 
     public boolean ActualizaDatosAcademicos(AcademicoBean objg) throws Exception;
 

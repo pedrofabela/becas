@@ -116,8 +116,9 @@ public class ConsultasBusiness {
         return con.ConsultaCobe(objg);
     }
      
-    public CobeneficiarioBean ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
-        return con.ConsultaCobeXcurp(objg);
+    public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
+        List lista=this.con.ConsultaCobeXcurp(objg);
+        return lista;
     } 
     
     public List ConsultaParentesco() throws Exception {
