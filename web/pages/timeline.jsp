@@ -166,9 +166,7 @@ function myFunction2(x){
                                 <span class="sidebar-normal"><s:property value="NOM_BECA"/> </span>
                             </a>
                         </li> 
-                            <s:hidden name = "ListaBecas[%{#stat.index}].ID_BECA" id="ID_BECA"></s:hidden>
-                            <s:hidden name = "ListaBecas[%{#stat.index}].NOM_BECA" id="NOM_BECA"></s:hidden>
-                    </s:iterator>              
+                </s:iterator>              
                 </ul>
             </div>
           </div>
@@ -298,6 +296,7 @@ function myFunction2(x){
                               
                               
                                       <s:if test="banConCurp">
+                                          <s:hidden name="banConCurp" value="%{banConCurp}"></s:hidden>
                               
                               <div class="col-md-12 text-center" style="margin-top: 25px;">
                                   <div style="margin: auto;"><h4 style="color:purple">Favor de capturar la CURP del Aspirante a la Beca</h4></div>
@@ -308,6 +307,7 @@ function myFunction2(x){
                                   <label for="examplePass" class="bmd-label-floating">CURP</label>
                                     <s:textfield name="objRenapo.CONSULTA_CURP" id="CONSULTA_CURP"  cssClass="form-control " oninput="validarInput(this)"></s:textfield>
                                      <s:fielderror fieldName="ERRORCURP" id="ERRORCURP" cssClass="alert alert-danger"></s:fielderror>
+                                      <s:fielderror fieldName="AlumYaRegistrado" id="ERRORCURP" cssClass="alert alert-danger"></s:fielderror>
                               </div>
                               
                               <div class="col-md-12" style="margin-top: 15px;" >
@@ -367,11 +367,12 @@ function myFunction2(x){
                                   </div>
                                   <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
                                       <div class="card-body">
-                                          <s:iterator value="ListaBecas" id="ListaBecas" status="stat">                                 
-
-                                              <s:property value="POB_OBJ"/>  
-                                              <s:hidden name = "ListaBecas[%{#stat.index}].POB_OBJ" id="POB_OBJ"></s:hidden>
-
+                                          <s:iterator value="ListaBecas" id="ListaBecas" status="stat">    
+                                              
+                                              <s:if test="ID_BECA==objdatos.ID_BECA_AUX">
+                                                  <s:property value="POB_OBJ"/>  
+                                                  <s:hidden name = "ListaBecas[%{#stat.index}].POB_OBJ" id="POB_OBJ"></s:hidden>
+                                              </s:if>
                                           </s:iterator>   
                                       </div>
                                   </div>
@@ -473,13 +474,13 @@ function myFunction2(x){
                               
                               
                               <s:textfield  name="objdatos.ID_BECA_AUX" id="ID" style='visibility:hidden' ></s:textfield>  
-        <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" style='visibility:hidden' ></s:textfield>  
-        <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" style='visibility:hidden' ></s:textfield>  
-         <s:textfield  name="objRenapo.NIVEL" id="NIVEL" style='visibility:hidden' ></s:textfield>  
-       <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" style='visibility:hidden' ></s:textfield>   
-        <s:textfield  name="objdatos.FECHA_INICIO" id="FECHA_INICIO" style='visibility:hidden' ></s:textfield>  
-         <s:textfield  name="objdatos.FECHA_TERMINO" id="FECHA_TERMINO" style='visibility:hidden' ></s:textfield>  
-          <s:textfield  name="objRenapo.EN_PERIODO" id="EN_PERIODO" style='visibility:hidden'></s:textfield>  
+                              <s:textfield  name="objRenapo.ID_CICLO" id="ID_CICLO" style='visibility:hidden' ></s:textfield>  
+                              <s:textfield  name="objRenapo.INTERVALO" id="INTERVALO" style='visibility:hidden' ></s:textfield>  
+                              <s:textfield  name="objRenapo.NIVEL" id="NIVEL" style='visibility:hidden' ></s:textfield>  
+                              <s:textfield  name="objdatos.RESTRICCION_ESC" id="RESTRICCION" style='visibility:hidden' ></s:textfield>   
+                              <s:textfield  name="objdatos.FECHA_INICIO" id="FECHA_INICIO" style='visibility:hidden' ></s:textfield>  
+                              <s:textfield  name="objdatos.FECHA_TERMINO" id="FECHA_TERMINO" style='visibility:hidden' ></s:textfield>  
+                              <s:textfield  name="objRenapo.EN_PERIODO" id="EN_PERIODO" style='visibility:hidden'></s:textfield>  
          
      </s:form>                       
                               
@@ -921,7 +922,7 @@ function myFunction2(x){
                                
                                if(pasa=="NO" && nivel==nivelcct ){
                                    
-                                  alert("La letra de tu Apellido no esta habilitada para el registro de la Beca en esta fecha");  
+                                  alert("Verificar el calendario de registro en la convocatoria correspondiente, el día de hoy NO ESTA DENTRO DE LAS FECHAS ESTABLECIDA");  
                                    
                                }
                                

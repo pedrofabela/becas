@@ -89,8 +89,7 @@
 
      
       <div class="content">
-        <div class="container-fluid">
-          
+        <div class="container-fluid">   
           <div class="row">
                  
               <div class="col-md-12" style="margin-bottom: 30px;">
@@ -98,9 +97,16 @@
                   <img src="assets/img/banner3.jpg" style="width: 100%;"></img>
 
               </div>
+              
+               <div class="progress col-md-11" style="height:2rem">
+                      <div class="progress-bar  bg-success " style="width:25%">REGISTRO DE DATOS GENERALES DEL ASPIRANTE</div>
+                      <div class="progress-bar  bg-info " style="width:25%">REGISTRO DE DATOS DEL PADRE O TUTOR</div>
+                       <div class="progress-bar bg-danger " style="width:25%">REGISTRO DE DATOS SOCIOECONOMICOS (3 DE 4)</div>
+
+             </div>
            
                   <div class="card ">
-                      <div class="card-header card-header-rose card-header-icon">
+                      <div class="card-header card-header-danger card-header-icon">
                           <div class="card-icon">
                               <i class="material-icons">account_box</i>
                           </div>
@@ -112,7 +118,7 @@
                               <div class="row">
                                   <div class="form-group col-md-4">
                                       <label for="exampleEmail" class="bmd-label-floating">CURP</label>
-                                      <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
+                                      <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objAspirante.CONSULTA_CURP" readonly="true"/>
                                       <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
                                       </div>
 
@@ -144,7 +150,7 @@
                       </div> 
                                       <br></br>                
                                       <div class="dropdown-divider"></div>
-                                      <div class="card-header card-header-rose card-header-icon">
+                                      <div class="card-header card-header-danger card-header-icon">
                                           <div class="card-icon">
                                               <i class="material-icons">attach_money</i>
                                           </div>
@@ -174,7 +180,19 @@
                                                       <s:textfield cssClass="form-control" name="objDatosE.MONTO" id="objDatosE.MONTO" />
                                                       <s:fielderror fieldName="MONTO" cssClass="alert alert-danger"></s:fielderror>
                                                       </div>
-
+                                                      <s:if  test="BanMuestraArchivo">
+                                                          <s:hidden name="BanMuestraArchivo>" value="%{BanMuestraArchivo}"></s:hidden>
+                                                      <div class="col-md-12 col-sm-12">
+                                                              <div class="alert alert-info alert-with-icon" data-notify="container">
+                                                                  <i class="material-icons" data-notify="icon">notifications</i>
+                                                                  <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                                                                  <span data-notify="message">
+                                                                      ARCHIVO REGISTRADO
+                                                                      <a  href="https://becas.edugem.gob.mx/documentos/becas/<s:property  value="objDatosE.ARCHIVO_INGRESO"/>" target="black"/><s:property  value="objDatosE.ARCHIVO_INGRESO"/>
+                                                              </span>
+                                                          </div>                                                                                                           
+                                                      </div>  
+                                                      </s:if>        
                                                       <div class="form-group col-md-12">
 
                                                           <div class="row">
@@ -193,56 +211,55 @@
                                               </div>               
                                           </div>                         
                                       </div>    
-                                                          <s:if test="banFormIngresos">
-                                                              <s:hidden name="banFormIngresos" value="%{banFormIngresos}"></s:hidden>
+                                                                      <s:if test="banFormIngresos">
+                                                                          <s:hidden name="banFormIngresos" value="%{banFormIngresos}"></s:hidden>
 
-                                                                  <div class="card-header card-header-rose card-header-icon">
-                                                                      <div class="card-icon">
-                                                                          <i class="material-icons">archive</i>
-                                                                      </div>
-                                                                      <h4 class="card-title">CARGA DE COMPROBANTE DE INGRESOS</h4>
-                                                                  </div>
-                                                                  <div class="card-body">  
-                                                                      <div class="col-sm-12">                              
-                                                                          <div class="row">
+                                                                              <div class="card-header card-header-danger card-header-icon">
+                                                                                  <div class="card-icon">
+                                                                                      <i class="material-icons">archive</i>
+                                                                                  </div>
+                                                                                  <h4 class="card-title">CARGA DE COMPROBANTE DE INGRESOS</h4>
+                                                                              </div>
+                                                                              <div class="card-body">  
+                                                                                  <div class="col-sm-12">                              
+                                                                                      <div class="row">
 
 
-                                                                              <div class="col-md-4 col-sm-4">
+                                                                                          <div class="col-md-4 col-sm-4">
 
-                                                                                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                                                                      <div class="fileinput-new thumbnail">
-                                                                                          <div class="card-icon col-md-4">
-                                                                                              <i class="material-icons">cloud_upload</i>
+                                                                                              <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                                                                  <div class="fileinput-new thumbnail">
+                                                                                                      <div class="card-icon col-md-4">
+                                                                                                          <i class="material-icons">cloud_upload</i>
+                                                                                                      </div>
+                                                                                                  </div>
+                                                                                                  <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                                                                  <div>
+                                                                                                      <span class="btn btn-rose btn-round btn-file">
+                                                                                                          <span class="fileinput-new">Seleccionar Archivo</span>
+                                                                                                          <span class="fileinput-exists">Cambiar</span>
+                                                                                                          <input type="file" name="archi" id="archi" />
+                                                                                                      </span>
+                                                                                                      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Eliminar</a>
+                                                                                                  <s:fielderror fieldName="archi" cssClass="help-block" cssStyle="color:red"/> 
+                                                                                              </div>
                                                                                           </div>
                                                                                       </div>
-                                                                                      <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                                                                      <div>
-                                                                                          <span class="btn btn-rose btn-round btn-file">
-                                                                                              <span class="fileinput-new">Seleccionar Archivo</span>
-                                                                                              <span class="fileinput-exists">Cambiar</span>
-                                                                                              <input type="file" name="archi" id="archi" />
-                                                                                          </span>
-                                                                                          <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Eliminar</a>
-                                                                                           <s:fielderror fieldName="archi" cssClass="help-block" cssStyle="color:red"/> 
-                                                                                      </div>
-                                                                                  </div>
-                                                                              </div>
 
 
-                                                                      </s:if> 
-                                                                  </div>               
-                                                              </div>                         
-                                                          </div>    
+                                                                                  </div>               
+                                                                              </div>                         
+                                                                          </div>    
 
-                                              
+                                                                      </s:if>                   
                       <div class="card-footer ">
                            <s:if test="banGuardaE">
                            <s:hidden name="banGuardaE" value="%{banGuardaE}"></s:hidden>
-                          <a href="Javascript:Consulta('GuardaSocioEconomico')" class="btn btn-round btn-primary">Guardar Datos Socioeconomicos</a>
+                          <a href="Javascript:Consulta('GuardaSocioEconomico')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Guardar Datos Socioeconomicos</a>
                        </s:if> 
                        <s:if test="banActualizaE">
                             <s:hidden name="banActualizaE" value="%{banActualizaE}"></s:hidden>
-                           <a href="Javascript:Consulta('ActualizaSocioEconomico')" class="btn btn-round btn-primary">Actualiza Datos Socioeconomicos</a>
+                           <a href="Javascript:Consulta('ActualizaSocioEconomico')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Actualiza Datos Socioeconomicos</a>
                        </s:if>   
                          
                       </div>
@@ -292,6 +309,7 @@
    <s:textfield  name="objAspirante.ID_CICLO" id="objAspirante.ID_CICLO" style='visibility:hidden' ></s:textfield>  
    <s:textfield  name="objDatosP.ID_MUNICIPIO_TU" id="objDatosP.ID_MUNICIPIO_TU" style='visibility:hidden' ></s:textfield>  
    <s:textfield  name="objDatosE.VALIDACHECK" id="vaingreso" style='visibility:hidden' ></s:textfield>  
+   <s:textfield  name="objDatosE.ARCHIVO_INGRESO" id="objDatosE.ARCHIVO_INGRESO"  style='visibility:hidden'></s:textfield>  
 
           
       </footer>
@@ -682,6 +700,28 @@
                 
 
             }
+            
+            
+             window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                                    var pos = window.name || 0;
+                                    window.scrollTo(0, pos);
+
+                                    window.location.hash = "no-back-button";
+                                    window.location.hash = "Again-No-back-button" //chrome
+                                    window.onhashchange = function () {
+                                        window.location.hash = "no-back-button";
+                                    }
+
+                                }
+
+                                window.onunload = function () {
+                                    window.name = self.pageYOffset
+                                            || (document.documentElement.scrollTop + document.body.scrollTop);
+
+
+                                }
+            
+            
   </script>    
        
      </s:form>

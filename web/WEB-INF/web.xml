@@ -20,16 +20,16 @@
 	<!--  para generar pdf -->
 
 	<servlet>
-		<description></description>
-		<display-name>servletGeneraPdf</display-name>
-		<servlet-name>servletGeneraPdf</servlet-name>
-		<servlet-class>action.servletGeneraPdf</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>servletGeneraPdf</servlet-name>
-		<url-pattern>/ejecutaServlet.action</url-pattern>
-	</servlet-mapping>
+        <description></description>
+        <display-name>GeneraPdf</display-name>
+        <servlet-name>GeneraPdf</servlet-name>
+        <servlet-class>action.GeneraPdf</servlet-class>
+    </servlet>
+	
+    <servlet-mapping>
+        <servlet-name>GeneraPdf</servlet-name>
+        <url-pattern>/GeneraPdf</url-pattern>
+    </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>/pages/login.jsp</welcome-file>

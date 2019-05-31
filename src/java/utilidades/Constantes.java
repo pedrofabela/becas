@@ -25,17 +25,18 @@ public class Constantes implements Serializable {
          public static final String TablaTutor="TBL_PADRETUTOR";
          public static final String TablaCobeneficiario="TBL_COBENEFICIARIO";
          public static final String TablaSocioEconomico="TBL_SOCIOECONOMICO";
+         public static final String TablaFolio="TBL_FOLIOS_BECAS";
 
 	 
 		 //**************DESARROLLO**********************************************************
 	
 		public static final boolean esDesarrollo = true;
 		public static final String rutaProyectos = "http://172.20.2.110:8080/";	
-		public static final String rutareportesjasper = "C:\\reportes/JasperSoft/permanecerEstudiando/";		                                                  
+		public static final String rutareportesjasper = "C:/Soft Stif/JASPERS/becasnuevas/";		                                                  
 		public static final String rutaArch = "C:/ARCHIVOS/becas/";  //cambair cuando els ervidor este activo
 		public static final String rutaEstilos = "http://172.20.2.110:8080/estilosUDAI/" ;
 		public static final String rutaManuales = "C:/manuales/permanecerEstudiando.pdf";
-		public static final String rutaImages ="C:\\reportes/JasperSoft/logos/";		
+		public static final String rutaImages ="C:/Users/gioca/Desktop/imagenes Tablero/";		
 		//*/
 		
 	 

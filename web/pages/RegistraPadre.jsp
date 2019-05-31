@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -99,9 +99,15 @@
                   <img src="assets/img/banner3.jpg" style="width: 100%;"></img>
 
               </div>
+              
+               <div class="progress col-md-11" style="height:2rem">
+                      <div class="progress-bar  bg-success " style="width:25%">REGISTRO DE DATOS GENERALES DEL ASPIRANTE</div>
+                      <div class="progress-bar  bg-info " style="width:25%">REGISTRO DE DATOS DEL PADRE O TUTOR(2 DE 4)</div>
+
+             </div>
            
                   <div class="card ">
-                      <div class="card-header card-header-rose card-header-icon">
+                      <div class="card-header card-header-info card-header-icon">
                           <div class="card-icon">
                               <i class="material-icons">account_box</i>
                           </div>
@@ -113,7 +119,7 @@
                                   <div class="row">
                                        <div class="form-group col-md-4">
                                           <label for="exampleEmail" class="bmd-label-floating">CURP</label>
-                                          <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objRenapo.CONSULTA_CURP" readonly="true"/>
+                                          <s:textfield  cssClass="form-control " name="objAspirante.CONSULTA_CURP" id="objAspirante.CONSULTA_CURP" readonly="true"/>
                                           <s:fielderror fieldName="CURP" id="CURP" ></s:fielderror>
                                       </div>
 
@@ -144,7 +150,7 @@
                               </div>                         
                       </div>  
                       <div class="dropdown-divider"></div>
-                       <div class="card-header card-header-rose card-header-icon">
+                       <div class="card-header card-header-info card-header-icon">
                           <div class="card-icon">
                               <i class="material-icons">local_library</i>
                           </div>
@@ -271,13 +277,13 @@
                                       </s:if>  
 
                                       <div class="form-group col-md-4">
-                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo</label>
-                                          <s:textfield cssClass="form-control" name="objDatosP.TELEFONO_TU" id="objDatosP.TELEFONO_TU" />
+                                          <label for="examplePass" class="bmd-label-floating">Teléfono Fijo Ej.(722)1234567</label>
+                                      <s:textfield cssClass="form-control" name="objDatosP.TELEFONO_TU" id="objDatosP.TELEFONO_TU" maxLength="12"/>
                                           <s:fielderror fieldName="TELT" cssClass="alert alert-danger"></s:fielderror>
                                           </div>
                                           <div class="form-group col-md-4">
-                                              <label for="examplePass" class="bmd-label-floating">Teléfono Celular</label>
-                                          <s:textfield cssClass="form-control" name="objDatosP.CELULAR_TU" id="objDatosP.CELULAR_TU" />
+                                              <label for="examplePass" class="bmd-label-floating">Teléfono Celular Ej.(044)1234567890</label>
+                                          <s:textfield cssClass="form-control" name="objDatosP.CELULAR_TU" id="objDatosP.CELULAR_TU" maxLength="15"/>
                                           <s:fielderror fieldName="CELT" cssClass="alert alert-danger"></s:fielderror>
                                           </div>
                                           <div class="form-group col-md-4">
@@ -308,7 +314,7 @@
                           <s:if test="banFormCobe">
                               <s:hidden name="banFormCobe" value="%{banFormCobe}"></s:hidden>
                                   <div class="dropdown-divider"></div>
-                                  <div class="card-header card-header-rose card-header-icon">
+                                  <div class="card-header card-header-info card-header-icon">
                                       <div class="card-icon">
                                           <i class="material-icons">supervisor_account</i>
                                       </div>

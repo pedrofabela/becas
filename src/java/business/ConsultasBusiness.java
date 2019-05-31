@@ -5,6 +5,7 @@ import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.FolioBean;
 import beans.IngresosBean;
 import beans.TutorBean;
 import beans.renapoBean;
@@ -179,5 +180,32 @@ public class ConsultasBusiness {
       public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception {
         return this.con.ActualizaSocioeconomico(objg);
     }
+      
+      public AcademicoBean ObtenDatosAcademicosAspirante(String idaspirante, String Ciclo) throws Exception {
+        return con.ObtenDatosAcademicosAspirante(idaspirante,Ciclo);
+    } 
+      
+     public int consultaSecuencia(String secuencia) throws Exception{
+		int numreg=this.con.consultaSecuencia(secuencia);
+		return numreg;
+	}
+     
+      public boolean GuardaFolio(FolioBean objg) throws Exception {
+        return this.con.GuardaFolio(objg);
+    }
+
+       public String verificaFolio(String idaspirante,String idbeca,String idciclo) throws Exception {
+        String id = this.con.verificaFolio(idaspirante,idbeca,idciclo);
+        return id;
+    }
+       
+         public List VerificaCurp(String curp) throws Exception {
+        List lista = this.con.VerificaCurp(curp);
+        return lista;
+    }
+
+
+
+  
 
 }

@@ -9,6 +9,7 @@ import beans.AspiranteBean;
 import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
+import beans.FolioBean;
 import beans.IngresosBean;
 import beans.TutorBean;
 import beans.renapoBean;
@@ -17,10 +18,14 @@ import java.util.List;
 public interface ConsultaDAO {
 
     public List ConsultaBecas() throws Exception;
-    public List ConsultaFechasBeca(BecasBean obj,  renapoBean ren) throws Exception;
-    public List ConsultaAspirante(BecasBean obj,  renapoBean ren) throws Exception;
-    public List ConsultaDatosAca(AspiranteBean obj,  AcademicoBean acad) throws Exception;
-    public List ConsultaFechasBecaTodos(BecasBean obj,  renapoBean ren) throws Exception;
+
+    public List ConsultaFechasBeca(BecasBean obj, renapoBean ren) throws Exception;
+
+    public List ConsultaAspirante(BecasBean obj, renapoBean ren) throws Exception;
+
+    public List ConsultaDatosAca(AspiranteBean obj, AcademicoBean acad) throws Exception;
+
+    public List ConsultaFechasBecaTodos(BecasBean obj, renapoBean ren) throws Exception;
 
     public List ConsultaReq(BecasBean obj) throws Exception;
 
@@ -31,7 +36,8 @@ public interface ConsultaDAO {
     public String ConsultaCiclo(BecasBean obj) throws Exception;
 
     public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception;
-      public String ConsultaIntervaloSinNivel(BecasBean obj, renapoBean ren) throws Exception;
+
+    public String ConsultaIntervaloSinNivel(BecasBean obj, renapoBean ren) throws Exception;
 
     public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception;
 
@@ -59,7 +65,7 @@ public interface ConsultaDAO {
 
     public CobeneficiarioBean ConsultaCobe(AcademicoBean objg) throws Exception;
 
-   public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception;
+    public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception;
 
     public boolean ActualizaDatosAcademicos(AcademicoBean objg) throws Exception;
 
@@ -68,17 +74,27 @@ public interface ConsultaDAO {
     public boolean GuardaDatosTutor(TutorBean objg) throws Exception;
 
     public boolean GuardaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
-    
-     public boolean ActualizaDatosTutor(TutorBean objg) throws Exception;
+
+    public boolean ActualizaDatosTutor(TutorBean objg) throws Exception;
 
     public boolean ActualizaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception;
 
     public List ConsultaRespuestas() throws Exception;
 
     public boolean GuardaSocioeconomico(IngresosBean objg) throws Exception;
+
+    public IngresosBean consultaSocioEconomico(String idaspirante, String Ciclo) throws Exception;
+
+    public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception;
     
-     public IngresosBean consultaSocioEconomico(String idaspirante, String Ciclo) throws Exception;
+    public AcademicoBean ObtenDatosAcademicosAspirante(String idaspirante, String Ciclo) throws Exception;
+    
+    public int consultaSecuencia(String secuencia) throws Exception;
      
-      public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception;
+    public boolean GuardaFolio(FolioBean objg) throws Exception;
+     
+    public String verificaFolio(String idaspirante,String idbeca,String idciclo) throws Exception ;
+    
+    public List VerificaCurp(String curp) throws Exception;
 
 }

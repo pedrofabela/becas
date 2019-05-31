@@ -6,6 +6,7 @@ import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.ColoniasBean;
 import beans.EstadoCivilBean;
+import beans.FolioBean;
 import beans.GradoBean;
 import beans.IngresosBean;
 import beans.ParentezcoBean;
@@ -13,6 +14,7 @@ import beans.PromedioBean;
 import beans.RequisitosBean;
 import beans.RespuestasBean;
 import beans.TutorBean;
+import beans.ValidaCurpBean;
 
 import beans.moduloAuxBean;
 import beans.moduloBean;
@@ -26,14 +28,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 import utilidades.Constantes;
+
 /*
 import mx.gob.edomex.dgsei.ws.ConsultaRenapoPorCurp;
 import mx.gob.edomex.dgsei.ws.ConsultaDatosRenapo;
 import mx.gob.edomex.dgsei.ws.PersonasDTO;*/
-
 public class Inicio_Action extends ActionSupport {
 
     //INSTANCIA A LOS BEANS//
@@ -44,6 +48,8 @@ public class Inicio_Action extends ActionSupport {
     TutorBean objDatosP = new TutorBean();
     CobeneficiarioBean objDatosC = new CobeneficiarioBean();
     IngresosBean objDatosE = new IngresosBean();
+    FolioBean objFolio = new FolioBean();
+    ValidaCurpBean objvalidaC= new ValidaCurpBean();
 
     //************************************
     //VARIABLES REQUERIDAS//
@@ -61,10 +67,10 @@ public class Inicio_Action extends ActionSupport {
     private List<ParentezcoBean> ListaParentesco = new ArrayList<ParentezcoBean>();
     private List<RespuestasBean> ListaRespuestas = new ArrayList<RespuestasBean>();
     private List<AspiranteBean> ListaActualizaAspirante = new ArrayList<AspiranteBean>();
-     private List<AcademicoBean> ListaDatosAcad = new ArrayList<AcademicoBean>();
-    private List<CobeneficiarioBean> VerificaCobe =new ArrayList<CobeneficiarioBean>();
-     private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
-     
+    private List<AcademicoBean> ListaDatosAcad = new ArrayList<AcademicoBean>();
+    private List<CobeneficiarioBean> VerificaCobe = new ArrayList<CobeneficiarioBean>();
+    private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
+    private List<ValidaCurpBean> validacurp = new ArrayList<ValidaCurpBean>();
 
     private boolean banColonia = false;
     private boolean banColoniaP = false;
@@ -81,21 +87,23 @@ public class Inicio_Action extends ActionSupport {
     private boolean banGuarda = false;
     private boolean banActualizaP = false;
     private boolean banGuardaP = false;
-    private boolean banGuardaE=false;
-    private boolean banActualizaE=false;
+    private boolean banGuardaE = false;
+    private boolean banActualizaE = false;
+    private boolean banMuestraArchivo = false;
 
     private String VALCOB;
     private String valingreso;
 
+    private String folioMax;
+    private String folioSolicitud;
+
     private File archi;
     private String archiFileName;
-    
-    
-     //instancias para web service//
+
+    //instancias para web service//
 /*    ConsultaDatosRenapo service = null;
     ConsultaRenapoPorCurp port;
     PersonasDTO personas;*/
-
     //****************************//
     // xxxxxxxxxxxxxxxxxxxxxSESIONxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     private usuarioBean usuariocons;
@@ -141,14 +149,6 @@ public class Inicio_Action extends ActionSupport {
             Constantes.enviaMensajeConsola("RESTRICCION ESCUELA " + objdatos.getRESTRICCION_ESC());
             Constantes.enviaMensajeConsola("ID DEL CICLO ESCOLAR " + objRenapo.getID_CICLO());
             ListaBecas = (ArrayList<BecasBean>) con.ConsultaBecas();
-          
-            
-            
-            
-            
-            
-            
-            
 
             if (objdatos.getRESTRICCION_ESC().equals("1")) {
 
@@ -159,45 +159,25 @@ public class Inicio_Action extends ActionSupport {
                 if (CctParticipa.length() > 0) {
 
                     Constantes.enviaMensajeConsola("LA ESCUELA SI PARTICIPA");
-                    
-                    
-                    objDatosA.setCCTAUX(CctParticipa);
-                    
-                    objDatosA = con.ConsultaCCT(objDatosA);
-                                  
-                    objRenapo.setNIVEL_AUX(objDatosA.getNIVELCCT());
-                                                                    
-                    
-                   
-                    
-                    
-                    
-                    objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
-                    
-                        objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
-                    
-                    if(objRenapo.getINTERVALO().length()==0 && objRenapo.getNIVEL().length()==0){
-                        
-                        
-                            objRenapo.setINTERVALO(con.ConsultaIntervaloSinNivel(objdatos, objRenapo));
-                            
-                        
-                    }
-                    
-                    
-                    
-                    
-                    
 
-                
-            
-            
-            
-            
-            ListaFechas= (ArrayList<BecasBean>) con.ConsultaFechasBeca(objdatos, objRenapo);
-            
-            
-            
+                    objDatosA.setCCTAUX(CctParticipa);
+
+                    objDatosA = con.ConsultaCCT(objDatosA);
+
+                    objRenapo.setNIVEL_AUX(objDatosA.getNIVELCCT());
+
+                    objRenapo.setINTERVALO(con.ConsultaIntervalo(objdatos, objRenapo));
+
+                    objRenapo.setNIVEL(con.ConsultaNivel(objdatos, objRenapo));
+
+                    if (objRenapo.getINTERVALO().length() == 0 && objRenapo.getNIVEL().length() == 0) {
+
+                        objRenapo.setINTERVALO(con.ConsultaIntervaloSinNivel(objdatos, objRenapo));
+
+                    }
+
+                    ListaFechas = (ArrayList<BecasBean>) con.ConsultaFechasBeca(objdatos, objRenapo);
+
                     Iterator LF = ListaFechas.iterator();
 
                     BecasBean obj2;
@@ -280,124 +260,122 @@ public class Inicio_Action extends ActionSupport {
             ConsultasBusiness con = new ConsultasBusiness();
             consultaRenapo renapo = new consultaRenapo();
 
-            ListaEstadosCivil = con.ConsultaEstadosCivil();
+            validacurp = con.VerificaCurp(objRenapo.getCONSULTA_CURP());
 
-            Constantes.enviaMensajeConsola("parametro aspirante " + objRenapo.getID_CICLO());
-
-            //consulta a tabla de aspirantes antes de renapo
-            
-          
+            if (validacurp.size() > 0) {
                 
-            objAspirante.setID_CICLO(objRenapo.getID_CICLO());
-            
-          
-            
-            
-              ListaActualizaAspirante= con.ConsultaAspirante(objdatos, objRenapo);
-               
-              if(ListaActualizaAspirante.size()>0){
-            Iterator LAA =ListaActualizaAspirante.iterator();
-            
-            AspiranteBean obj3;
-     
-            while (LAA.hasNext()) {
-             obj3 = (AspiranteBean) LAA.next();
-             
-               objAspirante.setCONSULTA_CURP(obj3.getCONSULTA_CURP());
-             objAspirante.setID_ASPIRANTE(obj3.getID_ASPIRANTE());
-             objAspirante.setNOMBRE_RENAPO(obj3.getNOMBRE_RENAPO());
-             objAspirante.setAMATERNO_RENAPO(obj3.getAMATERNO_RENAPO());
-             objAspirante.setAPATERNO_RENAPO(obj3.getAPATERNO_RENAPO());
-             objAspirante.setFEC_NAC_RENAPO(obj3.getFEC_NAC_RENAPO());
-             objAspirante.setNACIONALIDAD_RENAPO(obj3.getNACIONALIDAD_RENAPO());
-             objAspirante.setENTIDAD_NACIMINETO_RENAPO(obj3.getENTIDAD_NACIMINETO_RENAPO());
-             objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
-             objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
-             objAspirante.setDOMICILIO(obj3.getDOMICILIO());
-             objAspirante.setCALLE1(obj3.getCALLE1());
-             objAspirante.setCALLE2(obj3.getCALLE2());
-             objAspirante.setREFERENCIA(obj3.getREFERENCIA());
-             objAspirante.setCP(obj3.getCP());
-              ListaColonia = con.ConsultaColonia(objAspirante);
-           Iterator LC = ListaColonia.iterator();
-                ColoniasBean objg;
-
-                while (LC.hasNext()) {
-                    objg = (ColoniasBean) LC.next();
-
-                    objAspirante.setMUNICIPIO(objg.getMUNICIPIO());
-                    objAspirante.setID_MUNICIPIO(objg.getID_MUNICIPIO());
-
+                Iterator vc= validacurp.iterator();
+                
+                ValidaCurpBean objg1;
+                
+                while (vc.hasNext()) {
+                    objg1 = (ValidaCurpBean) vc.next();
+                    
+                    objvalidaC.setID_ASPIRANTE(objg1.getID_ASPIRANTE());
+                    objvalidaC.setID_BECA(objg1.getID_BECA());
+                    objvalidaC.setID_CICLO(objg1.getID_CICLO());                 
                 }
                 
-                objAspirante.setTELEFONO(obj3.getTELEFONO());
-                 objAspirante.setCELULAR(obj3.getCELULAR());
-                 objAspirante.setEMAIL(obj3.getEMAIL());
-                
-            }
-              
-              banColonia=true;
-                banActualiza=true;
-                banFormAca=true;
-                
-                
-                
-                
-                
-                ListaDatosAcad=con.ConsultaDatosAca(objAspirante, objDatosA);
-                
-                  ListaGrados = con.ConsultaGrados();
-                ListaPromedios = con.ConsultaPromedios();
-            
-                
-                Iterator LDA=ListaDatosAcad.iterator();
-                
-                
-                AcademicoBean obj4;
-                
-                  while (LDA.hasNext()) {
-                   obj4 = (AcademicoBean) LDA.next();
-                      
-                   objDatosA.setID_GRADO(obj4.getGRADO());
-                   objDatosA.setPROMEDIO(obj4.getPROMEDIO());
-                   
-                   
-                   
-                  }
-                
-                
-                
-                
-                
-                
-                
-              }
-              
-              
-              
-             
+                    Constantes.enviaMensajeConsola("id_beca jsp: "+objdatos.getID_BECA_AUX());
+                    Constantes.enviaMensajeConsola("id_ciclo jsp: "+objRenapo.getID_CICLO());
+                    
+                     Constantes.enviaMensajeConsola("id_beca con: "+objvalidaC.getID_BECA());
+                    Constantes.enviaMensajeConsola("id_ciclo con: "+objvalidaC.getID_CICLO());
+                    
+                if (objvalidaC.getID_BECA().equals(objdatos.getID_BECA_AUX()) && objvalidaC.getID_CICLO().equals(objRenapo.getID_CICLO())) {
+                    
+                    // si el alumno que intenta registrar es igual a la misma beca y al mismo ciclo y ademas pasa las restricciones de letra y nivel lo deja entrar
+                    
+                    Constantes.enviaMensajeConsola("alumno ya registrado para le mismo programa educativo");
+                    
+                     ListaEstadosCivil = con.ConsultaEstadosCivil();
+
+                Constantes.enviaMensajeConsola("curp aspirante " + objRenapo.getCONSULTA_CURP());
+
+                //consulta a tabla de aspirantes antes de renapo
+                objAspirante.setID_CICLO(objRenapo.getID_CICLO());
+
+                Constantes.enviaMensajeConsola("id_ciclo: " + objAspirante.getID_CICLO());
+
+                ListaActualizaAspirante = con.ConsultaAspirante(objdatos, objRenapo);
+
+                if (ListaActualizaAspirante.size() > 0) {
+                    Iterator LAA = ListaActualizaAspirante.iterator();
+
+                    AspiranteBean obj3;
+
+                    while (LAA.hasNext()) {
+                        obj3 = (AspiranteBean) LAA.next();
+
+                        objAspirante.setCONSULTA_CURP(obj3.getCONSULTA_CURP());
+                        objAspirante.setID_ASPIRANTE(obj3.getID_ASPIRANTE());
+                        objAspirante.setNOMBRE_RENAPO(obj3.getNOMBRE_RENAPO());
+                        objAspirante.setAMATERNO_RENAPO(obj3.getAMATERNO_RENAPO());
+                        objAspirante.setAPATERNO_RENAPO(obj3.getAPATERNO_RENAPO());
+                        objAspirante.setFEC_NAC_RENAPO(obj3.getFEC_NAC_RENAPO());
+                        objAspirante.setNACIONALIDAD_RENAPO(obj3.getNACIONALIDAD_RENAPO());
+                        objAspirante.setENTIDAD_NACIMINETO_RENAPO(obj3.getENTIDAD_NACIMINETO_RENAPO());
+                        objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
+                        objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
+                        objAspirante.setDOMICILIO(obj3.getDOMICILIO());
+                        objAspirante.setCALLE1(obj3.getCALLE1());
+                        objAspirante.setCALLE2(obj3.getCALLE2());
+                        objAspirante.setREFERENCIA(obj3.getREFERENCIA());
+                        objAspirante.setCP(obj3.getCP());
+                        ListaColonia = con.ConsultaColonia(objAspirante);
                         
-            else{
-                banGuarda=true;
-          objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP().toUpperCase());
-             
-           objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
-            objAspirante.setNOMBRE_RENAPO(objRenapo.getNOMBRE_RENAPO());
-            objAspirante.setAPATERNO_RENAPO(objRenapo.getAPATERNO_RENAPO());
-            objAspirante.setAMATERNO_RENAPO(objRenapo.AMATERNO_RENAPO);
-            objAspirante.setFEC_NAC_RENAPO(objRenapo.getFEC_NAC_RENAPO());
-            objAspirante.setNACIONALIDAD_RENAPO(objRenapo.getNACIONALIDAD_RENAPO());
-            objAspirante.setENTIDAD_NACIMINETO_RENAPO(objRenapo.getENTIDAD_NACIMINETO_RENAPO());
-            objAspirante.setGENERO_RENAPO(objRenapo.getGENERO_RENAPO());
-            
-            
-            
-            
-            
-      
-            
-            
-         /*   //***********************consulta renapo anterior *****************
+                        Iterator LC = ListaColonia.iterator();
+                        ColoniasBean objg;
+
+                        while (LC.hasNext()) {
+                            objg = (ColoniasBean) LC.next();
+
+                            objAspirante.setMUNICIPIO(objg.getMUNICIPIO());
+                            objAspirante.setID_MUNICIPIO(objg.getID_MUNICIPIO());
+
+                        }
+
+                        objAspirante.setTELEFONO(obj3.getTELEFONO());
+                        objAspirante.setCELULAR(obj3.getCELULAR());
+                        objAspirante.setEMAIL(obj3.getEMAIL());
+
+                    }
+
+                    banColonia = true;
+                    banActualiza = true;
+                    banFormAca = true;
+
+                    ListaDatosAcad = con.ConsultaDatosAca(objAspirante, objDatosA);
+
+                    ListaGrados = con.ConsultaGrados();
+                    ListaPromedios = con.ConsultaPromedios();
+
+                    Iterator LDA = ListaDatosAcad.iterator();
+
+                    AcademicoBean obj4;
+
+                    while (LDA.hasNext()) {
+                        obj4 = (AcademicoBean) LDA.next();
+
+                        objDatosA.setID_GRADO(obj4.getGRADO());
+                        objDatosA.setPROMEDIO(obj4.getPROMEDIO());
+
+                    }
+
+                } else {
+                    banGuarda = true;
+                    objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP().toUpperCase());
+
+                    objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
+                    objAspirante.setNOMBRE_RENAPO(objRenapo.getNOMBRE_RENAPO());
+                    objAspirante.setAPATERNO_RENAPO(objRenapo.getAPATERNO_RENAPO());
+                    objAspirante.setAMATERNO_RENAPO(objRenapo.AMATERNO_RENAPO);
+                    objAspirante.setFEC_NAC_RENAPO(objRenapo.getFEC_NAC_RENAPO());
+                    objAspirante.setNACIONALIDAD_RENAPO(objRenapo.getNACIONALIDAD_RENAPO());
+                    objAspirante.setENTIDAD_NACIMINETO_RENAPO(objRenapo.getENTIDAD_NACIMINETO_RENAPO());
+                    objAspirante.setGENERO_RENAPO(objRenapo.getGENERO_RENAPO());
+
+                    /*   //***********************consulta renapo anterior *****************
             
                   System.out.println ("MICURP ES: " + objRenapo.getCONSULTA_CURP());
                     service = new ConsultaDatosRenapo();
@@ -424,29 +402,184 @@ public class Inicio_Action extends ActionSupport {
             }
 
             
-            */
-            
+                     */
+                    //consulta cct*********************
+                    objDatosA.setCCTAUX(objDatosA.getCCT());
 
-            //consulta cct*********************
-            objDatosA.setCCTAUX(objDatosA.getCCT());
+                    objDatosA = con.ConsultaCCT(objDatosA);
 
-            objDatosA = con.ConsultaCCT(objDatosA);
+                    if (objDatosA == null) {
 
-            if (objDatosA == null) {
+                        banFormAca = false;
+                        addFieldError("ERRORCCT", "LA CCT QUE INGRESO NO SE ENCUENTRA FAVOR DE VERIFICAR");
 
-                banFormAca = false;
-                addFieldError("ERRORCCT", "LA CCT QUE INGRESO NO SE ENCUENTRA FAVOR DE VERIFICAR");
+                    } else {
+                        banFormAca = true;
+                        ListaGrados = con.ConsultaGrados();
+                        ListaPromedios = con.ConsultaPromedios();
+                    }
+
+                    Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
+                    Constantes.enviaMensajeConsola("lista Req: " + ListaReq.size());
+                    Constantes.enviaMensajeConsola("lista ESTADOS: " + ListaEstadosCivil.size());
+                }
+                    
+                    
+                    
+                    
+                    
+                    
+                } else {
+                     /* si el alumno que intenta registrar es diferente a la  beca y al  ciclo y si pasa las restricciones de letra y nivel 
+                     no lo deja entrar por que ya esta registrado para otro */
+                     addFieldError("AlumYaRegistrado", "la Curp que ingreso ya se encuentra registrada en otro programa ");
+                     Constantes.enviaMensajeConsola("alumno ya registrado en otro programa ");
+                     
+                     return "ERROR";
+                }
+                
+                
+                
 
             } else {
-                banFormAca = true;
-                ListaGrados = con.ConsultaGrados();
-                ListaPromedios = con.ConsultaPromedios();
+
+                ListaEstadosCivil = con.ConsultaEstadosCivil();
+
+                Constantes.enviaMensajeConsola("curp aspirante " + objRenapo.getCONSULTA_CURP());
+
+                //consulta a tabla de aspirantes antes de renapo
+                objAspirante.setID_CICLO(objRenapo.getID_CICLO());
+
+                Constantes.enviaMensajeConsola("id_ciclo: " + objAspirante.getID_CICLO());
+
+                ListaActualizaAspirante = con.ConsultaAspirante(objdatos, objRenapo);
+
+                if (ListaActualizaAspirante.size() > 0) {
+                    Iterator LAA = ListaActualizaAspirante.iterator();
+
+                    AspiranteBean obj3;
+
+                    while (LAA.hasNext()) {
+                        obj3 = (AspiranteBean) LAA.next();
+
+                        objAspirante.setCONSULTA_CURP(obj3.getCONSULTA_CURP());
+                        objAspirante.setID_ASPIRANTE(obj3.getID_ASPIRANTE());
+                        objAspirante.setNOMBRE_RENAPO(obj3.getNOMBRE_RENAPO());
+                        objAspirante.setAMATERNO_RENAPO(obj3.getAMATERNO_RENAPO());
+                        objAspirante.setAPATERNO_RENAPO(obj3.getAPATERNO_RENAPO());
+                        objAspirante.setFEC_NAC_RENAPO(obj3.getFEC_NAC_RENAPO());
+                        objAspirante.setNACIONALIDAD_RENAPO(obj3.getNACIONALIDAD_RENAPO());
+                        objAspirante.setENTIDAD_NACIMINETO_RENAPO(obj3.getENTIDAD_NACIMINETO_RENAPO());
+                        objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
+                        objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
+                        objAspirante.setDOMICILIO(obj3.getDOMICILIO());
+                        objAspirante.setCALLE1(obj3.getCALLE1());
+                        objAspirante.setCALLE2(obj3.getCALLE2());
+                        objAspirante.setREFERENCIA(obj3.getREFERENCIA());
+                        objAspirante.setCP(obj3.getCP());
+                        ListaColonia = con.ConsultaColonia(objAspirante);
+                        Iterator LC = ListaColonia.iterator();
+                        ColoniasBean objg;
+
+                        while (LC.hasNext()) {
+                            objg = (ColoniasBean) LC.next();
+
+                            objAspirante.setMUNICIPIO(objg.getMUNICIPIO());
+                            objAspirante.setID_MUNICIPIO(objg.getID_MUNICIPIO());
+
+                        }
+
+                        objAspirante.setTELEFONO(obj3.getTELEFONO());
+                        objAspirante.setCELULAR(obj3.getCELULAR());
+                        objAspirante.setEMAIL(obj3.getEMAIL());
+
+                    }
+
+                    banColonia = true;
+                    banActualiza = true;
+                    banFormAca = true;
+
+                    ListaDatosAcad = con.ConsultaDatosAca(objAspirante, objDatosA);
+
+                    ListaGrados = con.ConsultaGrados();
+                    ListaPromedios = con.ConsultaPromedios();
+
+                    Iterator LDA = ListaDatosAcad.iterator();
+
+                    AcademicoBean obj4;
+
+                    while (LDA.hasNext()) {
+                        obj4 = (AcademicoBean) LDA.next();
+
+                        objDatosA.setID_GRADO(obj4.getGRADO());
+                        objDatosA.setPROMEDIO(obj4.getPROMEDIO());
+
+                    }
+
+                } else {
+                    banGuarda = true;
+                    objRenapo = renapo.consultaRenapo(objRenapo.getCONSULTA_CURP().toUpperCase());
+
+                    objAspirante.setCONSULTA_CURP(objRenapo.getCONSULTA_CURP());
+                    objAspirante.setNOMBRE_RENAPO(objRenapo.getNOMBRE_RENAPO());
+                    objAspirante.setAPATERNO_RENAPO(objRenapo.getAPATERNO_RENAPO());
+                    objAspirante.setAMATERNO_RENAPO(objRenapo.AMATERNO_RENAPO);
+                    objAspirante.setFEC_NAC_RENAPO(objRenapo.getFEC_NAC_RENAPO());
+                    objAspirante.setNACIONALIDAD_RENAPO(objRenapo.getNACIONALIDAD_RENAPO());
+                    objAspirante.setENTIDAD_NACIMINETO_RENAPO(objRenapo.getENTIDAD_NACIMINETO_RENAPO());
+                    objAspirante.setGENERO_RENAPO(objRenapo.getGENERO_RENAPO());
+
+                    /*   //***********************consulta renapo anterior *****************
+            
+                  System.out.println ("MICURP ES: " + objRenapo.getCONSULTA_CURP());
+                    service = new ConsultaDatosRenapo();
+                    port = service.getConsultaRenapoPorCurpPort();
+                    personas = port.consultaPorCurp(objRenapo.getCONSULTA_CURP());
+
+
+            objAspirante.setCONSULTA_CURP(personas.getCurp());
+            objAspirante.setNOMBRE_RENAPO(personas.getNombre());
+            objAspirante.setAPATERNO_RENAPO(personas.getApellidoPaterno());
+            objAspirante.setAMATERNO_RENAPO(personas.getApellidoMaterno());
+            objAspirante.setFEC_NAC_RENAPO(personas.getFechaNacimientoAxu());
+            objAspirante.setNACIONALIDAD_RENAPO(personas.getNacionalidad());
+            objAspirante.setENTIDAD_NACIMINETO_RENAPO(personas.getCveEntidadNacimiento());
+            
+             if (personas.getSexo().equals("H")) {
+
+                objAspirante.setGENERO_RENAPO("hombre");
             }
 
-            Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
-            Constantes.enviaMensajeConsola("lista Req: " + ListaReq.size());
-            Constantes.enviaMensajeConsola("lista ESTADOS: " + ListaEstadosCivil.size());
+            if (personas.getSexo().equals("M")) {
+
+                objAspirante.setGENERO_RENAPO("mujer");
             }
+
+            
+                     */
+                    //consulta cct*********************
+                    objDatosA.setCCTAUX(objDatosA.getCCT());
+
+                    objDatosA = con.ConsultaCCT(objDatosA);
+
+                    if (objDatosA == null) {
+
+                        banFormAca = false;
+                        addFieldError("ERRORCCT", "LA CCT QUE INGRESO NO SE ENCUENTRA FAVOR DE VERIFICAR");
+
+                    } else {
+                        banFormAca = true;
+                        ListaGrados = con.ConsultaGrados();
+                        ListaPromedios = con.ConsultaPromedios();
+                    }
+
+                    Constantes.enviaMensajeConsola("ID_BECA_AUX: " + objdatos.getID_BECA_AUX());
+                    Constantes.enviaMensajeConsola("lista Req: " + ListaReq.size());
+                    Constantes.enviaMensajeConsola("lista ESTADOS: " + ListaEstadosCivil.size());
+                }
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Ocurrio un error: " + e);
@@ -639,7 +772,7 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 TELEFONO = false;
-                addFieldError("TEL", "Debe registrar un número telefonico del alumno");
+                addFieldError("TEL", "Debe registrar un número telefonico del alumno,padre, madre o tutor.");
             }
 
             if (objAspirante.getCELULAR().length() > 0) {
@@ -647,7 +780,7 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 CELULAR = false;
-                addFieldError("CEL", "Debe registrar un número celular del alumno");
+                addFieldError("CEL", "Debe registrar un número celular del alumno,padre, madre o tutor.");
             }
 
             if (objAspirante.getEMAIL().length() > 0) {
@@ -655,10 +788,10 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 EMAIL = false;
-                addFieldError("EMAIL", "Debe registrar un correo electronico del alumno");
+                addFieldError("EMAIL", "Debe registrar un correo electrónico del alumno, padre, madre o tutor");
             }
 
-            if (objDatosA.getGRADO().length() > 0) {
+            if (objDatosA.getID_GRADO().length() > 0) {
                 GRADO = true;
 
             } else {
@@ -844,7 +977,7 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 TELEFONO = false;
-                addFieldError("TEL", "Debe registrar un número telefonico del alumno");
+                addFieldError("TEL", "Debe registrar un número telefonico del alumno,padre, madre o tutor.");
             }
 
             if (objAspirante.getCELULAR().length() > 0) {
@@ -852,7 +985,7 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 CELULAR = false;
-                addFieldError("CEL", "Debe registrar un número celular del alumno");
+                addFieldError("CEL", "Debe registrar un número celular del alumno,padre, madre o tutor.");
             }
 
             if (objAspirante.getEMAIL().length() > 0) {
@@ -860,7 +993,7 @@ public class Inicio_Action extends ActionSupport {
 
             } else {
                 EMAIL = false;
-                addFieldError("EMAIL", "Debe registrar un correo electronico del alumno");
+                addFieldError("EMAIL", "Debe registrar un correo electrónico del alumno, padre, madre o tutor");
             }
 
             if (objDatosA.getID_GRADO().length() > 0) {
@@ -905,8 +1038,6 @@ public class Inicio_Action extends ActionSupport {
                     VALCOB = "true";
                     objDatosC.setVALIDACHECK("true");
 
-                } else {
-                    banGuardaP = true;
                 }
 
             } else {
@@ -954,6 +1085,7 @@ public class Inicio_Action extends ActionSupport {
                     ListaEstadosCivil = con.ConsultaEstadosCivil();
 
                     banFormP = true;
+                    banGuardaP = true;
 
                 }
 
@@ -1058,16 +1190,16 @@ public class Inicio_Action extends ActionSupport {
 
                 Constantes.enviaMensajeConsola("salio de la consulta" + VerificaCobe);
 
-                if (VerificaCobe.size()>0) {
+                if (VerificaCobe.size() > 0) {
                     Constantes.enviaMensajeConsola("entro al if : " + objDatosC.getCURPAUX_CO());
-                    
-                    Iterator VC=VerificaCobe.iterator();
-                    
+
+                    Iterator VC = VerificaCobe.iterator();
+
                     CobeneficiarioBean objg;
-                    
+
                     while (VC.hasNext()) {
                         objg = (CobeneficiarioBean) VC.next();
-                        
+
                         objDatosC.setCURP_CO(objg.getCURP_CO());
                         objDatosC.setNOMBRE_RENAPO_CO(objg.getNOMBRE_RENAPO_CO());
                         objDatosC.setAPATERNO_RENAPO_CO(objg.getAPATERNO_RENAPO_CO());
@@ -1079,15 +1211,12 @@ public class Inicio_Action extends ActionSupport {
                         objDatosC.setID_ESTADO_CIVIL_CO(objg.getID_ESTADO_CIVIL_CO());
                         objDatosC.setPARENTESCO_CO(objg.getPARENTESCO_CO());
 
-                        
                     }
-                    
-                    
+
                     ListaParentesco = con.ConsultaParentesco();
                     ListaEstadosCivil = con.ConsultaEstadosCivil();
 
                     banMuestraCobe = true;
-
 
                 } else {
 
@@ -1095,7 +1224,7 @@ public class Inicio_Action extends ActionSupport {
 
                     // objDatosC.setCURPAUX_CO(objDatosA.getCURP_AUX());
                     objRenapo = renapo.consultaRenapo(objDatosC.getCURPAUX_CO());
-                    
+
                     objDatosC.setID_ESTADO_CIVIL_CO("");
                     objDatosC.setPARENTESCO_CO("");
 
@@ -1111,8 +1240,6 @@ public class Inicio_Action extends ActionSupport {
                         Constantes.enviaMensajeConsola("genero: " + objRenapo.getGENERO_RENAPO());
                         Constantes.enviaMensajeConsola("nac: " + objRenapo.getNACIONALIDAD_RENAPO());
                         Constantes.enviaMensajeConsola("entidad: " + objRenapo.getENTIDAD_NACIMINETO_RENAPO());
-                        
-                        
 
                         objDatosC.setCURP_CO(objRenapo.getCONSULTA_CURP());
                         objDatosC.setNOMBRE_RENAPO_CO(objRenapo.getNOMBRE_RENAPO());
@@ -1123,13 +1250,12 @@ public class Inicio_Action extends ActionSupport {
                         objDatosC.setNACIONALIDAD_RENAPO_CO(objRenapo.getNACIONALIDAD_RENAPO());
                         objDatosC.setENTIDAD_NACIMINETO_RENAPO_CO(objRenapo.getENTIDAD_NACIMINETO_RENAPO());
 
-                        Constantes.enviaMensajeConsola("paso asignacion " +  objDatosC.getCURP_CO());
+                        Constantes.enviaMensajeConsola("paso asignacion " + objDatosC.getCURP_CO());
 
                         ListaParentesco = con.ConsultaParentesco();
                         ListaEstadosCivil = con.ConsultaEstadosCivil();
 
                         banMuestraCobe = true;
-                       
 
                     } else {
 
@@ -1432,6 +1558,8 @@ public class Inicio_Action extends ActionSupport {
                         con.GuardaDatosTutor(objDatosP);
                         con.GuardaDatosCobeneficiario(objDatosC);
 
+                        banGuardaE = true;
+
                     } else {
                         return "ERROR";
                     }
@@ -1461,6 +1589,8 @@ public class Inicio_Action extends ActionSupport {
                     con.GuardaDatosTutor(objDatosP);
                     con.GuardaDatosCobeneficiario(objDatosC);
 
+                    banGuardaE = true;
+
                 }
 
                 ListaRespuestas = con.ConsultaRespuestas();
@@ -1476,7 +1606,7 @@ public class Inicio_Action extends ActionSupport {
         }
         return "SUCCESS";
     }
-    
+
     public String ActualizaDatosTutor() {
 
         try {
@@ -1784,32 +1914,31 @@ public class Inicio_Action extends ActionSupport {
                     con.ActualizaDatosTutor(objDatosP);
                     con.ActualizaDatosCobeneficiario(objDatosC);
                 }
-                
-                objDatosE=con.consultaSocioEconomico(objDatosA.getID_ASPIRANTE(),objAspirante.getID_CICLO());
-                 ListaRespuestas = con.ConsultaRespuestas();
-                 
-                if (objDatosE != null) {
-                    
-                                       
-                    Constantes.enviaMensajeConsola("esto es lo que trae archivo: "+objDatosE.getARCHIVO_INGRESO());
-                    
-                    if (objDatosE.getARCHIVO_INGRESO().length()>0) {
-                        valingreso="true";
-                        objDatosE.setVALIDACHECK("true");
-                        
-                    } else {
-                        valingreso="false";
-                        objDatosE.setVALIDACHECK("true");
-                    }
-                    
-                    banActualizaE=true;
-                    
-                    
-                } else {
-                    banGuardaE=true;
-                }
 
-               
+                objDatosE = con.consultaSocioEconomico(objDatosA.getID_ASPIRANTE(), objAspirante.getID_CICLO());
+                ListaRespuestas = con.ConsultaRespuestas();
+
+                if (objDatosE != null) {
+
+                    Constantes.enviaMensajeConsola("esto es lo que trae archivo: " + objDatosE.getARCHIVO_INGRESO());
+
+                    if (objDatosE.getARCHIVO_INGRESO().equals("SINARCHIVO")) {
+                        Constantes.enviaMensajeConsola("entro al else de archivo");
+                        valingreso = "false";
+                        objDatosE.setVALIDACHECK("false");
+                        banFormIngresos = false;
+
+                    } else {
+                        Constantes.enviaMensajeConsola("Entro al if archivo lleno");
+                        banMuestraArchivo = true;
+
+                    }
+
+                    banActualizaE = true;
+
+                } else {
+                    banGuardaE = true;
+                }
 
             } else {
                 return "ERROR";
@@ -1971,6 +2100,7 @@ public class Inicio_Action extends ActionSupport {
                         //FileUtils.sizeOf(archi)
                         //AQUI VA METODO GUARDAR
                         con.GuardaSocioeconomico(objDatosE);
+                        ConsultaTodo(objDatosA.getID_ASPIRANTE(), objAspirante.getCONSULTA_CURP(), objAspirante.ID_CICLO, objdatos.getID_BECA_AUX());
 
                         Constantes.enviaMensajeConsola("guardado con archivo");
 
@@ -1978,13 +2108,17 @@ public class Inicio_Action extends ActionSupport {
                     }
                 } else {
                     Constantes.enviaMensajeConsola("guarda sin archivo");
+                    objDatosE.setARCHIVO_INGRESO("SINARCHIVO");
                     con.GuardaSocioeconomico(objDatosE);
+                    ConsultaTodo(objDatosA.getID_ASPIRANTE(), objAspirante.getCONSULTA_CURP(), objAspirante.ID_CICLO, objdatos.getID_BECA_AUX());
+
                     return "SUCCESS";
                 }
 
-            }
+            } else {
+                return "ERROR";
 
-            return "SUCCESS";
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1992,9 +2126,12 @@ public class Inicio_Action extends ActionSupport {
             return "ERROR";
 
         }
+
+        return "SUCCESS";
+
     }
-    
-     public String ActualizaSocioEconomico() {
+
+    public String ActualizaSocioEconomico() {
 
         try {
 
@@ -2034,10 +2171,10 @@ public class Inicio_Action extends ActionSupport {
             if (objDatosE.getVALIDACHECK().equals("true")) {
 
                 validate2();
+
                 utilidades.Constantes.enviaMensajeConsola("sali de validate");
 
                 if (banT) {
-
                     archivo = false;
 
                 } else {
@@ -2045,7 +2182,7 @@ public class Inicio_Action extends ActionSupport {
                 }
 
             } else {
-                Constantes.enviaMensajeConsola("entro a validacheck= false");
+                Constantes.enviaMensajeConsola("entro a validacheck = false");
                 banT = true;
                 archivo = true;
             }
@@ -2066,6 +2203,7 @@ public class Inicio_Action extends ActionSupport {
                     if (archiFileName != null) {
 
                         archiFileName = "prueba" + archiFileName;
+
                         objDatosE.setARCHIVO_INGRESO(archiFileName);
                         ruta = Constantes.rutaArch + archiFileName;
                         Constantes.enviaMensajeConsola(ruta);
@@ -2077,25 +2215,192 @@ public class Inicio_Action extends ActionSupport {
                         //AQUI VA METODO GUARDAR
                         con.ActualizaSocioeconomico(objDatosE);
 
+                        ConsultaTodo(objDatosA.getID_ASPIRANTE(), objAspirante.getCONSULTA_CURP(), objAspirante.ID_CICLO, objdatos.getID_BECA_AUX());
+
                         Constantes.enviaMensajeConsola("guardado con archivo");
 
                         archiFileName = null;
                     }
                 } else {
-                    Constantes.enviaMensajeConsola("guarda sin archivo");
-                    con.ActualizaSocioeconomico(objDatosE);
+
+                    if (objDatosE.getARCHIVO_INGRESO().length() > 0) {
+                        Constantes.enviaMensajeConsola("guarda sin modificar archivo registrado");
+
+                        con.ActualizaSocioeconomico(objDatosE);
+
+                    } else {
+                        Constantes.enviaMensajeConsola("guarda sin archivo");
+                        objDatosE.setARCHIVO_INGRESO("SINARCHIVO");
+                        con.ActualizaSocioeconomico(objDatosE);
+                    }
+
+                    ConsultaTodo(objDatosA.getID_ASPIRANTE(), objAspirante.getCONSULTA_CURP(), objAspirante.ID_CICLO, objdatos.getID_BECA_AUX());
+
                     return "SUCCESS";
                 }
 
+            } else {
+                Constantes.enviaMensajeConsola("NO PASO VALIDACIONES");
+                return "ERROR";
             }
-
-            return "SUCCESS";
 
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Ocurrio un error: " + e);
             return "ERROR";
 
+        }
+        return "SUCCESS";
+    }
+
+    public String ConsultaTodo(String idaspirante, String curp, String idciclo, String idbeca) {
+
+        try {
+            ConsultasBusiness con = new ConsultasBusiness();
+            ListaEstadosCivil = con.ConsultaEstadosCivil();
+
+            objRenapo.setCONSULTA_CURP(curp);
+            ListaActualizaAspirante = con.ConsultaAspirante(objdatos, objRenapo);
+            ListaGrados = con.ConsultaGrados();
+            ListaPromedios = con.ConsultaPromedios();
+            ListaParentesco = con.ConsultaParentesco();
+
+            if (ListaActualizaAspirante.size() > 0) {
+                Iterator LAA = ListaActualizaAspirante.iterator();
+
+                AspiranteBean obj3;
+
+                while (LAA.hasNext()) {
+                    obj3 = (AspiranteBean) LAA.next();
+
+                    objAspirante.setCONSULTA_CURP(obj3.getCONSULTA_CURP());
+                    objAspirante.setID_ASPIRANTE(obj3.getID_ASPIRANTE());
+                    objAspirante.setNOMBRE_RENAPO(obj3.getNOMBRE_RENAPO());
+                    objAspirante.setAMATERNO_RENAPO(obj3.getAMATERNO_RENAPO());
+                    objAspirante.setAPATERNO_RENAPO(obj3.getAPATERNO_RENAPO());
+                    objAspirante.setFEC_NAC_RENAPO(obj3.getFEC_NAC_RENAPO());
+                    objAspirante.setNACIONALIDAD_RENAPO(obj3.getNACIONALIDAD_RENAPO());
+                    objAspirante.setENTIDAD_NACIMINETO_RENAPO(obj3.getENTIDAD_NACIMINETO_RENAPO());
+                    objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
+                    objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
+                    objAspirante.setDOMICILIO(obj3.getDOMICILIO());
+                    objAspirante.setCALLE1(obj3.getCALLE1());
+                    objAspirante.setCALLE2(obj3.getCALLE2());
+                    objAspirante.setREFERENCIA(obj3.getREFERENCIA());
+                    objAspirante.setCP(obj3.getCP());
+                    ListaColonia = con.ConsultaColonia(objAspirante);
+                    Iterator LC = ListaColonia.iterator();
+                    ColoniasBean objg;
+
+                    while (LC.hasNext()) {
+                        objg = (ColoniasBean) LC.next();
+
+                        objAspirante.setMUNICIPIO(objg.getMUNICIPIO());
+                        objAspirante.setID_MUNICIPIO(objg.getID_MUNICIPIO());
+
+                    }
+
+                    objAspirante.setTELEFONO(obj3.getTELEFONO());
+                    objAspirante.setCELULAR(obj3.getCELULAR());
+                    objAspirante.setEMAIL(obj3.getEMAIL());
+
+                }
+
+            }
+
+            objDatosA = con.ObtenDatosAcademicosAspirante(idaspirante, idciclo);
+
+            objDatosA.setID_ASPIRANTE(idaspirante);
+            objDatosA.setID_CICLO(idciclo);
+
+            objDatosP = con.ConsultaTutor(objDatosA);
+
+            objDatosC = con.ConsultaCobe(objDatosA);
+
+            objDatosE = con.consultaSocioEconomico(idaspirante, idciclo);
+
+            objFolio.setFOLIO(con.verificaFolio(idaspirante, idbeca, idciclo));
+
+            if (objDatosE.getARCHIVO_INGRESO().length() > 0) {
+                banMuestraArchivo = true;
+            } else {
+                banMuestraArchivo = false;
+            }
+
+            objRenapo.setCONSULTA_CURP(curp);
+
+            Constantes.enviaMensajeConsola("ID CICLO: " + objAspirante.getID_CICLO());
+
+            objRenapo.setID_CICLO(idciclo);
+
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio_Action.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "SUCCESS";
+    }
+
+    public String GenerarFolio() {
+
+        try {
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            if (objFolio.getFOLIO().length() > 0) {
+                objFolio.setID_ASPIRANTEAUX(Integer.valueOf(objAspirante.getID_ASPIRANTE()));
+                Constantes.enviaMensajeConsola("ID_ASPIRANTE: " + objFolio.getID_ASPIRANTEAUX());
+
+                return "SUCCESS";
+
+            } else {
+                obtenerFolioPro();
+
+                objFolio.setID_ASPIRANTE(objAspirante.getID_ASPIRANTE());
+                objFolio.setID_BECA(objdatos.getID_BECA_AUX());
+                objFolio.setID_CICLO(objAspirante.getID_CICLO());
+                objFolio.setID_ASPIRANTEAUX(Integer.valueOf(objAspirante.getID_ASPIRANTE()));
+
+                con.GuardaFolio(objFolio);
+
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio_Action.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "SUCCESS";
+    }
+
+    private void obtenerFolioPro() {
+
+        try {
+            ConsultasBusiness objg = new ConsultasBusiness();
+            //**********************************************************************************
+
+            folioMax = Integer.toString(objg.consultaSecuencia("TBL_FOLIOS_BECAS_SEQ"));
+
+            Constantes.enviaMensajeConsola("el folio maximo es: " + folioMax);
+            String seqFinal = "";
+            if (folioMax.length() < 7) {
+                Constantes.enviaMensajeConsola("entro a folio menor que 5");
+                for (int i = 0; i < (7 - folioMax.length()); i++) {
+                    seqFinal = seqFinal + "0";
+
+                    Constantes.enviaMensajeConsola("la secuencia en la posicion " + i + " es: " + seqFinal);
+                }
+            } else {
+                seqFinal = "";
+            }
+            Constantes.enviaMensajeConsola("secuencia final: " + seqFinal);
+
+            //armando  el folio.....
+            folioSolicitud = seqFinal + folioMax;
+            objFolio.setFOLIO(folioSolicitud);
+            Constantes.enviaMensajeConsola("el folio de la solicitud es: " + objFolio.getFOLIO());
+            //**********************************************************************************
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error al obtener el FOLIO del trámite: " + e);
         }
     }
 
@@ -2171,8 +2476,6 @@ public class Inicio_Action extends ActionSupport {
     public void setVerificaCobe(List<CobeneficiarioBean> VerificaCobe) {
         this.VerificaCobe = VerificaCobe;
     }
-    
-    
 
     public BecasBean getObjdatos() {
         return objdatos;
@@ -2270,9 +2573,27 @@ public class Inicio_Action extends ActionSupport {
         this.objDatosE = objDatosE;
     }
 
+    public FolioBean getObjFolio() {
+        return objFolio;
+    }
+
+    public void setObjFolio(FolioBean objFolio) {
+        this.objFolio = objFolio;
+    }
+
     public String getNivelUsuario() {
         return nivelUsuario;
     }
+
+    public ValidaCurpBean getObjvalidaC() {
+        return objvalidaC;
+    }
+
+    public void setObjvalidaC(ValidaCurpBean objvalidaC) {
+        this.objvalidaC = objvalidaC;
+    }
+    
+    
 
     public void setNivelUsuario(String nivelUsuario) {
         this.nivelUsuario = nivelUsuario;
@@ -2405,8 +2726,14 @@ public class Inicio_Action extends ActionSupport {
     public void setBanActualizaE(boolean banActualizaE) {
         this.banActualizaE = banActualizaE;
     }
-    
-    
+
+    public boolean isBanMuestraArchivo() {
+        return banMuestraArchivo;
+    }
+
+    public void setBanMuestraArchivo(boolean banMuestraArchivo) {
+        this.banMuestraArchivo = banMuestraArchivo;
+    }
 
     public String getVALCOB() {
         return VALCOB;
@@ -2422,6 +2749,22 @@ public class Inicio_Action extends ActionSupport {
 
     public void setValingreso(String valingreso) {
         this.valingreso = valingreso;
+    }
+
+    public String getFolioMax() {
+        return folioMax;
+    }
+
+    public void setFolioMax(String folioMax) {
+        this.folioMax = folioMax;
+    }
+
+    public String getFolioSolicitud() {
+        return folioSolicitud;
+    }
+
+    public void setFolioSolicitud(String folioSolicitud) {
+        this.folioSolicitud = folioSolicitud;
     }
 
     public File getArchi() {
@@ -2463,7 +2806,13 @@ public class Inicio_Action extends ActionSupport {
     public void setListaDatosAcad(List<AcademicoBean> ListaDatosAcad) {
         this.ListaDatosAcad = ListaDatosAcad;
     }
-    
-    
+
+    public List<ValidaCurpBean> getValidacurp() {
+        return validacurp;
+    }
+
+    public void setValidacurp(List<ValidaCurpBean> validacurp) {
+        this.validacurp = validacurp;
+    }
 
 }

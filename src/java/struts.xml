@@ -9,6 +9,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="false" />
     <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+     <constant name="struts.action.excludePattern" value="/GeneraPdf"></constant>
     
     <package name="default" namespace="/" extends="struts-default">
 
@@ -128,17 +129,31 @@
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>  
         <action name="GuardaSocioEconomico" class="action.Inicio_Action" method="GuardaSocioEconomico">
-            <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
+            <result name="SUCCESS">/pages/PaginaFinal.jsp</result>			              
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
             <result name="input">/pages/RegistroSocioEconomico.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
         </action>   
         <action name="ActualizaSocioEconomico" class="action.Inicio_Action" method="ActualizaSocioEconomico">
-            <result name="SUCCESS">/pages/RegistroSocioEconomico.jsp</result>			              
+            <result name="SUCCESS">/pages/PaginaFinal.jsp</result>			              
             <result name="ERROR">/pages/RegistroSocioEconomico.jsp</result>
             <result name="input">/pages/RegistroSocioEconomico.jsp</result>
             <result name="SESION" type="chain">CerrarSesion</result>
-        </action>                                              	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
+        </action> 
+          <action name="ModificaDatos" class="action.Inicio_Action" method="Registro">
+            <result name="SUCCESS">/pages/Registro.jsp</result>			              
+            <result name="ERROR">/pages/timeline.jsp</result>
+            <result name="input">/pages/timeline.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>   
+         <action name="GenerarFolio" class="action.Inicio_Action" method="GenerarFolio">
+            <result name="SUCCESS">/pages/register.jsp</result>			              
+            <result name="ERROR">/pages/PaginaFinal.jsp</result>
+            <result name="input">/pages/PaginaFinal.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>             	          	
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
                                            	             	                                                                                                                        	             	                                            	             	                                                                                                                        	             	
     </package>
 	

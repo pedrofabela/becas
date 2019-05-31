@@ -307,7 +307,7 @@
                       <div class="card-footer ">
                           <s:if test="banGuarda">
                                 <s:hidden name="banGuarda" value="%{banGuarda}"></s:hidden>
-                              <a href="Javascript:Consulta('GuardaAspirante')" onclick="this.onclick = function () {return false}" class="btn btn-round btn-primary">Guardar y Continuar</a>
+                              <a href="Javascript:Consulta('GuardaAspirante')" onclick="this.onclick = function () {return false} class="btn btn-round btn-primary">Guardar y Continuar</a>
                           </s:if>
                               <s:if test="banActualiza">
                                     <s:hidden name="banActualiza" value="%{banActualiza}"></s:hidden>
