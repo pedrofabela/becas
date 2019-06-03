@@ -3,6 +3,8 @@ ENV TZ America/Mexico_City
 ENV LANG es_MX.UTF-8
 ENV LANGUAGE es_MX.UTF-8
 ENV LC_ALL es_MX.UTF-8
+RUN apk add tzdata
+RUN cp /usr/share/zoneinfo/America/Mexico_City /etc/localtime
 
 RUN ["rm", "-rf", "/usr/local/tomcat/webapps/docs"]
 RUN ["rm", "-rf", "/usr/local/tomcat/webapps/examples"]
