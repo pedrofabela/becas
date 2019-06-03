@@ -13,7 +13,7 @@ RUN ["rm", "-rf", "/usr/local/tomcat/webapps/host-manager"]
 RUN ["rm", "-rf", "/usr/local/tomcat/webapps/manager"]
 
 WORKDIR /usr/local/tomcat
-RUN chmod 777 temp/
+RUN chmod -R 1777 temp/
 RUN ["wget", "https://github.com/ran-jit/tomcat-cluster-redis-session-manager/releases/download/3.0/tomcat-cluster-redis-session-manager.zip"]
 RUN ["unzip", "tomcat-cluster-redis-session-manager.zip"]
 RUN ["pwd"]
