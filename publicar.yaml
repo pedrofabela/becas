@@ -72,21 +72,4 @@ spec:
       - backend:
           serviceName: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-service
           servicePort: 8080
----
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}
-  namespace: default
-spec:
-  scaleTargetRef:
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}
-  minReplicas: 2
-  maxReplicas: 20
-  metrics:
-  - type: Pods
-    pods:
-      metricName: cpu_usage
-      targetAverageValue: 1000m
+
