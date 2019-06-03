@@ -37,6 +37,6 @@ RUN ["rm", "-rf", "/usr/local/tomcat/webapps/ROOT"]
 ADD dist/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD jasper/becaFUR.jasper /usr/local/tomcat/webapps/
 ADD jasper/becaFUR_subreport1.jasper /usr/local/tomcat/webapps/
-ADD imagenes/encabezadoRep.png  /usr/local/tomcat/webapps/jasper/
+ADD jasper/imagenes/encabezadoRep.png  /usr/local/tomcat/webapps/
 
 CMD ["catalina.sh", "run"]
