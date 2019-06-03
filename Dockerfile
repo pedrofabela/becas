@@ -36,4 +36,5 @@ RUN sed -i '$a lb.sticky-session.enabled=true' /usr/local/tomcat/conf/redis-data
 RUN ["rm", "-rf", "/usr/local/tomcat/webapps/ROOT"]
 ADD dist/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD jasper/reporte.jasper /usr/local/tomcat/webapps/
+ADD imagenes/  /usr/local/tomcat/webapps/jasper
 CMD ["catalina.sh", "run"]
