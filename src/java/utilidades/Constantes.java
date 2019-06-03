@@ -28,7 +28,7 @@ public class Constantes implements Serializable {
          public static final String TablaFolio="TBL_FOLIOS_BECAS";
 
 	 
-		 //**************DESARROLLO**********************************************************
+		/* //**************DESARROLLO**********************************************************
 	
 		public static final boolean esDesarrollo = true;
 		public static final String rutaProyectos = "http://172.20.2.110:8080/";	
@@ -40,14 +40,14 @@ public class Constantes implements Serializable {
 		//*/
 		
 	 
-		/*//******************* PRODUCCION*******************************************************
+		//******************* PRODUCCION*******************************************************
       
 		public static final boolean esDesarrollo = true;		
 		public static final String rutaProyectos =   "http://aplicaciones.edugem.gob.mx/";
 		public static final String rutareportesjasper = "/apachetomcat/reportes/";		                                                  
-		public static final String rutaArch = "/apachetomcat/webapps/programas/permanecerestudiando/";  				
+		//public static final String rutaArch = "/tomcat/webapps/programas/permanecerestudiando/";  				
 		public static final String rutaEstilos = "http://aplicaciones.edugem.gob.mx/estilosUDAI/";		                                        
-		public static final String rutaImages = "/apachetomcat/reportes/imagenes/";
+		public static final String rutaImages = "/tomcat/reportes/imagenes/";
 		public static final String rutaManuales = "http://aplicaciones.edugem.gob.mx/manuales/ManualUsuario3P.pdf";		
 		//*/
 	  
