@@ -88,6 +88,18 @@ public class AspitanteMapper implements Mapper{
             dat.setDOMICILIO(rs.getString("DOMICILIO"));
         }     
           
+         if (rs.getString("NUM_INTERIOR") != null) {
+            dat.setNUM_INT(rs.getString("NUM_INTERIOR").trim());
+        } else {
+            dat.setNUM_INT(rs.getString("NUM_INTERIOR"));
+        }    
+         
+         if (rs.getString("NUM_EXTERIOR") != null) {
+            dat.setNUM_EXT(rs.getString("NUM_EXTERIOR").trim());
+        } else {
+            dat.setNUM_EXT(rs.getString("NUM_EXTERIOR"));
+        }     
+          
            if (rs.getString("LOCALIDAD") != null) {
             dat.setLOCALIDAD(rs.getString("LOCALIDAD").trim());
         } else {

@@ -44,39 +44,40 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         list = queryForList(query, new BecasMapper());
         return list;
     }
+
     public List ConsultaFechasBeca(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT FECHA_INICIO, FECHA_TERMINO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
+        String query = "SELECT FECHA_INICIO, FECHA_TERMINO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='" + obj.getID_BECA_AUX() + "' AND ID_CICLO='" + ren.getID_CICLO() + "' AND NIVEL='" + ren.getNIVEL_AUX() + "'";
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new fechasBecaMapper());
         return list;
     }
-    
-     public List ConsultaAspirante(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT ID_ASPIRANTE, CURP_AS AS CONSULTA_CURP, NOMBRE_AS AS NOMBRE_RENAPO, APATERNO_AS AS APATERNO_RENAPO, AMATERNO_AS AS AMATERNO_RENAPO, TO_CHAR(FECHA_NAC_AS,'DD/MM/YYYY') AS  FEC_NAC_RENAPO, ENTIDAD_NAC AS  ENTIDAD_NACIMINETO_RENAPO, NACIONALIDAD AS NACIONALIDAD_RENAPO, CP, MUNICIPIO, DOMICILIO_AS AS DOMICILIO, LOCALIDAD_AS AS LOCALIDAD, ENTRECALLE1 AS CALLE1, ENTRECALLE2 AS CALLE2, REFERENCIA_DOM AS REFERENCIA, TELEFONO_FIJO AS TELEFONO, TELEFONO_CELULAR AS CELULAR, CORREO AS EMAIL, ID_ESTADO_CIVIL, GENERO AS GENERO_RENAPO FROM TBL_ASPIRANTES WHERE CURP_AS='"+ren.getCONSULTA_CURP().toUpperCase()+"'";     
+
+    public List ConsultaAspirante(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT ID_ASPIRANTE, CURP_AS AS CONSULTA_CURP, NOMBRE_AS AS NOMBRE_RENAPO, APATERNO_AS AS APATERNO_RENAPO, AMATERNO_AS AS AMATERNO_RENAPO, TO_CHAR(FECHA_NAC_AS,'DD/MM/YYYY') AS  FEC_NAC_RENAPO, ENTIDAD_NAC AS  ENTIDAD_NACIMINETO_RENAPO, NACIONALIDAD AS NACIONALIDAD_RENAPO, CP, MUNICIPIO, DOMICILIO_AS AS DOMICILIO,NUM_INTERIOR,NUM_EXTERIOR,LOCALIDAD_AS AS LOCALIDAD, ENTRECALLE1 AS CALLE1, ENTRECALLE2 AS CALLE2, REFERENCIA_DOM AS REFERENCIA, TELEFONO_FIJO AS TELEFONO, TELEFONO_CELULAR AS CELULAR, CORREO AS EMAIL, ID_ESTADO_CIVIL, GENERO AS GENERO_RENAPO FROM TBL_ASPIRANTES WHERE CURP_AS='" + ren.getCONSULTA_CURP().toUpperCase() + "'";
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new AspitanteMapper());
         return list;
-        
+
     }
-     
-      public List ConsultaDatosAca(AspiranteBean obj, AcademicoBean acad) throws Exception {
-        String query = "select GRADO, PROMEDIO from TBL_DATOS_ACADEMICOS where ID_ASPIRANTE='"+obj.getID_ASPIRANTE()+"' and ID_CICLO='"+obj.getID_CICLO()+"' AND CCT='"+acad.getCCT()+"'";     
+
+    public List ConsultaDatosAca(AspiranteBean obj, AcademicoBean acad) throws Exception {
+        String query = "select GRADO, PROMEDIO from TBL_DATOS_ACADEMICOS where ID_ASPIRANTE='" + obj.getID_ASPIRANTE() + "' and ID_CICLO='" + obj.getID_CICLO() + "' AND CCT='" + acad.getCCT() + "'";
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new AspiranteAcadMapper());
         return list;
-        
+
     }
-     public List ConsultaFechasBecaTodos(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT FECHA_INICIO, FECHA_TERMINO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND ROWNUM=1";
+
+    public List ConsultaFechasBecaTodos(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT FECHA_INICIO, FECHA_TERMINO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='" + obj.getID_BECA_AUX() + "' AND ID_CICLO='" + ren.getID_CICLO() + "' AND ROWNUM=1";
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new fechasBecaMapper());
         return list;
     }
-   
 
     public List ConsultaReq(BecasBean obj) throws Exception {
         String query = "SELECT r.nom_requisito FROM tbl_beca_rec br INNER JOIN cat_requisitos r on br.id_requisito = r.id_requisito where br.id_beca='" + obj.getID_BECA_AUX() + "'";
@@ -109,26 +110,25 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         ciclo = queryStringUnCampo(query);
         return ciclo;
     }
-        
-        
-         public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
+
+    public String ConsultaIntervalo(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='" + obj.getID_BECA_AUX() + "' AND ID_CICLO='" + ren.getID_CICLO() + "' AND NIVEL='" + ren.getNIVEL_AUX() + "'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String intervalo = null;
         intervalo = queryStringUnCampo(query);
         return intervalo;
     }
-         
-           public String ConsultaIntervaloSinNivel(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"'";
+
+    public String ConsultaIntervaloSinNivel(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT INTERVALO FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='" + obj.getID_BECA_AUX() + "' AND ID_CICLO='" + ren.getID_CICLO() + "'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String intervalo = null;
         intervalo = queryStringUnCampo(query);
         return intervalo;
     }
-         
-            public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
-        String query = "SELECT NIVEL FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='"+obj.getID_BECA_AUX()+"' AND ID_CICLO='"+ren.getID_CICLO()+"' AND NIVEL='"+ren.getNIVEL_AUX()+"'";
+
+    public String ConsultaNivel(BecasBean obj, renapoBean ren) throws Exception {
+        String query = "SELECT NIVEL FROM VALIDA_LETRA_REG WHERE (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO AND ID_BECA='" + obj.getID_BECA_AUX() + "' AND ID_CICLO='" + ren.getID_CICLO() + "' AND NIVEL='" + ren.getNIVEL_AUX() + "'";
         Constantes.enviaMensajeConsola("ListaReq ---> " + query);
         String intervalo = null;
         intervalo = queryStringUnCampo(query);
@@ -209,6 +209,10 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO().toUpperCase());
         arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("NUM_INTERIOR", "STRING", objg.getNUM_INT());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
+        arregloCampos.add(temporal);
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
@@ -264,6 +268,10 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL().toUpperCase());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO().toUpperCase());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NUM_INTERIOR", "STRING", objg.getNUM_INT());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
         arregloCampos.add(temporal);
 
         String condicion = "WHERE ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "'";
@@ -373,13 +381,13 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return resu;
     }
 
-   public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
+    public List ConsultaCobeXcurp(AcademicoBean objg) throws Exception {
         String query = "";
         query = "SELECT curp_cob,nombre_cob,apaterno_cob,amaterno_cob,TO_CHAR(fecha_nac_cob,'DD/MM/YYYY') as fecha_nac_cob,entidad_nac,nacionalidad,id_parentesco,id_estado_civil,genero "
-                + " FROM " + Constantes.TablaCobeneficiario + " where ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "' AND ID_CICLO='" + objg.getID_CICLO() + "' and curp_cob='"+objg.getCURP_AUX()+"'";
+                + " FROM " + Constantes.TablaCobeneficiario + " where ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "' AND ID_CICLO='" + objg.getID_CICLO() + "' and curp_cob='" + objg.getCURP_AUX() + "'";
         Constantes.enviaMensajeConsola(" query consulta COBE --> " + query);
         List list = null;
-        list= queryForList(query, new CobeMapper());
+        list = queryForList(query, new CobeMapper());
         return list;
     }
 
@@ -492,8 +500,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert(Constantes.TablaCobeneficiario, arregloCampos);
     }
-    
-    
+
     public boolean ActualizaDatosTutor(TutorBean objg) throws Exception {
 
 //Crear un ArrayList para agregar los campos a insertar
@@ -528,12 +535,12 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL_TU", "STRING", objg.getID_ESTADO_CIVIL_TU().toUpperCase());
         arregloCampos.add(temporal);
-        
-        String condicion="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE_TU()+"' AND ID_CICLO='"+objg.getID_CICLO_TU()+"'";
+
+        String condicion = "where ID_ASPIRANTE='" + objg.getID_ASPIRANTE_TU() + "' AND ID_CICLO='" + objg.getID_CICLO_TU() + "'";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
-        return oraDaoFac.queryUpdate(Constantes.TablaTutor, arregloCampos,condicion);
+        return oraDaoFac.queryUpdate(Constantes.TablaTutor, arregloCampos, condicion);
     }
 
     public boolean ActualizaDatosCobeneficiario(CobeneficiarioBean objg) throws Exception {
@@ -546,9 +553,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS COBENEFICIARIO...................................");
 
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
-       
-       
-       temporal = new ObjPrepareStatement("CURP_COB", "STRING", objg.getCURP_CO().toUpperCase());
+        temporal = new ObjPrepareStatement("CURP_COB", "STRING", objg.getCURP_CO().toUpperCase());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("NOMBRE_COB", "STRING", objg.getNOMBRE_RENAPO_CO().toUpperCase());
         arregloCampos.add(temporal);
@@ -568,8 +573,8 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO_CO().toUpperCase());
         arregloCampos.add(temporal);
-        
-        String Condicion="where ID_ASPIRANTE='"+objg.getID_ASPIRANTE_CO()+"' AND ID_CICLO='"+objg.getID_CICLO_CO()+"'";
+
+        String Condicion = "where ID_ASPIRANTE='" + objg.getID_ASPIRANTE_CO() + "' AND ID_CICLO='" + objg.getID_CICLO_CO() + "'";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
@@ -614,15 +619,15 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return oraDaoFac.queryInsert(Constantes.TablaSocioEconomico, arregloCampos);
 
     }
-    
-     public IngresosBean consultaSocioEconomico(String ID , String Ciclo) throws Exception {
+
+    public IngresosBean consultaSocioEconomico(String ID, String Ciclo) throws Exception {
         String query = "";
-        query = "SELECT respuesta1,respuesta2,monto,ruta_archivo FROM "+Constantes.TablaSocioEconomico+" WHERE id_aspirante='"+ID+"' and id_ciclo='"+Ciclo+"'";
+        query = "SELECT respuesta1,respuesta2,monto,ruta_archivo FROM " + Constantes.TablaSocioEconomico + " WHERE id_aspirante='" + ID + "' and id_ciclo='" + Ciclo + "'";
         Constantes.enviaMensajeConsola(" query consulta socioeconomico --> " + query);
         IngresosBean resu = (IngresosBean) oraDaoFac.queryForObject(query, new IngresoMapper());
         return resu;
     }
-     
+
     public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception {
 
         //Crear un ArrayList para agregar los campos a insertar
@@ -643,33 +648,33 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("RUTA_ARCHIVO", "STRING", objg.getARCHIVO_INGRESO());
         arregloCampos.add(temporal);
-        
-        String condiciones=" where ID_ASPIRANTE='"+objg.getID_ASPIRANTE()+"' and ID_CICLO='"+objg.getID_CICLO()+"'";
+
+        String condiciones = " where ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "' and ID_CICLO='" + objg.getID_CICLO() + "'";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
-        return oraDaoFac.queryUpdate(Constantes.TablaSocioEconomico, arregloCampos,condiciones);
+        return oraDaoFac.queryUpdate(Constantes.TablaSocioEconomico, arregloCampos, condiciones);
 
-    } 
-    
-      public AcademicoBean ObtenDatosAcademicosAspirante(String ID , String Ciclo) throws Exception {
+    }
+
+    public AcademicoBean ObtenDatosAcademicosAspirante(String ID, String Ciclo) throws Exception {
         String query = "";
-        query = "SELECT cc.cct,cc.nombre,cc.domicilio,cc.FILTRO_PARA_TABLERO AS VERTIENTE,cc.turno_1,ta.grado,ta.promedio FROM cat_ccts cc INNER JOIN tbl_datos_academicos ta on cc.cct=ta.cct where ta.id_aspirante='"+ID+"' and ta.id_ciclo='"+Ciclo+"'";
+        query = "SELECT cc.cct,cc.nombre,cc.domicilio,cc.FILTRO_PARA_TABLERO AS VERTIENTE,cc.turno_1,ta.grado,ta.promedio FROM cat_ccts cc INNER JOIN tbl_datos_academicos ta on cc.cct=ta.cct where ta.id_aspirante='" + ID + "' and ta.id_ciclo='" + Ciclo + "'";
         Constantes.enviaMensajeConsola(" query consulta socioeconomico --> " + query);
         AcademicoBean resu = (AcademicoBean) oraDaoFac.queryForObject(query, new AcademicoMapper());
         return resu;
     }
-      
-     public int consultaSecuencia(String secuencia) throws Exception {
+
+    public int consultaSecuencia(String secuencia) throws Exception {
         Integer numreg;
         String query = "select (" + secuencia + ".NextVal)  From " + Constantes.tablaDual;
         //Constantes.enviaMensajeConsola(" query num SECUENCIA: " + query);
         System.out.println("query num SECUENCIA:" + query);
         numreg = oraDaoFac.queryInteger(query);
         return numreg;
-    }  
-     
-      public boolean GuardaFolio(FolioBean objg) throws Exception {
+    }
+
+    public boolean GuardaFolio(FolioBean objg) throws Exception {
 
         //Crear un ArrayList para agregar los campos a insertar
         ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
@@ -687,33 +692,29 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getID_CICLO());
         arregloCampos.add(temporal);
-         temporal = new ObjPrepareStatement("STATUS", "STRING", "1");
+        temporal = new ObjPrepareStatement("STATUS", "STRING", "1");
         arregloCampos.add(temporal);
-        
-        
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert(Constantes.TablaFolio, arregloCampos);
 
     }
-      
-     public String verificaFolio(String idaspirante,String idbeca,String idciclo) throws Exception  {
-        String query = "SELECT Folio  FROM " + Constantes.TablaFolio + " where id_aspirante='" +idaspirante+ "' and id_beca='"+idbeca+"' and id_ciclo='"+idciclo+"'";
+
+    public String verificaFolio(String idaspirante, String idbeca, String idciclo) throws Exception {
+        String query = "SELECT Folio  FROM " + Constantes.TablaFolio + " where id_aspirante='" + idaspirante + "' and id_beca='" + idbeca + "' and id_ciclo='" + idciclo + "'";
         Constantes.enviaMensajeConsola("CONSULTA folio ---> " + query);
         String folio = null;
         folio = queryStringUnCampo(query);
         return folio;
     }
-     
-      public List VerificaCurp(String curp) throws Exception {
-        String query = "SELECT\n" +
-"    ta.id_aspirante ,tf.id_beca, tf.id_ciclo FROM tbl_aspirantes ta INNER JOIN tbl_folios_becas tf on tf.id_aspirante=ta.id_aspirante INNER JOIN CAT_CICLOS tc on tf.id_ciclo=tc.id_ciclo WHERE ta.curp_as='"+curp+"' and tc.estatus='1'";
+
+    public List VerificaCurp(String curp) throws Exception {
+        String query = "SELECT ta.id_aspirante ,tf.id_beca, tf.id_ciclo FROM tbl_aspirantes ta INNER JOIN tbl_folios_becas tf on tf.id_aspirante=ta.id_aspirante INNER JOIN CAT_CICLOS tc on tf.id_ciclo=tc.id_ciclo WHERE ta.curp_as='" + curp + "' and tc.estatus='1'";
         Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
         List list = null;
         list = queryForList(query, new ValidaCurpMapper());
         return list;
     }
-
 
 }

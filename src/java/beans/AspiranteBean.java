@@ -40,6 +40,25 @@ public class AspiranteBean implements Serializable {
     public String INTERVALO;
     public String CCT;
     public String LOCALIDAD;
+    public String NUM_EXT;
+    public String NUM_INT;
+
+    public String getNUM_EXT() {
+        return NUM_EXT;
+    }
+
+    public void setNUM_EXT(String NUM_EXT) {
+        this.NUM_EXT = NUM_EXT;
+    }
+
+    public String getNUM_INT() {
+        return NUM_INT;
+    }
+
+    public void setNUM_INT(String NUM_INT) {
+        this.NUM_INT = NUM_INT;
+    }
+    
 
     
     

@@ -175,6 +175,16 @@
                                            <s:fielderror fieldName="DOMICILIO" cssClass="alert alert-danger" ></s:fielderror>
                                       </div>
                                       <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Número Exterior</label>
+                                           <s:textfield cssClass="form-control" name="objAspirante.NUM_EXT" id="objAspirante.NUM_EXT"/>
+                                           <s:fielderror fieldName="NUMEXT" cssClass="alert alert-danger" ></s:fielderror>
+                                      </div>
+                                       <div class="form-group col-md-4">
+                                          <label for="examplePass" class="bmd-label-floating">Número Interior</label>
+                                           <s:textfield cssClass="form-control" name="objAspirante.NUM_INT" id="objAspirante.NUM_INT"/>
+                                           <s:fielderror fieldName="NUMINT" cssClass="alert alert-danger" ></s:fielderror>
+                                      </div>
+                                      <div class="form-group col-md-4">
                                           <label for="examplePass" class="bmd-label-floating">Entre Calle </label>
                                            <s:textfield cssClass="form-control" name="objAspirante.CALLE1" id="objAspirante.CALLE1"/>
                                             <s:fielderror fieldName="CALLE1" cssClass="alert alert-danger"></s:fielderror>
