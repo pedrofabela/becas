@@ -318,6 +318,8 @@ public class Inicio_Action extends ActionSupport {
                         objAspirante.setGENERO_RENAPO(obj3.getGENERO_RENAPO());
                         objAspirante.setID_ESTADO_CIVIL(obj3.getID_ESTADO_CIVIL());
                         objAspirante.setDOMICILIO(obj3.getDOMICILIO());
+                        objAspirante.setNUM_EXT(obj3.getNUM_EXT());
+                        objAspirante.setNUM_INT(obj3.getNUM_INT());
                         objAspirante.setCALLE1(obj3.getCALLE1());
                         objAspirante.setCALLE2(obj3.getCALLE2());
                         objAspirante.setREFERENCIA(obj3.getREFERENCIA());
