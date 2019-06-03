@@ -72,4 +72,3 @@ spec:
       - backend:
           serviceName: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-service
           servicePort: 8080
-
