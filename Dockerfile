@@ -3,7 +3,7 @@ ENV TZ America/Mexico_City
 ENV LANG es_MX.UTF-8
 ENV LANGUAGE es_MX.UTF-8
 ENV LC_ALL es_MX.UTF-8
-ENV JAVA_OPTS -Djava.awt.headless=true
+ENV CATALINA_OPTS -Djava.awt.headless=true
 RUN apk add tzdata
 RUN cp /usr/share/zoneinfo/America/Mexico_City /etc/localtime
 
