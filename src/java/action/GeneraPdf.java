@@ -76,10 +76,14 @@ public class GeneraPdf extends HttpServlet {
         esExcel = request.getParameter("esExcel");
         esPDF = request.getParameter("esPDF");
         System.out.println("nombrereporte: " + nombrereporte);
+        Constantes.enviaMensajeConsola("id aspirante: "+Integer.parseInt(request.getParameter("ID_ASPIRANTE")));
+         Constantes.enviaMensajeConsola("id ciclo: "+request.getParameter("ID_CICLO"));
+        
 
         //REPORTE FINAL PROYECTOS X UNIDAD
         if (nombrereporte.equals("becaFUR.jasper")) {
             parameters.put("ID_ASPIRANTE", Integer.parseInt(request.getParameter("ID_ASPIRANTE")));
+            parameters.put("ID_CICLO", request.getParameter("ID_CICLO"));
             parameters.put("rutaimagen", Constantes.rutaImages);
             parameters.put("SUBREPORT_DIR", Constantes.rutareportesjasper);
 

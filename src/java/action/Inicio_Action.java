@@ -10,8 +10,10 @@ import beans.FolioBean;
 import beans.GradoBean;
 import beans.IngresosBean;
 import beans.ParentezcoBean;
+import beans.PreguntasBean;
 import beans.PromedioBean;
 import beans.RequisitosBean;
+import beans.Respuesta_PreguntaBean;
 import beans.RespuestasBean;
 import beans.TutorBean;
 import beans.ValidaCurpBean;
@@ -24,6 +26,9 @@ import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -50,6 +55,7 @@ public class Inicio_Action extends ActionSupport {
     IngresosBean objDatosE = new IngresosBean();
     FolioBean objFolio = new FolioBean();
     ValidaCurpBean objvalidaC= new ValidaCurpBean();
+    Respuesta_PreguntaBean objRespuesta=new Respuesta_PreguntaBean();
 
     //************************************
     //VARIABLES REQUERIDAS//
@@ -71,6 +77,8 @@ public class Inicio_Action extends ActionSupport {
     private List<CobeneficiarioBean> VerificaCobe = new ArrayList<CobeneficiarioBean>();
     private List<BecasBean> ListaFechas = new ArrayList<BecasBean>();
     private List<ValidaCurpBean> validacurp = new ArrayList<ValidaCurpBean>();
+    private List<PreguntasBean> ListaPreguntas= new ArrayList<PreguntasBean>();
+    private List<Respuesta_PreguntaBean> ListaContestados=new ArrayList<Respuesta_PreguntaBean>();
 
     private boolean banColonia = false;
     private boolean banColoniaP = false;
@@ -109,6 +117,10 @@ public class Inicio_Action extends ActionSupport {
     private usuarioBean usuariocons;
     private Map session = ActionContext.getContext().getSession();
     private String nivelUsuario;
+    
+    Statement objConexion;
+    PreparedStatement objPreConexion;
+    Connection conecta;
 
     public void setSession(Map session) {
         this.session = session;
@@ -348,8 +360,12 @@ public class Inicio_Action extends ActionSupport {
                     banFormAca = true;
 
                     ListaDatosAcad = con.ConsultaDatosAca(objAspirante, objDatosA);
+                    
+                   
+                    objDatosA.setNIVELCCT(objRenapo.getNIVEL());
+                     Constantes.enviaMensajeConsola("Nivel que llega de timeline: "+objDatosA.getNIVELCCT());
 
-                    ListaGrados = con.ConsultaGrados();
+                    ListaGrados = con.ConsultaGrados(objDatosA.getNIVELCCT());
                     ListaPromedios = con.ConsultaPromedios();
 
                     Iterator LDA = ListaDatosAcad.iterator();
@@ -417,7 +433,8 @@ public class Inicio_Action extends ActionSupport {
 
                     } else {
                         banFormAca = true;
-                        ListaGrados = con.ConsultaGrados();
+                         Constantes.enviaMensajeConsola("Nivel que llega de timeline"+objDatosA.getNIVELCCT());
+                        ListaGrados = con.ConsultaGrados(objDatosA.getNIVELCCT());
                         ListaPromedios = con.ConsultaPromedios();
                     }
 
@@ -503,7 +520,7 @@ public class Inicio_Action extends ActionSupport {
 
                     ListaDatosAcad = con.ConsultaDatosAca(objAspirante, objDatosA);
 
-                    ListaGrados = con.ConsultaGrados();
+                    ListaGrados = con.ConsultaGrados(objDatosA.getNIVELCCT());
                     ListaPromedios = con.ConsultaPromedios();
 
                     Iterator LDA = ListaDatosAcad.iterator();
@@ -571,7 +588,7 @@ public class Inicio_Action extends ActionSupport {
 
                     } else {
                         banFormAca = true;
-                        ListaGrados = con.ConsultaGrados();
+                        ListaGrados = con.ConsultaGrados(objDatosA.getNIVELCCT());
                         ListaPromedios = con.ConsultaPromedios();
                     }
 
@@ -1594,6 +1611,9 @@ public class Inicio_Action extends ActionSupport {
                     banGuardaE = true;
 
                 }
+                
+                
+                ListaPreguntas=con.ConsultaPreguntas(objdatos.getID_BECA_AUX());
 
                 ListaRespuestas = con.ConsultaRespuestas();
 
@@ -1919,6 +1939,8 @@ public class Inicio_Action extends ActionSupport {
 
                 objDatosE = con.consultaSocioEconomico(objDatosA.getID_ASPIRANTE(), objAspirante.getID_CICLO());
                 ListaRespuestas = con.ConsultaRespuestas();
+                ListaPreguntas=con.ConsultaPreguntas(objdatos.getID_BECA_AUX());
+                ListaContestados=con.ConsultaRes_Preg(objDatosA.getID_ASPIRANTE(), objAspirante.getID_CICLO());
 
                 if (objDatosE != null) {
 
@@ -2029,32 +2051,40 @@ public class Inicio_Action extends ActionSupport {
             ConsultasBusiness con = new ConsultasBusiness();
 
             String ruta = null;
+            
+            
+            Constantes.enviaMensajeConsola("lista contestados: "+ListaContestados.size());
 
-            boolean pregunta1;
-            boolean pregunta2;
-            boolean monto;
             boolean archivo;
+            boolean RESPUESTA;
+            
+            Constantes.enviaMensajeConsola("lista contestados: "+ListaContestados.size());
+             int contador=0;
 
-            if (objDatosE.getRESPUESTA1().length() > 0) {
-                pregunta1 = true;
+            for (int i = 0; i < ListaContestados.size(); i++) {
+                
+                objRespuesta.setID_PREGUNTA(ListaContestados.get(i).getID_PREGUNTA());
+                objRespuesta.setRESPUESTA(ListaContestados.get(i).getRESPUESTA());
+                
+                Constantes.enviaMensajeConsola("pregunta: "+objRespuesta.getID_PREGUNTA());
+                 Constantes.enviaMensajeConsola("respuesta: "+objRespuesta.getRESPUESTA());
+                
 
-            } else {
-                pregunta1 = false;
-                addFieldError("RES1", "Debe responder la pregunta 1");
+                if (objRespuesta.getRESPUESTA().length() == 0 || objRespuesta.getRESPUESTA().contains("-1")) {
+                    contador = contador + 1;
+                    break;
+                }
+                         
             }
-            if (objDatosE.getRESPUESTA2().length() > 0) {
-                pregunta2 = true;
+            
+            if (contador > 0) {
+                RESPUESTA = false;
+                addFieldError("ERRORPREG", "Debes responder todas las preguntas");
+                return "ERROR";
 
             } else {
-                pregunta2 = false;
-                addFieldError("RES2", "Debe responder la pregunta 2");
-            }
-            if (objDatosE.getMONTO().length() > 0) {
-                monto = true;
+                RESPUESTA = true;
 
-            } else {
-                monto = false;
-                addFieldError("MONTO", "Debe ingresar el monto mensual neto");
             }
 
             if (objDatosE.getVALIDACHECK().equals("true")) {
@@ -2076,13 +2106,30 @@ public class Inicio_Action extends ActionSupport {
                 archivo = true;
             }
 
-            if (pregunta1 && pregunta2 && monto && archivo) {
+            if (RESPUESTA && archivo) {
 
                 Constantes.enviaMensajeConsola("PASO VALIDACIONES");
 
                 objDatosE.setID_ASPIRANTE(objDatosA.getID_ASPIRANTE());
                 objDatosE.setID_CICLO(objAspirante.getID_CICLO());
                 objDatosE.setID_BECA(objdatos.getID_BECA_AUX());
+                
+                objRespuesta.setID_ASPIRANTE(objDatosA.getID_ASPIRANTE());
+                objRespuesta.setCICLO(objAspirante.getID_CICLO());
+                objRespuesta.setID_BECA(objdatos.getID_BECA_AUX());
+                
+                
+                  conecta = con.crearConexion();
+                //statement
+                objConexion = con.crearStatement(conecta);
+                        
+                for (int i = 0; i < ListaContestados.size(); i++) {              
+                    objRespuesta.setID_PREGUNTA(ListaContestados.get(i).getID_PREGUNTA());
+                    objRespuesta.setRESPUESTA(ListaContestados.get(i).getRESPUESTA()); 
+                    
+                    con.GuardaRespuestas(conecta, objPreConexion, objRespuesta);
+
+                }
 
                 Constantes.enviaMensajeConsola("paso asignaciones");
 
@@ -2116,6 +2163,7 @@ public class Inicio_Action extends ActionSupport {
 
                     return "SUCCESS";
                 }
+                cierraConexiones();
 
             } else {
                 return "ERROR";
@@ -2143,32 +2191,42 @@ public class Inicio_Action extends ActionSupport {
 
             String ruta = null;
 
-            boolean pregunta1;
-            boolean pregunta2;
-            boolean monto;
             boolean archivo;
+            boolean RESPUESTA;
+            
+            Constantes.enviaMensajeConsola("lista contestados: "+ListaContestados.size());
+             int contador=0;
 
-            if (objDatosE.getRESPUESTA1().length() > 0) {
-                pregunta1 = true;
+            for (int i = 0; i < ListaContestados.size(); i++) {
+                
+                objRespuesta.setID_PREGUNTA(ListaContestados.get(i).getID_PREGUNTA());
+                objRespuesta.setRESPUESTA(ListaContestados.get(i).getRESPUESTA());
+                
+                Constantes.enviaMensajeConsola("pregunta: "+objRespuesta.getID_PREGUNTA());
+                 Constantes.enviaMensajeConsola("respuesta: "+objRespuesta.getRESPUESTA());
+                
+
+                if (objRespuesta.getRESPUESTA().length() == 0 || objRespuesta.getRESPUESTA().contains("-1")) {
+                    contador = contador + 1;
+                    break;
+                }
+                         
+            }
+            
+            if (contador > 0) {
+                RESPUESTA = false;
+                addFieldError("ERRORPREG", "Debes responder todas las preguntas");
+                return "ERROR";
 
             } else {
-                pregunta1 = false;
-                addFieldError("RES1", "Debe responder la pregunta 1");
-            }
-            if (objDatosE.getRESPUESTA2().length() > 0) {
-                pregunta2 = true;
+                RESPUESTA = true;
 
-            } else {
-                pregunta2 = false;
-                addFieldError("RES2", "Debe responder la pregunta 2");
             }
-            if (objDatosE.getMONTO().length() > 0) {
-                monto = true;
 
-            } else {
-                monto = false;
-                addFieldError("MONTO", "Debe ingresar el monto mensual neto");
-            }
+            
+            
+
+            
 
             if (objDatosE.getVALIDACHECK().equals("true")) {
 
@@ -2189,13 +2247,33 @@ public class Inicio_Action extends ActionSupport {
                 archivo = true;
             }
 
-            if (pregunta1 && pregunta2 && monto && archivo) {
+            if ( RESPUESTA && archivo) {
 
                 Constantes.enviaMensajeConsola("PASO VALIDACIONES");
-
+                
+                                //abriendo la conexion.....
+               
+                objRespuesta.setID_ASPIRANTE(objDatosA.getID_ASPIRANTE());
+                objRespuesta.setCICLO(objAspirante.getID_CICLO());
+                objRespuesta.setID_BECA(objdatos.getID_BECA_AUX());
+                
                 objDatosE.setID_ASPIRANTE(objDatosA.getID_ASPIRANTE());
                 objDatosE.setID_CICLO(objAspirante.getID_CICLO());
                 objDatosE.setID_BECA(objdatos.getID_BECA_AUX());
+                
+                
+                 conecta = con.crearConexion();
+                //statement
+                objConexion = con.crearStatement(conecta);
+                        
+                for (int i = 0; i < ListaContestados.size(); i++) {     
+                    
+                    objRespuesta.setID_PREGUNTA(ListaContestados.get(i).getID_PREGUNTA());
+                    objRespuesta.setRESPUESTA(ListaContestados.get(i).getRESPUESTA()); 
+                    
+                    con.ActualizaRespuestas(conecta, objPreConexion, objRespuesta);
+
+                }
 
                 Constantes.enviaMensajeConsola("paso asignaciones");
 
@@ -2213,8 +2291,6 @@ public class Inicio_Action extends ActionSupport {
 
                         FileUtils.copyFile(archi, newarch);
 
-                        //FileUtils.sizeOf(archi)
-                        //AQUI VA METODO GUARDAR
                         con.ActualizaSocioeconomico(objDatosE);
 
                         ConsultaTodo(objDatosA.getID_ASPIRANTE(), objAspirante.getCONSULTA_CURP(), objAspirante.ID_CICLO, objdatos.getID_BECA_AUX());
@@ -2240,6 +2316,8 @@ public class Inicio_Action extends ActionSupport {
 
                     return "SUCCESS";
                 }
+                
+                cierraConexiones();
 
             } else {
                 Constantes.enviaMensajeConsola("NO PASO VALIDACIONES");
@@ -2263,7 +2341,7 @@ public class Inicio_Action extends ActionSupport {
 
             objRenapo.setCONSULTA_CURP(curp);
             ListaActualizaAspirante = con.ConsultaAspirante(objdatos, objRenapo);
-            ListaGrados = con.ConsultaGrados();
+            ListaGrados = con.ConsultaGrados(objDatosA.getNIVELCCT());
             ListaPromedios = con.ConsultaPromedios();
             ListaParentesco = con.ConsultaParentesco();
 
@@ -2320,6 +2398,8 @@ public class Inicio_Action extends ActionSupport {
             objDatosC = con.ConsultaCobe(objDatosA);
 
             objDatosE = con.consultaSocioEconomico(idaspirante, idciclo);
+            
+            ListaContestados=con.ConsultaRes_Preg(idaspirante, idciclo);
 
             objFolio.setFOLIO(con.verificaFolio(idaspirante, idbeca, idciclo));
 
@@ -2350,7 +2430,8 @@ public class Inicio_Action extends ActionSupport {
             if (objFolio.getFOLIO().length() > 0) {
                 objFolio.setID_ASPIRANTEAUX(Integer.valueOf(objAspirante.getID_ASPIRANTE()));
                 Constantes.enviaMensajeConsola("ID_ASPIRANTE: " + objFolio.getID_ASPIRANTEAUX());
-
+                objFolio.setID_CICLO(objAspirante.getID_CICLO());
+                Constantes.enviaMensajeConsola("ciclo en folio: "+objFolio.getID_CICLO());
                 return "SUCCESS";
 
             } else {
@@ -2359,6 +2440,7 @@ public class Inicio_Action extends ActionSupport {
                 objFolio.setID_ASPIRANTE(objAspirante.getID_ASPIRANTE());
                 objFolio.setID_BECA(objdatos.getID_BECA_AUX());
                 objFolio.setID_CICLO(objAspirante.getID_CICLO());
+                Constantes.enviaMensajeConsola("ciclo en folio: "+objFolio.getID_CICLO());
                 objFolio.setID_ASPIRANTEAUX(Integer.valueOf(objAspirante.getID_ASPIRANTE()));
 
                 con.GuardaFolio(objFolio);
@@ -2403,6 +2485,17 @@ public class Inicio_Action extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             addActionError("Ocurrio un error al obtener el FOLIO del trámite: " + e);
+        }
+    }
+    
+     private void cierraConexiones() {
+        try {
+            objConexion.close();
+            conecta.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Ocurrio un error al cerrar conexiones: " + e);
         }
     }
 
@@ -2594,6 +2687,16 @@ public class Inicio_Action extends ActionSupport {
     public void setObjvalidaC(ValidaCurpBean objvalidaC) {
         this.objvalidaC = objvalidaC;
     }
+
+    public Respuesta_PreguntaBean getObjRespuesta() {
+        return objRespuesta;
+    }
+
+    public void setObjRespuesta(Respuesta_PreguntaBean objRespuesta) {
+        this.objRespuesta = objRespuesta;
+    }
+    
+    
     
     
 
@@ -2816,5 +2919,23 @@ public class Inicio_Action extends ActionSupport {
     public void setValidacurp(List<ValidaCurpBean> validacurp) {
         this.validacurp = validacurp;
     }
+
+    public List<PreguntasBean> getListaPreguntas() {
+        return ListaPreguntas;
+    }
+
+    public void setListaPreguntas(List<PreguntasBean> ListaPreguntas) {
+        this.ListaPreguntas = ListaPreguntas;
+    }
+
+    public List<Respuesta_PreguntaBean> getListaContestados() {
+        return ListaContestados;
+    }
+
+    public void setListaContestados(List<Respuesta_PreguntaBean> ListaContestados) {
+        this.ListaContestados = ListaContestados;
+    }
+    
+    
 
 }

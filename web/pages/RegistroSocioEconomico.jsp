@@ -159,27 +159,44 @@
                                       <div class="card-body">  
                                           <div class="col-sm-12">                              
                                               <div class="row">
-
+                                                   <s:set var="NoPreg" value="1"/>
+                                                   <s:set var="cont" value="0" />
+                                                  <s:iterator value="ListaPreguntas" id="ListaPreguntas" status="stat">
                                                   <div class="form-group col-md-12">
-                                                      <label for="examplePass" class="bmd-label-floating">Cuenta con el apoyo del programa PROSPERA: </label>
-                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
-                                                      <s:iterator value="ListaRespuestas" id="ListaRespuestas" status="stat">                        
-                                                          <s:hidden  name = "ListaRespuestas[%{#stat.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
-                                                          <s:hidden  name = "ListaRespuestas[%{#stat.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
-                                                      </s:iterator>
-                                                      <s:fielderror fieldName="RES1" cssClass="alert alert-danger"></s:fielderror>
-                                                      </div>
+                                                      <label for="examplePass" class="bmd-label-floating"> <s:property value="#NoPreg" />) &nbsp;&nbsp; <s:property value="PREGUNTA" />  </label>
+                                                     
+                                                      <s:if test="TIPO_PREGUNTA==2">
+                                                          <s:textfield cssClass="form-control" name="ListaContestados[%{#cont}].RESPUESTA"  maxlength="1000"/>
 
-                                                      <div class="form-group col-md-12">
-                                                          <label for="examplePass" class="bmd-label-floating">Cuenta con algún apoyo de tipo económico o en especie para su educación al momento de realizar esta solicitud: </label>
-                                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
-                                                      <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
+                                                      </s:if>
+                                                      <s:elseif test="TIPO_PREGUNTA==1">
+                                                           <s:select  data-style="select-with-transition"   name="ListaContestados[%{#cont}].RESPUESTA"  list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker "  />
+                                                      </s:elseif> 
+                                                      
                                                       </div>
-                                                      <div class="form-group col-md-4">
-                                                          <label for="examplePass" class="bmd-label-floating">Monto total de percepciones netas mensuales familiares : $</label>
-                                                      <s:textfield cssClass="form-control" name="objDatosE.MONTO" id="objDatosE.MONTO" />
-                                                      <s:fielderror fieldName="MONTO" cssClass="alert alert-danger"></s:fielderror>
-                                                      </div>
+                                                      
+                                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].PREGUNTA" id="NOMPREG"></s:hidden>
+                                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].ID_PREGUNTA" id="ID_PREGUNTA"></s:hidden>
+                                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].TIPO_PREGUNTA" id="TIPO_PREGUNTA"></s:hidden>
+                                                      
+                                                      
+                                                                                                           
+                                                       <s:hidden  name = "ListaContestados[%{#cont}].ID_PREGUNTA" value="%{ID_PREGUNTA}"></s:hidden>
+                                                       
+
+                                                      
+                                                       <s:set var="NoPreg" value="%{#NoPreg+1}"/>
+                                                       <s:set var="cont" value="%{#cont+1}"/>
+
+                                                    </s:iterator>
+                                                    
+                                                     <s:iterator value="ListaRespuestas" id="ListaRespuestas" status="stat1">                        
+                                                          <s:hidden  name = "ListaRespuestas[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
+                                                          <s:hidden  name = "ListaRespuestas[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
+                                                      </s:iterator>
+
+                                                    
+                                                     <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
                                                       <s:if  test="BanMuestraArchivo">
                                                           <s:hidden name="BanMuestraArchivo>" value="%{BanMuestraArchivo}"></s:hidden>
                                                       <div class="col-md-12 col-sm-12">

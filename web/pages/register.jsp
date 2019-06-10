@@ -71,6 +71,7 @@
 
                             <s:param name="TipoReporte" value="'becaFUR.jasper'"/>
                             <s:param name="ID_ASPIRANTE" value="objFolio.ID_ASPIRANTEAUX"/>
+                             <s:param name="ID_CICLO" value="objFolio.ID_CICLO"/>
                             <s:param name="esExcel" value="'false'"/>
                             <s:param name="esPDF" value="'true'"/>            
 
@@ -123,6 +124,7 @@
           </div>
         </div>
            <s:textfield cssClass="form-control" name="objFolio.ID_ASPIRANTEAUX" id="objFolio.ID_ASPIRANTEAUX"   required="true" style='visibility:hidden' />
+           <s:textfield cssClass="form-control" name="objFolio.ID_CICLO" id="objFolio.ID_CICLO"   required="true"  />
       </footer>
     </div>
   </div>

@@ -504,28 +504,46 @@
                               <div class="col-sm-12">                              
                                   <div class="row">
 
+                                  <s:set var="NoPreg" value="1"/>
+                                  <s:set var="cont" value="0" />
+                                  <s:iterator value="ListaPreguntas" id="ListaPreguntas" status="stat">
                                       <div class="form-group col-md-12">
-                                          <label for="examplePass" class="bmd-label-floating">Cuenta con el apoyo del programa PROSPERA: </label>
-                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA1" id="objDatosP.RESPUESTA1" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker " disabled="true"  />
-                                      <s:hidden name="objDatosE.RESPUESTA1" id="%{objDatosE.RESPUESTA1}"></s:hidden>
-                                      <s:fielderror fieldName="RES1" cssClass="alert alert-danger"></s:fielderror>
+                                          <label for="examplePass" class="bmd-label-floating"> <s:property value="#NoPreg" />) &nbsp;&nbsp; <s:property value="PREGUNTA" />  </label>
+
+                                          <s:if test="TIPO_PREGUNTA==2">
+                                              <s:textfield cssClass="form-control" name="ListaContestados[%{#cont}].RESPUESTA"  maxlength="1000" readonly="true"/>
+
+                                          </s:if>
+                                          <s:elseif test="TIPO_PREGUNTA==1">
+                                              <s:select  data-style="select-with-transition"   name="ListaContestados[%{#cont}].RESPUESTA"  list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker " disabled="true" />
+                                          </s:elseif> 
+
                                       </div>
 
-                                      <div class="form-group col-md-12">
-                                          <label for="examplePass" class="bmd-label-floating">Cuenta con algún apoyo de tipo económico o en especie para su educación al momento de realizar esta solicitud: </label>
-                                      <s:select  data-style="select-with-transition"   name="objDatosE.RESPUESTA2" id="objDatosP.RESPUESTA2" list="ListaRespuestas"  listKey="RESPUESTA"  listValue="RESPUESTA" headerKey="" headerValue="--SELLECCIONE--"  cssClass="selectpicker " disabled="true" />
-                                      <s:hidden name="objDatosE.RESPUESTA2" id="%{objDatosE.RESPUESTA2}"></s:hidden>
-                                      <s:fielderror fieldName="RES2" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
-                                      <div class="form-inline col-md-12">
-                                          <label for="examplePass" class="bmd-label-static">Monto total de percepciones netas mensuales familiares :$</label>
-                                          
-                                      <s:textfield cssClass="form-control" name="objDatosE.MONTO" id="objDatosE.MONTO" readonly="true"/>
-                                      <s:fielderror fieldName="MONTO" cssClass="alert alert-danger"></s:fielderror>
-                                      </div>
+                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].PREGUNTA" id="NOMPREG"></s:hidden>
+                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].ID_PREGUNTA" id="ID_PREGUNTA"></s:hidden>
+                                      <s:hidden  name = "ListaPreguntas[%{#stat.index}].TIPO_PREGUNTA" id="TIPO_PREGUNTA"></s:hidden>
 
 
-                                  </div>               
+
+                                      <s:hidden  name = "ListaContestados[%{#cont}].ID_PREGUNTA" value="%{ID_PREGUNTA}"></s:hidden>
+
+
+
+                                      <s:set var="NoPreg" value="%{#NoPreg+1}"/>
+                                      <s:set var="cont" value="%{#cont+1}"/>
+
+                                  </s:iterator>
+
+                                  <s:iterator value="ListaRespuestas" id="ListaRespuestas" status="stat1">                        
+                                      <s:hidden  name = "ListaRespuestas[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
+                                      <s:hidden  name = "ListaRespuestas[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
+                                  </s:iterator>   
+
+
+
+
+                              </div>               
                               </div>                         
                           </div>   
                           &nbsp;            
@@ -563,10 +581,7 @@
                               </div> 
                           </div>
                       </div>
-                  </div>                 
-                  
-                  
-             
+                  </div>                              
           </div>
         </div>
       </div>

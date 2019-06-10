@@ -6,8 +6,12 @@ import beans.BecasBean;
 import beans.CobeneficiarioBean;
 import beans.FolioBean;
 import beans.IngresosBean;
+import beans.Respuesta_PreguntaBean;
 import beans.TutorBean;
 import beans.renapoBean;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -23,6 +27,8 @@ import mappers.EstadosMapper;
 import mappers.GradosMapper;
 import mappers.IngresoMapper;
 import mappers.ParentescosMapper;
+import mappers.Preg_ResMapper;
+import mappers.PreguntasMapper;
 import mappers.PromediosMapper;
 import mappers.RequisitoBuenoMapper;
 import mappers.RequisitosMapper;
@@ -36,6 +42,24 @@ import utilidades.ObjPrepareStatement;
 public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 
     OracleDAOFactory oraDaoFac = new OracleDAOFactory();
+
+    public Connection crearConexion() throws Exception {
+
+        Connection conne;
+        conne = createConnection();
+        Constantes.enviaMensajeConsola("conexion abierta.........");
+        return conne;
+
+    }
+
+    //creando statement
+    public Statement crearStatement(Connection cone) throws Exception {
+        Statement stei;
+        stei = createStatement2(cone);
+        return stei;
+    }
+    
+    
 
     public List ConsultaBecas() throws Exception {
         String query = "SELECT ID_BECA, NOM_BECA,ACRO_BECA,ESTATUS_BECA,FECHA_INICIO,FECHA_TERMINO,POB_OBJ,IMAGEN, CASE WHEN (SELECT SYSDATE FROM DUAL) <= FECHA_TERMINO AND (SELECT SYSDATE FROM DUAL)>=FECHA_INICIO  THEN '1' ELSE '0' END AS ESTATUS_FECHA, RESTRICCION_ESC FROM  CAT_BECAS WHERE ACTIVO=1";
@@ -207,11 +231,11 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL().toUpperCase());
         arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO().toUpperCase());
+        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO());
         arregloCampos.add(temporal);
-         temporal = new ObjPrepareStatement("NUM_INTERIOR", "STRING", objg.getNUM_INT());
+        temporal = new ObjPrepareStatement("NUM_INTERIOR", "STRING", objg.getNUM_INT());
         arregloCampos.add(temporal);
-         temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
+        temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
         arregloCampos.add(temporal);
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
@@ -267,11 +291,11 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_ESTADO_CIVIL", "STRING", objg.getID_ESTADO_CIVIL().toUpperCase());
         arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO().toUpperCase());
+        temporal = new ObjPrepareStatement("GENERO", "STRING", objg.getGENERO_RENAPO());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("NUM_INTERIOR", "STRING", objg.getNUM_INT());
         arregloCampos.add(temporal);
-         temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
+        temporal = new ObjPrepareStatement("NUM_EXTERIOR", "STRING", objg.getNUM_EXT());
         arregloCampos.add(temporal);
 
         String condicion = "WHERE ID_ASPIRANTE='" + objg.getID_ASPIRANTE() + "'";
@@ -289,8 +313,8 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return resu;
     }
 
-    public List ConsultaGrados() throws Exception {
-        String query = "SELECT id_grado,grado FROM cat_grados";
+    public List ConsultaGrados(String nivel) throws Exception {
+        String query = "SELECT id_grado,grado FROM cat_grados where nivel='"+nivel+"' and status='1' ORDER BY ORDEN ASC";
         Constantes.enviaMensajeConsola("CONSULTA GRADOS ---> " + query);
         List list = null;
         list = queryForList(query, new GradosMapper());
@@ -581,9 +605,18 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         return oraDaoFac.queryUpdate(Constantes.TablaCobeneficiario, arregloCampos, Condicion);
     }
 
+    public List ConsultaPreguntas(String idbeca) throws Exception {
+        String query = "SELECT cp.id_pregunta,cp.pregunta,cp.tipo_pregunta "
+                + "FROM tbl_preg_beca TPB INNER JOIN cat_preguntas cp ON tpb.id_pregunta=cp.id_pregunta WHERE tpb.id_beca='" + idbeca + "' AND cp.status='1'";
+        Constantes.enviaMensajeConsola("QueryConsultaPreguntas ---> " + query);
+        List list = null;
+        list = queryForList(query, new PreguntasMapper());
+        return list;
+    }
+
     public List ConsultaRespuestas() throws Exception {
         String query = "SELECT ID_RESPUESTA,RESPUESTA FROM CAT_RESPUESTA WHERE STATUS='1'";
-        Constantes.enviaMensajeConsola("QueryConsultaBecas ---> " + query);
+        Constantes.enviaMensajeConsola("QueryConsultaRespuestas ---> " + query);
         List list = null;
         list = queryForList(query, new RespuestasMapper());
         return list;
@@ -601,12 +634,6 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
         temporal = new ObjPrepareStatement("ID_ASPIRANTE", "STRING", objg.getID_ASPIRANTE().toUpperCase());
         arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("RESPUESTA1", "STRING", objg.getRESPUESTA1().toUpperCase());
-        arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("RESPUESTA2", "STRING", objg.getRESPUESTA2().toUpperCase());
-        arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("MONTO", "STRING", objg.getMONTO());
-        arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getID_CICLO().toUpperCase());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_BECA", "STRING", objg.getID_BECA().toUpperCase());
@@ -620,12 +647,53 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 
     }
 
+    public boolean GuardaRespuestas(Connection conn, PreparedStatement stat, Respuesta_PreguntaBean objg) throws Exception {
+
+//modifica euipamiento
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+        temporal = new ObjPrepareStatement("ID_ASPIRANTE", "STRING", objg.getID_ASPIRANTE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_BECA", "STRING", objg.getID_BECA());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_PREGUNTA", "STRING", objg.getID_PREGUNTA());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("RESPUESTA", "STRING", objg.getRESPUESTA());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_CICLO", "STRING", objg.getCICLO());
+        arregloCampos.add(temporal);
+
+        return oraDaoFac.queryInsertTransaccion(conn, stat, Constantes.TablaRespuesta_Preguntas, arregloCampos);
+    }
+
     public IngresosBean consultaSocioEconomico(String ID, String Ciclo) throws Exception {
         String query = "";
-        query = "SELECT respuesta1,respuesta2,monto,ruta_archivo FROM " + Constantes.TablaSocioEconomico + " WHERE id_aspirante='" + ID + "' and id_ciclo='" + Ciclo + "'";
+        query = "SELECT ruta_archivo FROM " + Constantes.TablaSocioEconomico + " WHERE id_aspirante='" + ID + "' and id_ciclo='" + Ciclo + "'";
         Constantes.enviaMensajeConsola(" query consulta socioeconomico --> " + query);
         IngresosBean resu = (IngresosBean) oraDaoFac.queryForObject(query, new IngresoMapper());
         return resu;
+    }
+
+    public List ConsultaRes_Preg(String idaspirante, String Ciclo) throws Exception {
+        String query = "SELECT ID_PREGUNTA,RESPUESTA FROM " + Constantes.TablaRespuesta_Preguntas + " WHERE ID_ASPIRANTE='" + idaspirante + "' AND ID_CICLO='" + Ciclo + "'";
+        Constantes.enviaMensajeConsola("QueryConsultaPregunta_Respuestas ---> " + query);
+        List list = null;
+        list = queryForList(query, new Preg_ResMapper());
+        return list;
+    }
+
+    public boolean ActualizaRespuestas(Connection conn, PreparedStatement stat, Respuesta_PreguntaBean objg) throws Exception {
+
+//modifica euipamiento
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+
+        temporal = new ObjPrepareStatement("RESPUESTA", "STRING", objg.getRESPUESTA());
+        arregloCampos.add(temporal);
+
+        String where = "";
+        where = " WHERE ID_ASPIRANTE = " + objg.getID_ASPIRANTE() + " and ID_CICLO = " + objg.getCICLO() + " and ID_PREGUNTA='"+objg.getID_PREGUNTA()+"'";
+        return oraDaoFac.queryUpdateTransaccion(conn, stat, Constantes.TablaRespuesta_Preguntas, arregloCampos, where);
     }
 
     public boolean ActualizaSocioeconomico(IngresosBean objg) throws Exception {
@@ -638,14 +706,6 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
         Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS SOCIOECONOMICOS...................................");
 
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
-        temporal = new ObjPrepareStatement("RESPUESTA1", "STRING", objg.getRESPUESTA1().toUpperCase());
-        arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("RESPUESTA2", "STRING", objg.getRESPUESTA2().toUpperCase());
-        arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("MONTO", "STRING", objg.getMONTO());
-        arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("ID_BECA", "STRING", objg.getID_BECA().toUpperCase());
-        arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("RUTA_ARCHIVO", "STRING", objg.getARCHIVO_INGRESO());
         arregloCampos.add(temporal);
 
